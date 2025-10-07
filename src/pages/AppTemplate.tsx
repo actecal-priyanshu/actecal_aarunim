@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import type { AppModuleMeta } from '../data/appModules';
 
 interface AppTemplateProps {
@@ -7,11 +7,15 @@ interface AppTemplateProps {
 }
 
 export const AppTemplate: React.FC<AppTemplateProps> = ({ module }) => {
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get('category');
+  const backUrl = category ? `/apps?category=${category}` : '/apps';
+
   return (
     <main style={{ background: '#f3f4f6', minHeight: '100vh', padding: '72px 0 120px' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto', padding: '0 24px' }}>
         <nav style={{ marginBottom: 24 }}>
-          <Link to="/apps" style={{ color: '#6366f1', textDecoration: 'none', fontWeight: 600 }}>
+          <Link to={backUrl} style={{ color: '#6366f1', textDecoration: 'none', fontWeight: 600 }}>
             ← Back to apps catalog
           </Link>
         </nav>

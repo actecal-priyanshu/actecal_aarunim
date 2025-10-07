@@ -1,310 +1,206 @@
-import React, { useEffect, useState } from 'react';
-import { Hero } from '../components/Hero';
-import HandwrittenHero from '../components/HandwrittenHero';
-import { FeatureGrid } from '../components/FeatureGrid';
-import { Testimonials } from '../components/Testimonials';
-import { PricingSection } from '../components/PricingSection';
-import { NewsletterSignup } from '../components/NewsletterSignup';
-import { StatsSection } from '../components/StatsSection';
-import { DoodleBackground, StickerButton } from '../components/CreativeBits';
-import { AnimatedBackground } from '../components/AnimatedBackground';
-import AppDirectory from '../components/AppDirectory';
-import QuickStartSteps from '../components/QuickStartSteps';
-import GradientWaveDivider from '../components/GradientWaveDivider';
-import FloatingCTA from '../components/FloatingCTA';
-import ElevateSection from '../components/ElevateSection';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
+import '../styles/Home.css';
 
-type HeroData = {
-  heading: string;
-  subheading: string;
-  cta: { label: string; href: string };
-  stats?: { label: string; value: string }[];
-  badges?: string[];
-};
+const apps = [
+  { name: 'Accounting', icon: '💰', color: '#FF6B6B' },
+  { name: 'Knowledge', icon: '📚', color: '#4ECDC4' },
+  { name: 'Sign', icon: '✍️', color: '#45B7D1' },
+  { name: 'CRM', icon: '👥', color: '#96CEB4' },
+  { name: 'Studio', icon: '🎨', color: '#FFEAA7' },
+  { name: 'Subscriptions', icon: '🔄', color: '#DFE6E9' },
+  { name: 'Rental', icon: '🔑', color: '#74B9FF' },
+  { name: 'Point of Sale', icon: '🏪', color: '#A29BFE' },
+  { name: 'Discuss', icon: '💬', color: '#FD79A8' },
+  { name: 'Documents', icon: '📄', color: '#FDCB6E' },
+  { name: 'Project', icon: '📊', color: '#6C5CE7' },
+  { name: 'Timesheets', icon: '⏱️', color: '#0984E3' },
+  { name: 'Field Service', icon: '⚡', color: '#E17055' },
+  { name: 'Planning', icon: '📅', color: '#00B894' },
+  { name: 'Helpdesk', icon: '🎧', color: '#00CEC9' },
+  { name: 'Website', icon: '🌐', color: '#0984E3' },
+  { name: 'Social Marketing', icon: '❤️', color: '#FD79A8' },
+  { name: 'Email Marketing', icon: '📧', color: '#6C5CE7' },
+  { name: 'Purchase', icon: '🛒', color: '#00B894' },
+  { name: 'Inventory', icon: '📦', color: '#E17055' },
+  { name: 'Manufacturing', icon: '🏭', color: '#00CEC9' },
+  { name: 'Sales', icon: '📈', color: '#FDCB6E' },
+  { name: 'HR', icon: '👤', color: '#A29BFE' },
+  { name: 'Dashboard', icon: '📊', color: '#74B9FF' }
+];
 
-type Section = { 
-  id: string; 
-  title: string; 
-  description: string; 
-  features: string[];
-  icon?: string;
-  color?: string;
-  cta?: { label: string; href: string };
-};
+const features = [
+  {
+    icon: '📊',
+    title: 'Analytics',
+    description: 'Get detailed insights and analytics for your business.'
+  },
+  {
+    icon: '⚡',
+    title: 'Performance',
+    description: 'Lightning fast performance for all your business needs.'
+  },
+  {
+    icon: '🔒',
+    title: 'Security',
+    description: 'Enterprise-grade security to protect your data.'
+  },
+  {
+    icon: '🔄',
+    title: 'Integration',
+    description: 'Seamlessly integrate with your favorite tools.'
+  }
+];
 
-type Testimonial = { 
-  author: string; 
-  quote: string;
-  role?: string;
-  company?: string;
-  rating?: number;
-  avatar?: string;
-  logo?: string;
-};
+const techPlatforms = [
+  {
+    name: 'Shop Floor',
+    image: '🏭',
+    description: 'Manage your shop floor operations'
+  },
+  {
+    name: 'Expenses',
+    image: '💳',
+    description: 'Track and manage expenses'
+  },
+  {
+    name: 'Point of Sale',
+    image: '🛒',
+    description: 'Complete POS solution'
+  },
+  {
+    name: 'IoT',
+    image: '📡',
+    description: 'IoT device integration'
+  },
+  {
+    name: 'Kiosk',
+    image: '🖥️',
+    description: 'Self-service kiosk'
+  },
+  {
+    name: 'Barcode Scanner',
+    image: '📱',
+    description: 'Mobile scanning solution'
+  }
+];
 
-type PricingTier = {
-  name: string;
-  price: string;
-  period: string;
-  description: string;
-  features: string[];
-  popular?: boolean;
-  cta: string;
-  href: string;
-};
-
-export const Home: React.FC = () => {
-  const [hero, setHero] = useState<HeroData | null>(null);
-  const [sections, setSections] = useState<Section[]>([]);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [pricingTiers, setPricingTiers] = useState<PricingTier[]>([]);
-  const [stats, setStats] = useState<{ value: number; label: string; suffix?: string; prefix?: string; icon?: string; color?: string }[]>([]);
-
-  useEffect(() => {
-    // Simulate API calls with enhanced data
-    const fetchAll = async () => {
-      // Hero data with enhanced content
-      const heroData: HeroData = {
-        heading: "Transform Your Business with Modern Apps",
-        subheading: "Unify your workflow with our comprehensive suite of business applications. Streamline operations, boost productivity, and scale with confidence.",
-        cta: { label: "Start Free Trial", href: "/signup" },
-        badges: ["🚀 New Features", "⚡ Lightning Fast", "🔒 Enterprise Security"],
-        stats: [
-          { label: "Active Users", value: "50,000+" },
-          { label: "Countries", value: "150+" },
-          { label: "Uptime", value: "99.9%" }
-        ]
-      };
-
-      // Feature sections with enhanced content
-      const featureSections: Section[] = [
-        {
-          id: "analytics",
-          title: "Advanced Analytics",
-          description: "Get deep insights into your business performance with real-time dashboards and customizable reports.",
-          features: [
-            "Real-time data visualization",
-            "Custom dashboard builder",
-            "Predictive analytics",
-            "Export to multiple formats"
-          ],
-          icon: "📊",
-          color: "#667eea",
-          cta: { label: "Learn More", href: "/features/analytics" }
-        },
-        {
-          id: "automation",
-          title: "Workflow Automation",
-          description: "Automate repetitive tasks and create intelligent workflows that adapt to your business needs.",
-          features: [
-            "Drag & drop workflow builder",
-            "Conditional logic",
-            "API integrations",
-            "Scheduled automation"
-          ],
-          icon: "⚡",
-          color: "#f6ad55",
-          cta: { label: "Explore", href: "/features/automation" }
-        },
-        {
-          id: "collaboration",
-          title: "Team Collaboration",
-          description: "Foster better teamwork with integrated communication tools and project management features.",
-          features: [
-            "Real-time chat & video calls",
-            "Project tracking",
-            "File sharing & version control",
-            "Team performance metrics"
-          ],
-          icon: "🤝",
-          color: "#48bb78",
-          cta: { label: "Discover", href: "/features/collaboration" }
-        },
-        {
-          id: "security",
-          title: "Enterprise Security",
-          description: "Bank-grade security with advanced encryption, compliance, and access control management.",
-          features: [
-            "End-to-end encryption",
-            "SOC 2 compliance",
-            "Multi-factor authentication",
-            "Audit logging"
-          ],
-          icon: "🔒",
-          color: "#f56565",
-          cta: { label: "Secure Now", href: "/features/security" }
-        },
-        {
-          id: "integration",
-          title: "Seamless Integration",
-          description: "Connect with your favorite tools and services through our extensive integration library.",
-          features: [
-            "500+ app integrations",
-            "Custom webhook support",
-            "REST API access",
-            "Zapier compatibility"
-          ],
-          icon: "🔗",
-          color: "#9f7aea",
-          cta: { label: "Integrate", href: "/features/integrations" }
-        },
-        {
-          id: "mobile",
-          title: "Mobile First",
-          description: "Access your business data anywhere with our responsive mobile applications.",
-          features: [
-            "iOS & Android apps",
-            "Offline functionality",
-            "Push notifications",
-            "Touch-optimized interface"
-          ],
-          icon: "📱",
-          color: "#38b2ac",
-          cta: { label: "Download", href: "/mobile" }
-        }
-      ];
-
-      // Enhanced testimonials
-      const testimonialData: Testimonial[] = [
-        {
-          author: "Sarah Johnson",
-          role: "CTO",
-          company: "TechFlow Inc.",
-          quote: "BizSuite transformed our entire development workflow. We've seen a 40% increase in team productivity and much better project visibility.",
-          rating: 5,
-          avatar: ""
-        },
-        {
-          author: "Michael Chen",
-          role: "Operations Manager",
-          company: "Global Retail Co.",
-          quote: "The automation features alone saved us 20 hours per week. The ROI was immediate and the support team is incredibly responsive.",
-          rating: 5,
-          avatar: ""
-        },
-        {
-          author: "Emily Rodriguez",
-          role: "Product Manager",
-          company: "StartupXYZ",
-          quote: "As a growing startup, we needed a solution that could scale with us. BizSuite has been perfect - powerful yet simple to use.",
-          rating: 5,
-          avatar: ""
-        }
-      ];
-
-      // Pricing tiers
-      const pricingData: PricingTier[] = [
-        {
-          name: "Starter",
-          price: "₹2,499",
-          period: "month",
-          description: "Perfect for small teams getting started",
-          features: [
-            "Up to 5 team members",
-            "Basic analytics",
-            "10 workflow automations",
-            "Email support",
-            "Mobile apps",
-            "Basic integrations"
-          ],
-          cta: "Start Free Trial",
-          href: "/signup?plan=starter"
-        },
-        {
-          name: "Professional",
-          price: "₹6,499",
-          period: "month",
-          description: "Ideal for growing businesses",
-          features: [
-            "Up to 25 team members",
-            "Advanced analytics",
-            "Unlimited automations",
-            "Priority support",
-            "Advanced integrations",
-            "Custom branding",
-            "API access",
-            "Advanced security"
-          ],
-          popular: true,
-          cta: "Start Free Trial",
-          href: "/signup?plan=professional"
-        },
-        {
-          name: "Enterprise",
-          price: "₹16,499",
-          period: "month",
-          description: "For large organizations",
-          features: [
-            "Unlimited team members",
-            "Custom analytics",
-            "White-label solution",
-            "Dedicated support",
-            "Custom integrations",
-            "Advanced compliance",
-            "SLA guarantee",
-            "On-premise option"
-          ],
-          cta: "Contact Sales",
-          href: "/contact"
-        }
-      ];
-
-      // Stats data
-      const statsData = [
-        { value: 50000, label: "Active Users", icon: "👥", color: "#667eea" },
-        { value: 150, label: "Countries", icon: "🌍", color: "#48bb78" },
-        { value: 99.9, label: "Uptime %", icon: "⚡", color: "#f6ad55" },
-        { value: 500, label: "Integrations", icon: "🔗", color: "#9f7aea" }
-      ];
-
-      setHero(heroData);
-      setSections(featureSections);
-      setTestimonials(testimonialData);
-      setPricingTiers(pricingData);
-      setStats(statsData);
-    };
-
-    fetchAll();
-  }, []);
-
+const Home: React.FC = () => {
   return (
-    <div>
-      <AnimatedBackground variant="gradient" intensity="high">
-        <HandwrittenHero 
-          heading="Run your entire business from one modern workspace."
-          highlight="one modern workspace."
-          subheading="Connected apps that automate work and scale with you."
-          underlineWord="automate"
-          primaryCta={{ label: "Start now - It's free", href: "/signup" }}
-          secondaryCta={{ label: 'Meet an advisor', href: '#advisor' }}
-          priceNote={"580.00 ₹ / month for ALL apps"}
-        />
-      </AnimatedBackground>
-      <ElevateSection />
-
-      <FeatureGrid sections={sections} />
-      <GradientWaveDivider />
-      {/* Keep the rest minimal and customer-centric */}
-      <QuickStartSteps />
-      <PricingSection tiers={pricingTiers} />
-      <FloatingCTA 
-        title="Ready to level up your operations?"
-        subtitle="Start your 14-day free trial. No credit card required."
-        ctaText="Get Started"
-        href="/signup"
-      />
-      {/* <AnimatedBackground variant="waves" intensity="low">
-        <NewsletterSignup 
-          title="Stay Ahead of the Curve"
-          subtitle="Get exclusive insights, product updates, and industry trends delivered to your inbox. Join 50,000+ professionals who trust us."
-          buttonText={''}
-        />
-        <div style={{ textAlign: 'center', marginTop: -52, marginBottom: -8 }}>
-          <StickerButton href="/signup">Subscribe Now</StickerButton>
+    <div className="home-container">
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="hero-content">
+          <h1>Business Solutions Made Simple</h1>
+          <p className="hero-subtitle">Streamline your operations with our powerful suite of business tools designed for modern enterprises.</p>
+          <div className="hero-cta">
+            <button className="btn btn-primary btn-large">Get Started</button>
+            <button className="btn btn-outline btn-large">Learn More</button>
+          </div>
         </div>
-      </AnimatedBackground> */}
+        <div className="hero-image">
+          <div className="dashboard-preview">
+            {/* Placeholder for dashboard image */}
+            <div className="dashboard-placeholder">
+              <div className="dashboard-header">
+                <div className="dashboard-tabs">
+                  <span className="tab active">Dashboard</span>
+                  <span className="tab">Analytics</span>
+                  <span className="tab">Reports</span>
+                </div>
+              </div>
+              <div className="dashboard-content">
+                <div className="metric-cards">
+                  <div className="metric-card">
+                    <div className="metric-value">1,240</div>
+                    <div className="metric-label">Active Users</div>
+                  </div>
+                  <div className="metric-card">
+                    <div className="metric-value">89%</div>
+                    <div className="metric-label">Uptime</div>
+                  </div>
+                </div>
+                <div className="chart-placeholder">
+                  <div className="chart-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Apps Grid Section */}
+      <section className="apps-section">
+        <div className="apps-container">
+          <div className="apps-grid">
+            {apps.map((app, index) => (
+              <div key={index} className="app-card">
+                <div className="app-icon-wrapper" style={{ backgroundColor: app.color }}>
+                  <span className="app-icon">{app.icon}</span>
+                </div>
+                <h3 className="app-name">{app.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Apps Info Section */}
+      <section className="apps-info-section">
+        <div className="apps-info-container">
+          <h2 className="apps-info-title">Imagine a vast collection of business apps at your disposal.</h2>
+          <p className="apps-info-subtitle">Got something to improve? There is an app for that.</p>
+          <p className="apps-info-subtitle">No complexity, no cost, just a one-click install.</p>
+          
+          <div className="apps-info-description">
+            <p>Each app simplifies a process and empowers more people.</p>
+            <p>Imagine the impact when everyone gets the right tool for the job, with perfect integration.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="features-section">
+        <div className="section-header">
+          <h2>Powerful Features</h2>
+          <p>Everything you need to grow your business</p>
+        </div>
+        <div className="features-grid">
+          {features.map((feature, index) => (
+            <div key={index} className="feature-card">
+              <div className="feature-icon">{feature.icon}</div>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Tech Platform Section */}
+      <section className="tech-platform-section">
+        <div className="tech-platform-container">
+          <h2 className="tech-platform-title">
+            <span className="highlight-text">All the tech</span> in one platform
+          </h2>
+          <div className="tech-grid">
+            {techPlatforms.map((platform, index) => (
+              <div key={index} className="tech-card">
+                <div className="tech-image-wrapper">
+                  <div className="tech-image-bg"></div>
+                  <div className="tech-image">{platform.image}</div>
+                </div>
+                <h3 className="tech-name">{platform.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
 
-
+export default Home;

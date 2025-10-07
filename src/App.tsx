@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import SiteLayout from './components/SiteLayout';
-import { Home } from './pages/Home';
+import Home from './pages/Home';
 import { Apps } from './pages/Apps';
 import { Pricing } from './pages/Pricing';
 import { Contact } from './pages/Contact';
@@ -19,7 +19,7 @@ import { Billing } from './pages/Billing';
 import { Plan } from './pages/Plan';
 import { Signup } from './pages/Signup';
 import { ContactSales } from './pages/ContactSales';
-import { Login } from './pages/Login';
+import { Signup } from './pages/Signup';
 import { RequireAuth } from './auth/RequireAuth';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
@@ -27,6 +27,7 @@ import { CookiePolicy } from './pages/CookiePolicy';
 import { HelpCenter } from './pages/HelpCenter';
 import { APIReference } from './pages/APIReference';
 import { Status } from './pages/Status';
+import { AppDetail } from './pages/AppDetail';
 
 function App() {
   return (
@@ -34,11 +35,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/apps" element={<Apps />} />
+        <Route path="/apps/:slug" element={<AppDetail />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/plans/:planId" element={<Plan />} />
         <Route path="/billing" element={<RequireAuth><Billing /></RequireAuth>} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Signup />} />
         <Route path="/contact-sales" element={<ContactSales />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />

@@ -27,7 +27,7 @@ export const PromoCard: React.FC = () => {
 						<path d="M48 14 L54 18 L48 22" stroke="#2d1b2b" strokeWidth="3" strokeLinecap="round"/>
 					</svg>
 				</div>
-				<div className="promo-price anim-delay-3" aria-label="Price">
+				<div className="promo-price anim-delay-3" style={{position: 'fixed',left: '37rem'}} aria-label="Price">
 					<span className="value">$19</span>
 					<span className="per">/month</span>
 				</div>

@@ -108,6 +108,44 @@ const financeModules: AppModuleMeta[] = [
       { label: 'Compliance', value: 'SOC 2, GDPR' }
     ],
     ['Google Drive', 'Box', 'DocuSign']
+  ),
+  createModule(
+    'spreadsheet-bi',
+    'Spreadsheet (BI)',
+    'Finance',
+    'Build interactive dashboards and reports with spreadsheet-like formulas.',
+    'Transform raw data into actionable insights with pivot tables, charts, and collaborative spreadsheets. Connect to any data source and share live dashboards with stakeholders.',
+    [
+      'Excel-like interface with advanced formulas',
+      'Real-time collaboration and commenting',
+      'Pivot tables, charts, and conditional formatting',
+      'Connect to databases, APIs, and CSV imports'
+    ],
+    [
+      { label: 'Reports created', value: '45K+' },
+      { label: 'Data sources', value: '120+' },
+      { label: 'Refresh speed', value: '< 3s' }
+    ],
+    ['Excel', 'Google Sheets', 'Power BI', 'Tableau']
+  ),
+  createModule(
+    'sign',
+    'Sign',
+    'Finance',
+    'Secure electronic signatures for contracts and approvals.',
+    'Send documents for signature with audit trails, multi-party workflows, and legal compliance. Track status in real-time and integrate with your existing document workflows.',
+    [
+      'Legally binding e-signatures',
+      'Multi-party signing workflows',
+      'Audit trails and compliance reports',
+      'Template library for common documents'
+    ],
+    [
+      { label: 'Documents signed', value: '2.8M+' },
+      { label: 'Avg. signing time', value: '4 min' },
+      { label: 'Compliance', value: 'eIDAS, ESIGN' }
+    ],
+    ['DocuSign', 'Adobe Sign', 'HelloSign']
   )
 ];
 
@@ -167,6 +205,44 @@ const salesModules: AppModuleMeta[] = [
     ['Square', 'Clover', 'Shopify']
   ),
   createModule(
+    'pos-shop',
+    'POS Shop',
+    'Sales',
+    'Modern point of sale for retail stores and pop-ups.',
+    'Complete retail POS with inventory sync, customer loyalty, and offline capabilities. Perfect for boutiques, pop-ups, and multi-location retail.',
+    [
+      'Barcode scanning and receipt printing',
+      'Customer loyalty and gift cards',
+      'Multi-location inventory sync',
+      'Offline mode with cloud sync'
+    ],
+    [
+      { label: 'Checkout speed', value: '30 sec' },
+      { label: 'Offline reliability', value: '100%' },
+      { label: 'Payment methods', value: '15+' }
+    ],
+    ['Square', 'Shopify POS', 'Lightspeed']
+  ),
+  createModule(
+    'pos-restaurant',
+    'POS Restaurant',
+    'Sales',
+    'Full-service restaurant POS with kitchen display and table management.',
+    'Streamline front-of-house and back-of-house operations with table management, kitchen displays, and menu engineering analytics.',
+    [
+      'Table management and floor plans',
+      'Kitchen display system (KDS)',
+      'Split bills and tip management',
+      'Menu engineering and cost tracking'
+    ],
+    [
+      { label: 'Table turnover', value: '+18%' },
+      { label: 'Order accuracy', value: '99.5%' },
+      { label: 'Avg. service time', value: '-12%' }
+    ],
+    ['Toast', 'Square Restaurant', 'Clover']
+  ),
+  createModule(
     'subscriptions',
     'Subscriptions',
     'Sales',
@@ -183,6 +259,25 @@ const salesModules: AppModuleMeta[] = [
       { label: 'Billing models', value: 'Flat, tiered, usage' }
     ],
     ['Stripe Billing', 'Chargebee', 'Salesforce']
+  ),
+  createModule(
+    'rental',
+    'Rental',
+    'Sales',
+    'Manage equipment rentals, bookings, and returns.',
+    'Track rental inventory, manage bookings with calendars, automate invoicing, and handle damage deposits. Perfect for equipment, vehicle, or property rentals.',
+    [
+      'Calendar-based availability tracking',
+      'Automated deposit and damage tracking',
+      'Maintenance scheduling and alerts',
+      'Late fee automation'
+    ],
+    [
+      { label: 'Utilization rate', value: '87%' },
+      { label: 'Booking conflicts', value: '-95%' },
+      { label: 'Revenue per asset', value: '+24%' }
+    ],
+    ['Booqable', 'EZRentOut', 'QuickBooks']
   )
 ];
 

@@ -77,74 +77,20 @@ const Navbar: React.FC = () => {
           {renderNavLink('/apps', 'Applications')}
           {renderNavLink('/solutions', 'Industries')}
           {renderNavLink('/blog', 'Community')}
-          {renderNavLink('/pricing', 'Pricing')}
         </div>
 
         {/* Right actions */}
         <div style={{ display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: 12, justifySelf: 'end' }}>
-          {renderNavLink('/login', 'Log in')}
-          <Link to="/signup" style={{
-            textDecoration: 'none',
-            background: 'var(--color-primary)',
-            color: '#ffffff',
-            padding: '10px 18px',
-            borderRadius: 9999,
-            fontWeight: 700,
-            fontSize: '0.95rem',
-            boxShadow: '0 8px 20px rgba(255,107,0,0.25)',
-            transition: 'transform .15s ease, box-shadow .2s ease'
-          }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 10px 24px rgba(255,107,0,0.28)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(255,107,0,0.25)'; }}
-          >
-            Get Started
-          </Link>
-        </div>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          style={{
-            display: isMobile ? 'inline-flex' : 'none',
-            justifySelf: 'end',
-            width: 40,
-            height: 40,
-            borderRadius: 8,
-            border: '1px solid rgba(0,0,0,0.1)',
-            background: '#fff',
-            cursor: 'pointer',
-            fontSize: '1.1rem',
-            color: '#333'
-          }}
-          aria-label="Toggle menu"
-        >
-          {open ? '✕' : '☰'}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div style={{
-          display: isMobile ? 'block' : 'none',
-          borderTop: '1px solid rgba(0,0,0,0.06)',
-          padding: 16,
-          background: '#fff'
-        }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {renderNavLink('/apps', 'Applications')}
+          <Link to="/login" className="btn btn-primary">Log in</Link>
+          <Link to="/login" className="btn btn-primary">Sign up</Link>
+{{ ... }}
             {renderNavLink('/solutions', 'Industries')}
             {renderNavLink('/blog', 'Community')}
             {renderNavLink('/pricing', 'Pricing')}
             <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
-              {renderNavLink('/login', 'Log in')}
-              <Link to="/signup" style={{
-                textDecoration: 'none',
-                background: 'var(--color-primary)',
-                color: '#ffffff',
-                padding: '10px 18px',
-                borderRadius: 9999,
-                fontWeight: 700,
-                fontSize: '0.95rem',
+              <Link to="/login" className="btn btn-primary">Log in</Link>
+              <Link to="/login" className="btn btn-primary">Sign up</Link>
+{{ ... }}
                 textAlign: 'center',
                 boxShadow: '0 8px 20px rgba(255,107,0,0.25)'
               }} onClick={() => setOpen(false)}>
