@@ -37,8 +37,8 @@ export const Login: React.FC = () => {
 				<div style={{ marginBottom: 24 }}>
 					<Link to="/" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Home</Link>
 				</div>
-				<h1 style={{ margin: '0 0 12px' }}>Log in</h1>
-				<p style={{ color: '#4a5568', margin: '0 0 24px' }}>Welcome back.</p>
+				<h1 style={{ margin: '0 0 12px' }}>Signup</h1>
+				<p style={{ color: '#4a5568', margin: '0 0 24px' }}>Create your account.</p>
 				{error && (
 					<div style={{ background: '#FED7D7', color: '#742A2A', padding: '10px 12px', borderRadius: 8, marginBottom: 12 }}>
 						{error}
@@ -61,14 +61,12 @@ export const Login: React.FC = () => {
 						onChange={(e) => setPassword(e.target.value)}
 						style={{ padding: '12px 14px', border: '1px solid #e2e8f0', borderRadius: 8 }}
 					/>
-					<button type="submit" className="btn btn-primary">Log in</button>
+					<button type="submit" className="btn btn-primary">Signup</button>
 				</form>
 				<div style={{ marginTop: 12, color: '#4a5568' }}>
-					Don't have an account? <Link to="/signup" style={{ color: '#667eea' }}>Sign up</Link>
+					Already have an account? <Link to="/login" style={{ color: '#667eea' }}>Log in</Link>
 				</div>
 			</div>
 		</section>
 	);
 };
-
-

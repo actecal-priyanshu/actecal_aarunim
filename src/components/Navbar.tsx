@@ -77,20 +77,51 @@ const Navbar: React.FC = () => {
           {renderNavLink('/apps', 'Applications')}
           {renderNavLink('/solutions', 'Industries')}
           {renderNavLink('/blog', 'Community')}
+          {renderNavLink('/pricing', 'Pricing')}
         </div>
 
         {/* Right actions */}
         <div style={{ display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: 12, justifySelf: 'end' }}>
-          <Link to="/login" className="btn btn-primary">Log in</Link>
-          <Link to="/login" className="btn btn-primary">Sign up</Link>
-{{ ... }}
+          <Link to="/login" className="btn">Log in</Link>
+          <Link to="/signup" className="btn btn-primary">Sign up</Link>
+        </div>
+
+        {isMobile && (
+          <button 
+            onClick={() => setOpen(!open)} 
+            style={{
+              background: 'transparent', 
+              border: 'none', 
+              fontSize: '1.5rem', 
+              cursor: 'pointer', 
+              color: 'var(--color-text)'
+            }}
+          >
+            {open ? '✕' : '☰'}
+          </button>
+        )}
+      </div>
+
+      {isMobile && open && (
+        <div style={{
+          background: '#fff',
+          padding: '16px 24px',
+          borderTop: '1px solid rgba(0,0,0,0.06)',
+          display: 'grid',
+          gap: 12
+        }}>
+          <div style={{ display: 'grid', gap: 12, textAlign: 'center' }}>
+            {renderNavLink('/apps', 'Applications')}
             {renderNavLink('/solutions', 'Industries')}
             {renderNavLink('/blog', 'Community')}
             {renderNavLink('/pricing', 'Pricing')}
             <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
-              <Link to="/login" className="btn btn-primary">Log in</Link>
-              <Link to="/login" className="btn btn-primary">Sign up</Link>
-{{ ... }}
+              <Link to="/login" className="btn">Log in</Link>
+              <Link to="/signup" className="btn btn-primary">Sign up</Link>
+            </div>
+            <div style={{ marginTop: 8 }}>
+              <Link to="/contact-sales" className="btn" style={{
+                width: '100%',
                 textAlign: 'center',
                 boxShadow: '0 8px 20px rgba(255,107,0,0.25)'
               }} onClick={() => setOpen(false)}>

@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import '../styles/Signup.css';
-
-const useQuery = () => new URLSearchParams(useLocation().search);
 
 export const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
+    email: '',
     logo: null as File | null,
     companyName: '',
   });
   const [errors, setErrors] = useState<any>({});
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
-  const { signup } = useAuth();
+  const { login } = useAuth();
   const [submitted, setSubmitted] = useState(false);
 
   const validate = () => {
     const newErrors: any = {};
     if (!formData.name) newErrors.name = 'Name is required';
-{{ ... }}
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is invalid';
+    }
     if (!formData.companyName) newErrors.companyName = 'Company name is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -44,16 +47,27 @@ export const Signup: React.FC = () => {
       const payload = new FormData();
       payload.append('name', formData.name);
       payload.append('email', formData.email);
-{{ ... }}
+      payload.append('companyName', formData.companyName);
+      if (formData.logo) {
+        payload.append('logo', formData.logo);
+      }
+
+      try {
+        const res = await fetch('/api/auth/signup', {
+          method: 'POST',
+          body: payload,
+        });
+
+        if (!res.ok) {
           const data = await res.json().catch(() => ({}));
           throw new Error(data.message || `Failed to create account (code ${res.status})`);
         }
 
         const data = await res.json();
-        await signup(data.token);
+        await login(data.token);
         setSubmitted(true);
       } catch (err: any) {
-        setErrors({ ...errors, form: err.message || 'Something went wrong' });
+        setErrors({ form: err.message || 'Something went wrong' });
       }
     }
   };
@@ -63,52 +77,69 @@ export const Signup: React.FC = () => {
       <div className="signup-container">
         <h2>Registration Successful!</h2>
         <p>Thank you for signing up. You are now logged in.</p>
-    Already have an account? <Link to="/login" style={{ color: '#667eea' }}>Log in</Link>
+        <Link to="/">Go to Home</Link>
       </div>
     );
   }
 
   return (
-{{ ... }}
+    <div className="signup-container">
       <h2>Signup</h2>
       <form onSubmit={handleSubmit} className="signup-form">
         <div className="form-group">
           <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
+          <div className="input-with-icon">
+            <i className="fas fa-user"></i>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </div>
           {errors.name && <p className="error-message">{errors.name}</p>}
         </div>
         <div className="form-group">
           <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
+          <div className="input-with-icon">
+            <i className="fas fa-envelope"></i>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
           {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
         <div className="form-group">
           <label>Company Name</label>
-          <input
-            type="text"
-            name="companyName"
-            value={formData.companyName}
-            onChange={handleChange}
-          />
+          <div className="input-with-icon">
+            <i className="fas fa-building"></i>
+            <input
+              type="text"
+              name="companyName"
+              placeholder="Enter your company name"
+              value={formData.companyName}
+              onChange={handleChange}
+            />
+          </div>
           {errors.companyName && <p className="error-message">{errors.companyName}</p>}
         </div>
         <div className="form-group">
           <label>Logo</label>
+          <label htmlFor="file-upload" className="file-upload-label">
+            <i className="fas fa-cloud-upload-alt"></i> Choose a Logo
+          </label>
           <input
+            id="file-upload"
             type="file"
             name="logo"
             onChange={handleFileChange}
           />
+          {formData.logo && <span className="file-name">{formData.logo.name}</span>}
         </div>
         {logoPreview && (
           <div className="logo-preview">
@@ -116,7 +147,10 @@ export const Signup: React.FC = () => {
           </div>
         )}
         {errors.form && <p className="error-message">{errors.form}</p>}
-        <button type="submit">Signup</button>
+        <button type="submit">Create Account</button>
+        <p className="terms-text">
+          By signing up, you agree to our <Link to="/terms">Terms of Service</Link> and <Link to="/privacy">Privacy Policy</Link>.
+        </p>
       </form>
     </div>
   );

@@ -19,7 +19,7 @@ import { Billing } from './pages/Billing';
 import { Plan } from './pages/Plan';
 import { Signup } from './pages/Signup';
 import { ContactSales } from './pages/ContactSales';
-import { Signup } from './pages/Signup';
+import { Login } from './pages/Login';
 import { RequireAuth } from './auth/RequireAuth';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
@@ -28,7 +28,7 @@ import { HelpCenter } from './pages/HelpCenter';
 import { APIReference } from './pages/APIReference';
 import { Status } from './pages/Status';
 import { AppDetail } from './pages/AppDetail';
-
+import { Industry } from './pages/Industry';
 function App() {
   return (
     <SiteLayout>
@@ -40,7 +40,7 @@ function App() {
         <Route path="/plans/:planId" element={<Plan />} />
         <Route path="/billing" element={<RequireAuth><Billing /></RequireAuth>} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/contact-sales" element={<ContactSales />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
@@ -56,6 +56,7 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/cookies" element={<CookiePolicy />} />
+        <Route path="/industries/:slug" element={<Industry />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

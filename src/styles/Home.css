@@ -478,6 +478,7 @@ button {
 .tech-platform-section {
   padding: 6rem 0;
   background-color: #ffffff;
+  margin-top: -6rem;
 }
 
 .tech-platform-container {
