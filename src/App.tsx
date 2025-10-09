@@ -29,6 +29,31 @@ import { APIReference } from './pages/APIReference';
 import { Status } from './pages/Status';
 import { AppDetail } from './pages/AppDetail';
 import { Industry } from './pages/Industry';
+import { AllIndustries } from './pages/AllIndustries';
+import { Community } from './pages/Community';
+import { Tutorials } from './pages/Tutorials';
+import { Certifications } from './pages/Certifications';
+import { Training } from './pages/Training';
+import { Podcast } from './pages/Podcast';
+import { EducationProgram } from './pages/EducationProgram';
+import { ScaleUpBusinessGame } from './pages/ScaleUpBusinessGame';
+import { VisitOdoo } from './pages/VisitOdoo';
+import { Download } from './pages/Download';
+import { CompareEditions } from './pages/CompareEditions';
+import { Releases } from './pages/Releases';
+import { Github } from './pages/Github';
+import { Forum } from './pages/Forum';
+import { Events } from './pages/Events';
+import { Translations } from './pages/Translations';
+import { BecomeAPartner } from './pages/BecomeAPartner';
+import { ServicesForPartners } from './pages/ServicesForPartners';
+import { RegisterYourAccountingFirm } from './pages/RegisterYourAccountingFirm';
+import { FindAPartner } from './pages/FindAPartner';
+import { FindAnAccountant } from './pages/FindAnAccountant';
+import { MeetAnAdvisor } from './pages/MeetAnAdvisor';
+import { ImplementationServices } from './pages/ImplementationServices';
+import { CustomerReferences } from './pages/CustomerReferences';
+import { Upgrades } from './pages/Upgrades';
 function App() {
   return (
     <SiteLayout>
@@ -56,7 +81,32 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/cookies" element={<CookiePolicy />} />
+        <Route path="/industries" element={<AllIndustries />} />
         <Route path="/industries/:slug" element={<Industry />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/tutorials" element={<Tutorials />} />
+        <Route path="/certifications" element={<Certifications />} />
+        <Route path="/training" element={<Training />} />
+        <Route path="/podcast" element={<Podcast />} />
+        <Route path="/education-program" element={<EducationProgram />} />
+        <Route path="/scale-up!-business-game" element={<ScaleUpBusinessGame />} />
+        <Route path="/visit-odoo" element={<VisitOdoo />} />
+        <Route path="/download" element={<Download />} />
+        <Route path="/compare-editions" element={<CompareEditions />} />
+        <Route path="/releases" element={<Releases />} />
+        <Route path="/github" element={<Github />} />
+        <Route path="/forum" element={<Forum />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/translations" element={<Translations />} />
+        <Route path="/become-a-partner" element={<BecomeAPartner />} />
+        <Route path="/services-for-partners" element={<ServicesForPartners />} />
+        <Route path="/register-your-accounting-firm" element={<RegisterYourAccountingFirm />} />
+        <Route path="/find-a-partner" element={<FindAPartner />} />
+        <Route path="/find-an-accountant" element={<FindAnAccountant />} />
+        <Route path="/meet-an-advisor" element={<MeetAnAdvisor />} />
+        <Route path="/implementation-services" element={<ImplementationServices />} />
+        <Route path="/customer-references" element={<CustomerReferences />} />
+        <Route path="/upgrades" element={<Upgrades />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

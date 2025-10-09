@@ -1,0 +1,144 @@
+.industry-page-section {
+  padding: 80px 24px;
+}
+
+.industry-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.key-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.key-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 24px;
+}
+
+.key-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.key-feature-icon {
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  margin-top: 4px;
+}
+
+.key-feature-text {
+  margin: 0;
+  color: #4A5568;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.industry-image {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.testimonial-section {
+  margin-top: 80px;
+  padding: 40px;
+  background-color: #F9FAFB;
+  border-radius: 12px;
+  border-left: 4px solid var(--color-primary);
+  text-align: center;
+}
+
+.testimonial-quote {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #4A5568;
+  margin: 0;
+}
+
+.testimonial-author {
+  margin-top: 16px;
+  font-weight: 600;
+  color: #2D3748;
+}
+
+.related-apps-section {
+  margin-top: 80px;
+}
+
+.related-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.related-app-card {
+  display: block;
+  padding: 24px;
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.related-app-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.related-app-card h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.related-app-card p {
+  color: #4A5568;
+  margin: 0;
+}
+
+.cta-section {
+  text-align: center;
+  margin-top: 80px;
+  padding: 40px;
+  background-color: #F7FAFC;
+  border-radius: 12px;
+}
+
+.section-title {
+  font-size: 2.25rem;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.cta-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.cta-subtitle {
+  color: #4A5568;
+  margin-bottom: 24px;
+}
+
+.cta-button {
+  padding: 14px 32px;
+  font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .key-features-grid {
+    grid-template-columns: 1fr;
+  }
+}

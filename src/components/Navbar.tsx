@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
         }}>
           {renderNavLink('/apps', 'Applications')}
           {renderNavLink('/solutions', 'Industries')}
-          {renderNavLink('/blog', 'Community')}
+          {renderNavLink('/community', 'Community')}
           {renderNavLink('/pricing', 'Pricing')}
         </div>
 
@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
           <div style={{ display: 'grid', gap: 12, textAlign: 'center' }}>
             {renderNavLink('/apps', 'Applications')}
             {renderNavLink('/solutions', 'Industries')}
-            {renderNavLink('/blog', 'Community')}
+            {renderNavLink('/community', 'Community')}
             {renderNavLink('/pricing', 'Pricing')}
             <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
               <Link to="/login" className="btn">Log in</Link>
