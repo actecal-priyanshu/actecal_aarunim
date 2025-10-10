@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
-import '../styles/Signup.css';
 
 export const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +13,7 @@ export const Signup: React.FC = () => {
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const { login } = useAuth();
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     const newErrors: any = {};
@@ -36,6 +36,16 @@ export const Signup: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      // basic validation: <= 2MB and image type
+      const maxBytes = 2 * 1024 * 1024;
+      if (!/^image\//.test(file.type)) {
+        setErrors((prev: any) => ({ ...prev, form: 'Logo must be an image file.' }));
+        return;
+      }
+      if (file.size > maxBytes) {
+        setErrors((prev: any) => ({ ...prev, form: 'Logo must be less than 2MB.' }));
+        return;
+      }
       setFormData({ ...formData, logo: file });
       setLogoPreview(URL.createObjectURL(file));
     }
@@ -44,6 +54,7 @@ export const Signup: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
+      setIsSubmitting(true);
       const payload = new FormData();
       payload.append('name', formData.name);
       payload.append('email', formData.email);
@@ -68,90 +79,105 @@ export const Signup: React.FC = () => {
         setSubmitted(true);
       } catch (err: any) {
         setErrors({ form: err.message || 'Something went wrong' });
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
 
   if (submitted) {
     return (
-      <div className="signup-container">
-        <h2>Registration Successful!</h2>
-        <p>Thank you for signing up. You are now logged in.</p>
-        <Link to="/">Go to Home</Link>
-      </div>
+      <section style={{ padding: '60px 24px' }}>
+        <div style={{ maxWidth: 600, margin: '0 auto' }}>
+          <div style={{ marginBottom: 24 }}>
+            <Link to="/" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Home</Link>
+          </div>
+          <h1 style={{ margin: '0 0 12px' }}>Signup</h1>
+          <p style={{ color: '#4a5568', margin: '0 0 24px' }}>Registration Successful!</p>
+          <p style={{ color: '#4a5568', margin: '0 0 24px' }}>Thank you for signing up. You are now logged in.</p>
+          <Link to="/" className="btn btn-primary">Go to Home</Link>
+        </div>
+      </section>
     );
   }
 
   return (
-    <div className="signup-container">
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit} className="signup-form">
-        <div className="form-group">
-          <label>Name</label>
-          <div className="input-with-icon">
-            <i className="fas fa-user"></i>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </div>
-          {errors.name && <p className="error-message">{errors.name}</p>}
+    <section style={{ padding: '60px 24px' }}>
+      <div style={{ maxWidth: 600, margin: '0 auto' }}>
+        <div style={{ marginBottom: 24 }}>
+          <Link to="/" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Home</Link>
         </div>
-        <div className="form-group">
-          <label>Email</label>
-          <div className="input-with-icon">
-            <i className="fas fa-envelope"></i>
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-            />
+        <h1 style={{ margin: '0 0 12px' }}>Signup</h1>
+        <p style={{ color: '#4a5568', margin: '0 0 24px' }}>Create your account.</p>
+
+        {errors.form && (
+          <div style={{ background: '#FED7D7', color: '#742A2A', padding: '10px 12px', borderRadius: 8, marginBottom: 12 }}>
+            {errors.form}
           </div>
-          {errors.email && <p className="error-message">{errors.email}</p>}
-        </div>
-        <div className="form-group">
-          <label>Company Name</label>
-          <div className="input-with-icon">
-            <i className="fas fa-building"></i>
-            <input
-              type="text"
-              name="companyName"
-              placeholder="Enter your company name"
-              value={formData.companyName}
-              onChange={handleChange}
-            />
-          </div>
-          {errors.companyName && <p className="error-message">{errors.companyName}</p>}
-        </div>
-        <div className="form-group">
-          <label>Logo</label>
-          <label htmlFor="file-upload" className="file-upload-label">
-            <i className="fas fa-cloud-upload-alt"></i> Choose a Logo
-          </label>
+        )}
+
+        <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
+          <input
+            type="text"
+            name="name"
+            required
+            placeholder="Full name"
+            value={formData.name}
+            onChange={handleChange}
+            autoFocus
+            style={{ padding: '12px 14px', border: '1px solid #e2e8f0', borderRadius: 8 }}
+          />
+          {errors.name && <small style={{ color: '#E53E3E' }}>{errors.name}</small>}
+
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            style={{ padding: '12px 14px', border: '1px solid #e2e8f0', borderRadius: 8 }}
+          />
+          {errors.email && <small style={{ color: '#E53E3E' }}>{errors.email}</small>}
+
+          <input
+            type="text"
+            name="companyName"
+            required
+            placeholder="Company name"
+            value={formData.companyName}
+            onChange={handleChange}
+            style={{ padding: '12px 14px', border: '1px solid #e2e8f0', borderRadius: 8 }}
+          />
+          {errors.companyName && <small style={{ color: '#E53E3E' }}>{errors.companyName}</small>}
+
           <input
             id="file-upload"
             type="file"
             name="logo"
             onChange={handleFileChange}
+            style={{ padding: '10px', border: '1px solid #e2e8f0', borderRadius: 8 }}
+            accept="image/*"
           />
-          {formData.logo && <span className="file-name">{formData.logo.name}</span>}
+          {formData.logo && <small style={{ color: '#4a5568' }}>{formData.logo.name}</small>}
+
+          {logoPreview && (
+            <div style={{ border: '1px solid #e2e8f0', borderRadius: 8, padding: 8 }}>
+              <img src={logoPreview} alt="Logo Preview" style={{ maxWidth: '100%', display: 'block' }} />
+            </div>
+          )}
+
+          <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+            {isSubmitting ? 'Creating account...' : 'Create Account'}
+          </button>
+        </form>
+        <div style={{ marginTop: 12, color: '#4a5568' }}>
+          Already have an account? <Link to="/login" style={{ color: '#667eea' }}>Log in</Link>
         </div>
-        {logoPreview && (
-          <div className="logo-preview">
-            <img src={logoPreview} alt="Logo Preview" />
-          </div>
-        )}
-        {errors.form && <p className="error-message">{errors.form}</p>}
-        <button type="submit">Create Account</button>
-        <p className="terms-text">
+        <p style={{ marginTop: 12, color: '#718096' }}>
           By signing up, you agree to our <Link to="/terms">Terms of Service</Link> and <Link to="/privacy">Privacy Policy</Link>.
         </p>
-      </form>
-    </div>
+      </div>
+    </section>
   );
 };

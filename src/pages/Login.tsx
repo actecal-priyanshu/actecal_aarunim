@@ -3,15 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 
 export const Login: React.FC = () => {
-	const navigate = useNavigate();
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { login } = useAuth();
 
 	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setError(null);
+		setIsSubmitting(true);
 		try {
 			const res = await fetch('/api/auth/login', {
 				method: 'POST',
@@ -28,6 +31,8 @@ export const Login: React.FC = () => {
 			navigate('/');
 		} catch (err: any) {
 			setError(err.message || 'Something went wrong');
+		} finally {
+			setIsSubmitting(false);
 		}
 	};
 
@@ -37,8 +42,8 @@ export const Login: React.FC = () => {
 				<div style={{ marginBottom: 24 }}>
 					<Link to="/" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Home</Link>
 				</div>
-				<h1 style={{ margin: '0 0 12px' }}>Signup</h1>
-				<p style={{ color: '#4a5568', margin: '0 0 24px' }}>Create your account.</p>
+				<h1 style={{ margin: '0 0 12px' }}>Login</h1>
+				<p style={{ color: '#4a5568', margin: '0 0 24px' }}>Access your account.</p>
 				{error && (
 					<div style={{ background: '#FED7D7', color: '#742A2A', padding: '10px 12px', borderRadius: 8, marginBottom: 12 }}>
 						{error}
@@ -54,17 +59,27 @@ export const Login: React.FC = () => {
 						style={{ padding: '12px 14px', border: '1px solid #e2e8f0', borderRadius: 8 }}
 					/>
 					<input
-						type="password"
+						type={showPassword ? 'text' : 'password'}
 						required
 						placeholder="Password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						style={{ padding: '12px 14px', border: '1px solid #e2e8f0', borderRadius: 8 }}
 					/>
-					<button type="submit" className="btn btn-primary">Signup</button>
+					<label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+						<input
+							type="checkbox"
+							checked={showPassword}
+							onChange={(e) => setShowPassword(e.target.checked)}
+						/>
+						Show password
+					</label>
+					<button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+						{isSubmitting ? 'Logging in...' : 'Login'}
+					</button>
 				</form>
 				<div style={{ marginTop: 12, color: '#4a5568' }}>
-					Already have an account? <Link to="/login" style={{ color: '#667eea' }}>Log in</Link>
+					Don't have an account? <Link to="/signup" style={{ color: '#667eea' }}>Sign up</Link>
 				</div>
 			</div>
 		</section>
