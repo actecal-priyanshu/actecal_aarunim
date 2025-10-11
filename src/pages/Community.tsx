@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PageHero } from '../components/PageHero';
 import '../styles/Community.css';
 
@@ -40,15 +40,18 @@ const communitySections: CommunitySection[] = [
 // Map known labels to real routes to avoid 404s. Fallback to slugified label.
 const pathOverrides: Record<string, string> = {
   'Tutorials': '/tutorials',
+  'Documentation': '/docs',
   'Certifications': '/certifications',
   'Training': '/training',
-  'Find a Partner': '/partners',
+  'Find a Partner': '/find-a-partner',
   'Find an Accountant': '/find-an-accountant',
   'Meet an advisor': '/meet-an-advisor',
   'Implementation Services': '/implementation-services',
   'Customer References': '/customer-references',
   'Support': '/support',
   'Upgrades': '/upgrades',
+  'Blog': '/blog',
+  'Podcast': '/podcast',
 };
 
 const featuredEvents = [
@@ -110,10 +113,8 @@ const getSectionIcon = (title: string) => {
 
 export const Community: React.FC = () => {
   const [query, setQuery] = useState('');
-  const [expanded, setExpanded] = useState<Record<string, boolean>>(
-    () => Object.fromEntries(communitySections.map(s => [s.title, true])) as Record<string, boolean>
-  );
   const searchRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const filteredSections = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -146,26 +147,6 @@ export const Community: React.FC = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  // Persist expand/collapse state
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem('community_expanded_v1');
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (parsed && typeof parsed === 'object') {
-          setExpanded((prev) => ({ ...prev, ...parsed }));
-        }
-      }
-    } catch {}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('community_expanded_v1', JSON.stringify(expanded));
-    } catch {}
-  }, [expanded]);
-
   const resultsCount = useMemo(
     () => filteredSections.reduce((sum, s) => sum + s.links.length, 0),
     [filteredSections]
@@ -188,6 +169,16 @@ export const Community: React.FC = () => {
               onChange={(e) => setQuery(e.target.value)}
               aria-label="Search community resources"
               ref={searchRef}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  const first = filteredSections[0]?.links?.[0];
+                  if (first) {
+                    const path = pathOverrides[first] ?? `/${first.toLowerCase().replace(/\s+/g, '-')}`;
+                    navigate(path);
+                  }
+                }
+              }}
             />
             {query && (
               <button type="button" className="clear-btn" onClick={() => setQuery('')} aria-label="Clear search">Clear</button>
@@ -206,30 +197,21 @@ export const Community: React.FC = () => {
                 className="community-section"
                 style={{ '--accent-color': section.color } as React.CSSProperties}
               >
-                <button
-                  className="community-section-title collapsible-toggle"
-                  aria-expanded={!!expanded[section.title]}
-                  onClick={() => setExpanded((prev) => ({ ...prev, [section.title]: !prev[section.title] }))}
-                  aria-controls={section.title.toLowerCase().replace(/\s+/g, '-') + '-links'}
-                >
+                <h4 className="community-section-title">
                   <span className="section-icon">{getSectionIcon(section.title)}</span>
                   <span className="title-text">{section.title}</span>
-                  <span className="count-badge" aria-label={`${section.links.length} links`}>{section.links.length}</span>
-                  <span className={`chevron ${expanded[section.title] ? 'open' : ''}`}></span>
-                </button>
-                {expanded[section.title] && (
-                  <div className="community-links" id={section.title.toLowerCase().replace(/\s+/g, '-') + '-links'}>
-                    {section.links.map((link: string) => (
-                      <Link
-                        key={link}
-                        to={pathOverrides[link] ?? `/${link.toLowerCase().replace(/\s+/g, '-')}`}
-                        className="community-link"
-                      >
-                        {highlight(link)}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                </h4>
+                <div className="community-links" id={section.title.toLowerCase().replace(/\s+/g, '-') + '-links'}>
+                  {section.links.map((link: string) => (
+                    <Link
+                      key={link}
+                      to={pathOverrides[link] ?? `/${link.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="community-link"
+                    >
+                      {highlight(link)}
+                    </Link>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
