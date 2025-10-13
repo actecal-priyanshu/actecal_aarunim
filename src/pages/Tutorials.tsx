@@ -13,6 +13,9 @@ export const Tutorials: React.FC = () => {
 
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ marginBottom: 12 }}>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Community</Link>
+          </div>
           <h2 style={{ margin: '0 0 16px' }}>Quick starts</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 32 }}>
             <div style={{ border: '1px solid #e2e8f0', borderRadius: 10, padding: 18 }}>

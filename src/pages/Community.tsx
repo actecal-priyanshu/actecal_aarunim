@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageHero } from '../components/PageHero';
 import '../styles/Community.css';
+import { posts } from './blogData';
 
 type CommunitySection = {
   title: string;
@@ -12,17 +13,17 @@ type CommunitySection = {
 const communitySections: CommunitySection[] = [
   {
     title: 'Learn',
-    links: ['Tutorials', 'Documentation', 'Certifications', 'Training', 'Blog', 'Podcast'],
+    links: ['Tutorials', 'Documentation', 'Certifications', 'Training', 'Blog', 'Podcast', 'Help Center', 'API Reference', 'Status'],
     color: '#E97326',
   },
   {
     title: 'Empower Education',
-    links: ['Education Program', 'Scale Up! Business Game', 'Visit Odoo'],
+    links: ['Education Program', 'Scale Up! Business Game', 'Student Certifications'],
     color: '#E97326',
   },
   {
     title: 'Get the Software',
-    links: ['Download', 'Compare Editions', 'Releases'],
+    links: ['Download', 'Compare Editions', 'Releases', 'Security'],
     color: '#00A09D',
   },
   {
@@ -32,7 +33,7 @@ const communitySections: CommunitySection[] = [
   },
   {
     title: 'Get Services',
-    links: ['Find a Partner', 'Find an Accountant', 'Meet an advisor', 'Implementation Services', 'Customer References', 'Support', 'Upgrades'],
+    links: ['Find a Partner', 'Find an Accountant', 'Meet an advisor', 'Implementation Services', 'Customer References', 'Support', 'Upgrades', 'Contact Sales'],
     color: '#007A87',
   },
 ];
@@ -52,6 +53,12 @@ const pathOverrides: Record<string, string> = {
   'Upgrades': '/upgrades',
   'Blog': '/blog',
   'Podcast': '/podcast',
+  'Help Center': '/help-center',
+  'API Reference': '/api-reference',
+  'Status': '/status',
+  'Security': '/security',
+  'Contact Sales': '/contact-sales',
+  'Student Certifications': '/certifications',
 };
 
 const featuredEvents = [
@@ -69,6 +76,20 @@ const featuredEvents = [
     description: 'A casual meetup to connect with local BizSuite users and share best practices.',
     link: '/events/ny-meetup',
   },
+  {
+    title: 'Webinar: Inventory Optimization',
+    date: 'December 2, 2024',
+    location: 'Online',
+    description: 'Practical strategies to reduce stockouts and excess inventory using BizSuite.',
+    link: '/events/inventory-webinar',
+  },
+  {
+    title: 'Partner Summit Europe 2025',
+    date: 'May 9, 2025',
+    location: 'Berlin, Germany',
+    description: 'A full-day deep dive into partner solutions, roadmap, and co-selling strategies.',
+    link: '/events/partner-summit-eu',
+  },
 ];
 
 const testimonials = [
@@ -81,6 +102,16 @@ const testimonials = [
     quote: 'The forums and events have helped me solve complex issues and learn from others’ experiences.',
     author: 'John Smith',
     company: 'TechStart Inc.',
+  },
+  {
+    quote: 'Our implementation finished 30% faster thanks to the training tracks and partner guidance.',
+    author: 'Sofia Patel',
+    company: 'BluePeak Manufacturing',
+  },
+  {
+    quote: 'Documentation and API examples made integration straightforward for our dev team.',
+    author: 'Marcus Lee',
+    company: 'Finlytics',
   },
 ];
 
@@ -237,7 +268,63 @@ export const Community: React.FC = () => {
           </div>
         </div>
       </section>
-      
+
+      <section className="stats-section">
+        <div className="community-container">
+          <h2 className="section-title center">Community at a Glance</h2>
+          <div className="stats-grid">
+            {[
+              { value: '12k+', label: 'Members' },
+              { value: '3.5k+', label: 'Forum posts' },
+              { value: '120+', label: 'Open-source repos' },
+              { value: '85+', label: 'Events / year' },
+            ].map((s) => (
+              <div key={s.label} className="stat-card">
+                <div className="stat-value">{s.value}</div>
+                <div className="stat-label">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="repos-section">
+        <div className="community-container">
+          <h2 className="section-title center">Featured Repositories</h2>
+          <div className="repos-grid">
+            {[
+              { name: 'bizsuite-core', desc: 'Core modules and utilities', url: 'https://github.com/example/bizsuite-core' },
+              { name: 'bizsuite-ui', desc: 'UI components and patterns', url: 'https://github.com/example/bizsuite-ui' },
+              { name: 'bizsuite-integrations', desc: 'Official integrations', url: 'https://github.com/example/bizsuite-integrations' },
+              { name: 'bizsuite-examples', desc: 'Starter projects and examples', url: 'https://github.com/example/bizsuite-examples' },
+            ].map((repo) => (
+              <a key={repo.name} href={repo.url} className="repo-card" target="_blank" rel="noreferrer">
+                <h3 className="repo-name">{repo.name}</h3>
+                <p className="repo-desc">{repo.desc}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="blog-section">
+        <div className="community-container">
+          <h2 className="section-title center">From the Blog</h2>
+          <div className="blog-grid">
+            {posts.slice(0, 3).map((post) => (
+              <Link key={post.slug} to={`/blog/${post.slug}`} className="blog-card">
+                <h3 className="blog-title">{post.title}</h3>
+                <p className="blog-meta">{post.category} • {post.date} • {post.read}</p>
+                <p className="blog-summary">{post.summary}</p>
+              </Link>
+            ))}
+          </div>
+          <div className="blog-actions">
+            <Link to="/blog" className="btn btn-outline-primary">View all posts</Link>
+          </div>
+        </div>
+      </section>
+
       <section className="testimonial-section">
         <div className="community-container">
           <h2 className="section-title center">What Our Community Says</h2>
@@ -248,6 +335,26 @@ export const Community: React.FC = () => {
                 <p className="testimonial-author">- {testimonial.author}, {testimonial.company}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="faq-section">
+        <div className="community-container">
+          <h2 className="section-title center">FAQ</h2>
+          <div className="faq-list">
+            <div className="faq-item">
+              <h4>How do I get help quickly?</h4>
+              <p>Start with <Link to="/help-center">Help Center</Link> or open a ticket via <Link to="/support">Support</Link>.</p>
+            </div>
+            <div className="faq-item">
+              <h4>Where can I learn best practices?</h4>
+              <p>See <Link to="/tutorials">Tutorials</Link>, <Link to="/training">Training</Link>, and <Link to="/certifications">Certifications</Link>.</p>
+            </div>
+            <div className="faq-item">
+              <h4>How do I contribute?</h4>
+              <p>Check <Link to="/github">GitHub</Link> for issues and PRs, and <Link to="/translations">Translations</Link> for localization.</p>
+            </div>
           </div>
         </div>
       </section>

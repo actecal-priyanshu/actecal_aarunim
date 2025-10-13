@@ -306,6 +306,135 @@ mark {
   background-color: #fff;
 }
 
+/* Stats */
+.stats-section {
+  background: #fff;
+  padding: 60px 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  padding: 22px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  color: #718096;
+}
+
+/* Featured Repos */
+.repos-section {
+  background: #f8f9fa;
+  padding: 60px 0;
+}
+
+.repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.repo-card {
+  display: block;
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  padding: 18px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.repo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+
+.repo-name { margin: 0 0 6px; font-weight: 700; }
+.repo-desc { margin: 0; color: #4a5568; }
+
+/* Blog section */
+.blog-section {
+  background: #f8f9fa;
+  padding: 60px 0;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.blog-card {
+  display: block;
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  padding: 18px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+
+.blog-title {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.blog-meta {
+  margin: 0 0 8px;
+  color: #718096;
+  font-size: .9rem;
+}
+
+.blog-summary {
+  margin: 0;
+  color: #4a5568;
+}
+
+.blog-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* FAQ */
+.faq-section {
+  padding: 60px 0;
+  background: #fff;
+}
+
+.faq-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.faq-item {
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 12px;
+  padding: 18px;
+}
+
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

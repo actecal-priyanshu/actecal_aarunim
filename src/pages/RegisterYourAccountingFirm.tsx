@@ -1,10 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { PageHero } from '../components/PageHero';
 
 export const RegisterYourAccountingFirm: React.FC = () => {
   return (
-    <div style={{ padding: '60px 24px', textAlign: 'center' }}>
-      <h1>Register your Accounting Firm</h1>
-      <p>This page is under construction.</p>
-    </div>
+    <main>
+      <PageHero
+        title="Register your Accounting Firm"
+        subtitle="Join our directory to reach new clients and collaborate on BizSuite implementations."
+        emphasize="none"
+      />
+      <section style={{ padding: '10px 24px 60px' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+          <h2 style={{ margin: '0 0 16px' }}>How registration works</h2>
+          <ol style={{ margin: 0, paddingLeft: 20, color: '#4a5568' }}>
+            <li>Submit your firm details and service specialties.</li>
+            <li>Verification by our partner team (2–5 business days).</li>
+            <li>Get listed in the directory and receive client leads.</li>
+          </ol>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 16 }}>
+            <a href="#" className="btn btn-primary">Start registration</a>
+            <Link to="/become-a-partner" className="btn btn-outline-primary">Partner program</Link>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 };
