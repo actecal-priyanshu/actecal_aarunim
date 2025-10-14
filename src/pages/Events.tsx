@@ -17,6 +17,9 @@ export const Events: React.FC = () => {
       />
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ marginBottom: 12 }}>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
             {items.map((e) => (
               <div key={e.title} style={{ border: '1px solid #e2e8f0', borderRadius: 10, padding: 18 }}>
@@ -24,7 +27,7 @@ export const Events: React.FC = () => {
                 <p style={{ margin: 0, color: '#4a5568' }}><strong>Date:</strong> {e.date}</p>
                 <p style={{ margin: 0, color: '#4a5568' }}><strong>Location:</strong> {e.location}</p>
                 <div style={{ marginTop: 10 }}>
-                  <Link to={e.link} className="btn btn-outline-primary">Learn More</Link>
+                  <Link to={e.link} className="btn btn-outline-primary" reloadDocument>Learn More</Link>
                 </div>
               </div>
             ))}

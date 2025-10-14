@@ -18,7 +18,7 @@ export const Podcast: React.FC = () => {
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ marginBottom: 12 }}>
-            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Community</Link>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
           </div>
           <h2 style={{ margin: '0 0 16px' }}>Latest episodes</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
@@ -28,7 +28,7 @@ export const Podcast: React.FC = () => {
                 <p style={{ margin: 0, color: '#4a5568' }}>{ep.desc}</p>
                 <div style={{ marginTop: 12, display: 'flex', gap: 10 }}>
                   <button className="btn btn-primary" type="button">Play</button>
-                  <Link to="/blog" className="btn btn-outline-primary">Read transcript</Link>
+                  <Link to="/blog" className="btn btn-outline-primary" reloadDocument>Read transcript</Link>
                 </div>
               </div>
             ))}

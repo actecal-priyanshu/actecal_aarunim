@@ -13,7 +13,7 @@ export const Github: React.FC = () => {
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ marginBottom: 12 }}>
-            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Community</Link>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
             {[{t:'Repository', d:'Browse code, branches, and tags.'}, {t:'Issues', d:'Report bugs or request features.'}, {t:'Pull Requests', d:'Contribute improvements.'}].map((it, i) => (
@@ -36,8 +36,8 @@ export const Github: React.FC = () => {
             <li>Open a PR with context and screenshots</li>
           </ol>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 16 }}>
-            <Link to="/docs" className="btn btn-outline-primary">Contributing Guide</Link>
-            <Link to="/releases" className="btn btn-outline-primary">Release notes</Link>
+            <Link to="/docs" className="btn btn-outline-primary" reloadDocument>Contributing Guide</Link>
+            <Link to="/releases" className="btn btn-outline-primary" reloadDocument>Release notes</Link>
           </div>
         </div>
       </section>

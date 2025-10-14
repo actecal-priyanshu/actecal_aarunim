@@ -12,6 +12,9 @@ export const Download: React.FC = () => {
       />
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ marginBottom: 12 }}>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
+          </div>
           <h2 style={{ margin: '0 0 16px' }}>Choose platform</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginBottom: 32 }}>
             {['Windows','macOS','Linux','Docker'].map((p) => (
@@ -27,8 +30,8 @@ export const Download: React.FC = () => {
             <li>Review latest release notes.</li>
           </ul>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', marginTop: 16 }}>
-            <Link to="/compare-editions" className="btn btn-outline-primary">Compare Editions</Link>
-            <Link to="/releases" className="btn btn-outline-primary">View Releases</Link>
+            <Link to="/compare-editions" className="btn btn-outline-primary" reloadDocument>Compare Editions</Link>
+            <Link to="/releases" className="btn btn-outline-primary" reloadDocument>View Releases</Link>
           </div>
         </div>
       </section>

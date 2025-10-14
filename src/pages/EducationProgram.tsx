@@ -13,7 +13,7 @@ export const EducationProgram: React.FC = () => {
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ marginBottom: 12 }}>
-            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Community</Link>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
           </div>
           <h2 style={{ margin: '0 0 16px' }}>What you get</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 32 }}>
@@ -25,8 +25,8 @@ export const EducationProgram: React.FC = () => {
             ))}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <Link to="/training" className="btn btn-primary">View learning tracks</Link>
-            <Link to="/certifications" className="btn btn-outline-primary">Certifications</Link>
+            <Link to="/training" className="btn btn-primary" reloadDocument>View learning tracks</Link>
+            <Link to="/certifications" className="btn btn-outline-primary" reloadDocument>Certifications</Link>
           </div>
         </div>
       </section>

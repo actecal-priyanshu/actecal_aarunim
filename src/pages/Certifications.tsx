@@ -14,7 +14,7 @@ export const Certifications: React.FC = () => {
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ marginBottom: 12 }}>
-            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Community</Link>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
           </div>
           <h2 style={{ margin: '0 0 16px' }}>Certification paths</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 32 }}>
@@ -29,8 +29,8 @@ export const Certifications: React.FC = () => {
                 <h4 style={{ margin: '0 0 8px' }}>{it.t}</h4>
                 <p style={{ margin: '0 0 12px', color: '#4a5568' }}>{it.d}</p>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                  <Link to="/training" className="btn btn-outline-primary">View training</Link>
-                  <Link to="/docs" className="btn btn-outline-primary">Docs</Link>
+                  <Link to="/training" className="btn btn-outline-primary" reloadDocument>View training</Link>
+                  <Link to="/docs" className="btn btn-outline-primary" reloadDocument>Docs</Link>
                 </div>
               </div>
             ))}
@@ -46,8 +46,8 @@ export const Certifications: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <Link to="/training" className="btn btn-primary">Start preparing</Link>
-            <Link to="/help-center" className="btn btn-outline-primary">Get help</Link>
+            <Link to="/training" className="btn btn-primary" reloadDocument>Start preparing</Link>
+            <Link to="/help-center" className="btn btn-outline-primary" reloadDocument>Get help</Link>
           </div>
         </div>
       </section>

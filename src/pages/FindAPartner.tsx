@@ -4,10 +4,15 @@ import { PageHero } from '../components/PageHero';
 
 export const FindAPartner: React.FC = () => {
   const partners = [
-    { name: 'Acme Solutions', city: 'San Francisco, USA', tier: 'Gold', services: ['Implementation','Training'] },
+    { name: 'Acme Solutions', city: 'San Francisco, USA', tier: 'Gold', services: ['Implementation','Training','Customization'] },
     { name: 'Northwind Tech', city: 'Berlin, DE', tier: 'Silver', services: ['Customization','Support'] },
     { name: 'Delta Systems', city: 'Mumbai, IN', tier: 'Registered', services: ['Implementation','Accounting'] },
+    { name: 'BrightScale', city: 'London, UK', tier: 'Gold', services: ['Implementation','Support','Training'] },
+    { name: 'Cobalt IT', city: 'Toronto, CA', tier: 'Silver', services: ['Customization','Accounting'] },
+    { name: 'ZenWare', city: 'Sydney, AU', tier: 'Registered', services: ['Implementation'] },
   ];
+  const [tier, setTier] = React.useState<string>('All');
+  const [svc, setSvc] = React.useState<string>('All');
   return (
     <main>
       <PageHero
@@ -17,8 +22,33 @@ export const FindAPartner: React.FC = () => {
       />
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ marginBottom: 12 }}>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
+          </div>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 12 }}>
+            <div>
+              <strong style={{ marginRight: 8 }}>Tier:</strong>
+              {['All','Registered','Silver','Gold'].map((t) => (
+                <button key={t} type="button" onClick={() => setTier(t)}
+                  style={{ border: '1px solid #e2e8f0', borderRadius: 999, padding: '6px 10px', marginRight: 6, background: tier===t?'#edf2ff':'#fff', color: tier===t?'#2b6cb0':'#2d3748', cursor:'pointer', fontSize:12 }}>
+                  {t}
+                </button>
+              ))}
+            </div>
+            <div>
+              <strong style={{ marginRight: 8 }}>Service:</strong>
+              {['All','Implementation','Training','Customization','Support','Accounting'].map((s) => (
+                <button key={s} type="button" onClick={() => setSvc(s)}
+                  style={{ border: '1px solid #e2e8f0', borderRadius: 999, padding: '6px 10px', marginRight: 6, background: svc===s?'#edf2ff':'#fff', color: svc===s?'#2b6cb0':'#2d3748', cursor:'pointer', fontSize:12 }}>
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
-            {partners.map((p) => (
+            {partners
+              .filter((p) => (tier === 'All' || p.tier === tier) && (svc === 'All' || p.services.includes(svc)))
+              .map((p) => (
               <div key={p.name} style={{ border: '1px solid #e2e8f0', borderRadius: 10, padding: 18 }}>
                 <h4 style={{ margin: '0 0 6px' }}>{p.name}</h4>
                 <p style={{ margin: 0, color: '#4a5568' }}>{p.city}</p>
@@ -33,8 +63,8 @@ export const FindAPartner: React.FC = () => {
             ))}
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 16 }}>
-            <Link to="/become-a-partner" className="btn btn-outline-primary">Become a Partner</Link>
-            <Link to="/services-for-partners" className="btn btn-outline-primary">Partner Services</Link>
+            <Link to="/become-a-partner" className="btn btn-outline-primary" reloadDocument>Become a Partner</Link>
+            <Link to="/services-for-partners" className="btn btn-outline-primary" reloadDocument>Partner Services</Link>
           </div>
         </div>
       </section>

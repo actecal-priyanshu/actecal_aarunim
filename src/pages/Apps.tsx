@@ -83,12 +83,6 @@ export const Apps: React.FC = () => {
         <a href="#" className="footer-link">
           <span className="footer-icon">🔌</span> Third party apps
         </a>
-        <a href="#" className="footer-link">
-          <span className="footer-icon">🎨</span> Odoo Studio
-        </a>
-        <a href="#" className="footer-link">
-          <span className="footer-icon">☁️</span> Odoo Cloud Platform
-        </a>
       </div>
 
       {/* Footer */}

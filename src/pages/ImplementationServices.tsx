@@ -12,6 +12,9 @@ export const ImplementationServices: React.FC = () => {
       />
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ marginBottom: 12 }}>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
+          </div>
           <h2 style={{ margin: '0 0 16px' }}>Our approach</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginBottom: 24 }}>
             {[{t:'Discovery', d:'Assess goals, processes, and data sources.'}, {t:'Design', d:'Blueprint architecture and security.'}, {t:'Deployment', d:'Configure apps, migrate data, integrate systems.'}, {t:'Enablement', d:'Train users and transition to steady state.'}].map((it, i) => (
@@ -34,8 +37,8 @@ export const ImplementationServices: React.FC = () => {
             ))}
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 24 }}>
-            <Link to="/contact-sales" className="btn btn-primary">Talk to sales</Link>
-            <Link to="/find-a-partner" className="btn btn-outline-primary">Find a Partner</Link>
+            <Link to="/contact-sales" className="btn btn-primary" reloadDocument>Talk to sales</Link>
+            <Link to="/find-a-partner" className="btn btn-outline-primary" reloadDocument>Find a Partner</Link>
           </div>
         </div>
       </section>

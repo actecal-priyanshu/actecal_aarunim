@@ -12,6 +12,9 @@ export const BecomeAPartner: React.FC = () => {
       />
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ marginBottom: 12 }}>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
+          </div>
           <h2 style={{ margin: '0 0 16px' }}>Why partner with us</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 24 }}>
             {[{t:'Enablement', d:'Training, certifications, and solution playbooks.'}, {t:'Marketing', d:'Co-marketing and directory listings.'}, {t:'Support', d:'Priority partner support and success managers.'}].map((it, i) => (
@@ -31,8 +34,8 @@ export const BecomeAPartner: React.FC = () => {
             ))}
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 24 }}>
-            <Link to="/services-for-partners" className="btn btn-primary">View partner services</Link>
-            <Link to="/contact-sales" className="btn btn-outline-primary">Talk to partner team</Link>
+            <Link to="/services-for-partners" className="btn btn-primary" reloadDocument>View partner services</Link>
+            <Link to="/contact-sales" className="btn btn-outline-primary" reloadDocument>Talk to partner team</Link>
           </div>
         </div>
       </section>

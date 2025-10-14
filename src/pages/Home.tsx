@@ -92,15 +92,17 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <h1>Business Solutions Made Simple</h1>
-          <p className="hero-subtitle">Streamline your operations with our powerful suite of business tools designed for modern enterprises.</p>
+          <h1 className="hero-title-animated">
+            <span>Business</span> <span>Solutions</span> <span>Made</span> <span>Simple</span>
+          </h1>
+          <p className="hero-subtitle hero-subtitle-animated">Streamline your operations with our powerful suite of business tools designed for modern enterprises.</p>
           <div className="hero-cta">
             <button className="btn btn-primary btn-large">Get Started</button>
             <button className="btn btn-outline btn-large">Learn More</button>
           </div>
         </div>
         <div className="hero-image">
-          <div className="dashboard-preview">
+          <div className="dashboard-preview hero-float">
             {/* Placeholder for dashboard image */}
             <div className="dashboard-placeholder">
               <div className="dashboard-header">

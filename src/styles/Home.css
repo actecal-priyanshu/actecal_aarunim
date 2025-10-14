@@ -149,12 +149,26 @@ button {
   color: var(--text-color);
 }
 
+/* Hero animated title (staggered fade-up per word) */
+.hero-title-animated { display: inline-block; }
+.hero-title-animated span { display: inline-block; opacity: 0; transform: translateY(14px); animation: fadeUp .7s ease forwards; }
+.hero-title-animated span:nth-child(1){ animation-delay: .05s; }
+.hero-title-animated span:nth-child(2){ animation-delay: .18s; }
+.hero-title-animated span:nth-child(3){ animation-delay: .31s; }
+.hero-title-animated span:nth-child(4){ animation-delay: .44s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .hero-subtitle {
   font-size: 1.25rem;
   color: var(--text-secondary);
   margin-bottom: 2.5rem;
   max-width: 90%;
 }
+
+.hero-subtitle-animated { opacity: 0; transform: translateY(10px); animation: fadeUp .7s ease .6s forwards; }
 
 .hero-cta {
   display: flex;
@@ -177,6 +191,14 @@ button {
   border-radius: 0.75rem;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
+}
+
+/* Slow floating animation for dashboard mock */
+.hero-float { animation: floatY 6s ease-in-out infinite; }
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 }
 
 .dashboard-header {

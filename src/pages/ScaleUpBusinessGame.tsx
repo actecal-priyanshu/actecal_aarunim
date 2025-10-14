@@ -13,7 +13,7 @@ export const ScaleUpBusinessGame: React.FC = () => {
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ marginBottom: 12 }}>
-            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Community</Link>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
           </div>
           <h2 style={{ margin: '0 0 16px' }}>How it works</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 32 }}>
@@ -25,9 +25,9 @@ export const ScaleUpBusinessGame: React.FC = () => {
             ))}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <Link to="/events" className="btn btn-primary">Join a session</Link>
-            <Link to="/education-program" className="btn btn-outline-primary">Curriculum</Link>
-            <Link to="/docs" className="btn btn-outline-primary">Game guide</Link>
+            <Link to="/events" className="btn btn-primary" reloadDocument>Join a session</Link>
+            <Link to="/education-program" className="btn btn-outline-primary" reloadDocument>Curriculum</Link>
+            <Link to="/docs" className="btn btn-outline-primary" reloadDocument>Game guide</Link>
           </div>
         </div>
       </section>

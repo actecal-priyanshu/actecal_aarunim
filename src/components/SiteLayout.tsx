@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './Navbar';
+import { AIAssistant } from './AIAssistant';
 
 interface SiteLayoutProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
       <div>
         {children}
       </div>
+      <AIAssistant />
     </div>
   );
 };

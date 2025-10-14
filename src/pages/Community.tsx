@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { PageHero } from '../components/PageHero';
 import '../styles/Community.css';
 import { posts } from './blogData';
@@ -145,7 +145,6 @@ const getSectionIcon = (title: string) => {
 export const Community: React.FC = () => {
   const [query, setQuery] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   const filteredSections = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -206,7 +205,7 @@ export const Community: React.FC = () => {
                   const first = filteredSections[0]?.links?.[0];
                   if (first) {
                     const path = pathOverrides[first] ?? `/${first.toLowerCase().replace(/\s+/g, '-')}`;
-                    navigate(path);
+                    window.location.assign(path);
                   }
                 }
               }}
@@ -238,6 +237,7 @@ export const Community: React.FC = () => {
                       key={link}
                       to={pathOverrides[link] ?? `/${link.toLowerCase().replace(/\s+/g, '-')}`}
                       className="community-link"
+                      reloadDocument
                     >
                       {highlight(link)}
                     </Link>
@@ -262,7 +262,7 @@ export const Community: React.FC = () => {
                 <p><strong>Date:</strong> {event.date}</p>
                 <p><strong>Location:</strong> {event.location}</p>
                 <p>{event.description}</p>
-                <Link to={event.link} className="btn btn-outline-primary">Learn More</Link>
+                <Link to={event.link} className="btn btn-outline-primary" reloadDocument>Learn More</Link>
               </div>
             ))}
           </div>
@@ -312,7 +312,7 @@ export const Community: React.FC = () => {
           <h2 className="section-title center">From the Blog</h2>
           <div className="blog-grid">
             {posts.slice(0, 3).map((post) => (
-              <Link key={post.slug} to={`/blog/${post.slug}`} className="blog-card">
+              <Link key={post.slug} to={`/blog/${post.slug}`} className="blog-card" reloadDocument>
                 <h3 className="blog-title">{post.title}</h3>
                 <p className="blog-meta">{post.category} • {post.date} • {post.read}</p>
                 <p className="blog-summary">{post.summary}</p>
@@ -320,7 +320,7 @@ export const Community: React.FC = () => {
             ))}
           </div>
           <div className="blog-actions">
-            <Link to="/blog" className="btn btn-outline-primary">View all posts</Link>
+            <Link to="/blog" className="btn btn-outline-primary" reloadDocument>View all posts</Link>
           </div>
         </div>
       </section>
@@ -345,15 +345,15 @@ export const Community: React.FC = () => {
           <div className="faq-list">
             <div className="faq-item">
               <h4>How do I get help quickly?</h4>
-              <p>Start with <Link to="/help-center">Help Center</Link> or open a ticket via <Link to="/support">Support</Link>.</p>
+              <p>Start with <Link to="/help-center" reloadDocument>Help Center</Link> or open a ticket via <Link to="/support" reloadDocument>Support</Link>.</p>
             </div>
             <div className="faq-item">
               <h4>Where can I learn best practices?</h4>
-              <p>See <Link to="/tutorials">Tutorials</Link>, <Link to="/training">Training</Link>, and <Link to="/certifications">Certifications</Link>.</p>
+              <p>See <Link to="/tutorials" reloadDocument>Tutorials</Link>, <Link to="/training" reloadDocument>Training</Link>, and <Link to="/certifications" reloadDocument>Certifications</Link>.</p>
             </div>
             <div className="faq-item">
               <h4>How do I contribute?</h4>
-              <p>Check <Link to="/github">GitHub</Link> for issues and PRs, and <Link to="/translations">Translations</Link> for localization.</p>
+              <p>Check <Link to="/github" reloadDocument>GitHub</Link> for issues and PRs, and <Link to="/translations" reloadDocument>Translations</Link> for localization.</p>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@ export const Forum: React.FC = () => {
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ marginBottom: 12 }}>
-            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }}>← Back to Community</Link>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
           </div>
           <h2 style={{ margin: '0 0 16px' }}>Popular topics</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 24 }}>
@@ -31,8 +31,8 @@ export const Forum: React.FC = () => {
           </ul>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 16 }}>
             <button type="button" className="btn btn-primary">Ask a question</button>
-            <Link to="/docs" className="btn btn-outline-primary">Browse Docs</Link>
-            <Link to="/support" className="btn btn-outline-primary">Contact Support</Link>
+            <Link to="/docs" className="btn btn-outline-primary" reloadDocument>Browse Docs</Link>
+            <Link to="/support" className="btn btn-outline-primary" reloadDocument>Contact Support</Link>
           </div>
         </div>
       </section>

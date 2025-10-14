@@ -13,6 +13,9 @@ export const Translations: React.FC = () => {
       />
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ marginBottom: 12 }}>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
+          </div>
           <h2 style={{ margin: '0 0 16px' }}>Available languages</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 24 }}>
             {languages.map((lng) => (
@@ -28,8 +31,8 @@ export const Translations: React.FC = () => {
             <li>Submit for review and track progress.</li>
           </ol>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 16 }}>
-            <Link to="/docs" className="btn btn-outline-primary">Guidelines</Link>
-            <Link to="/github" className="btn btn-outline-primary">Contribute on GitHub</Link>
+            <Link to="/docs" className="btn btn-outline-primary" reloadDocument>Guidelines</Link>
+            <Link to="/github" className="btn btn-outline-primary" reloadDocument>Contribute on GitHub</Link>
           </div>
         </div>
       </section>

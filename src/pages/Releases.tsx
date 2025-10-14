@@ -17,6 +17,9 @@ export const Releases: React.FC = () => {
       />
       <section style={{ padding: '10px 24px 60px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
+          <div style={{ marginBottom: 12 }}>
+            <Link to="/community" style={{ textDecoration: 'none', color: '#667eea' }} reloadDocument>← Back to Community</Link>
+          </div>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             {releases.map((r) => (
               <li key={r.v} style={{ border: '1px solid #e2e8f0', borderRadius: 10, padding: 18, marginBottom: 12 }}>
@@ -25,12 +28,16 @@ export const Releases: React.FC = () => {
                     <strong style={{ marginRight: 8 }}>{r.v}</strong>
                     <span style={{ color: '#718096' }}>{r.d}</span>
                   </div>
-                  <Link to="/docs" className="btn btn-outline-primary">Notes</Link>
+                  <Link to="/docs" className="btn btn-outline-primary" reloadDocument>Notes</Link>
                 </div>
                 <p style={{ margin: '8px 0 0', color: '#4a5568' }}>{r.notes}</p>
               </li>
             ))}
           </ul>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 16 }}>
+            <Link to="/upgrades" className="btn btn-outline-primary" reloadDocument>Plan an upgrade</Link>
+            <Link to="/security" className="btn btn-outline-primary" reloadDocument>Review security</Link>
+          </div>
         </div>
       </section>
     </main>
