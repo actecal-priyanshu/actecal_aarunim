@@ -93,28 +93,28 @@ export const About: React.FC = () => {
                   subtitle: "Start small, expand when you need",
                   content: "Susiness software shouldn't be 'all or nothing.' with bizsuite, you can begin with one app—like crm or finance—and expand as your company grows. this modularity ensures you always have what you need, without paying for what you don't.",
                   variant: "glass" as const,
-                  icon: "🧩"
+                  icon: <i className="fa-solid fa-puzzle-piece" aria-hidden="true"></i>
                 },
                 {
                   title: "Open by default",
                   subtitle: "API-first with clean integrations",
                   content: "We believe businesses should own their data, not lock it away in silos. bizsuite is api-first and designed for seamless integrations with the tools you already use.",
                   variant: "gradient" as const,
-                  icon: "🔗"
+                  icon: <i className="fa-solid fa-link" aria-hidden="true"></i>
                 },
                 {
                   title: "Delightfully usable",
                   subtitle: "Craft and polish matter",
                   content: "We obsess over details—clean interfaces, simple workflows, and thoughtful design—because small touches have a big impact.",
                   variant: "neon" as const,
-                  icon: "✨"
+                  icon: <i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
                 },
                 {
                   title: "One coherent system",
                   subtitle: "Not a pile of tabs",
                   content: "Bizsuite is designed to feel like one connected brain for your company. no jumping between tabs, no hunting for files—just one seamless experience.",
                   variant: "cyber" as const,
-                  icon: "🧠"
+                  icon: <i className="fa-solid fa-brain" aria-hidden="true"></i>
                 }
               ].map((principle, idx) => (
                 <FloatingElement key={idx} direction="up" intensity="low" delay={1.4 + idx * 0.2}>
@@ -179,7 +179,7 @@ export const About: React.FC = () => {
                     "scale faster by adapting tools as you grow"
                   ].map((impact, idx) => (
                     <div key={idx} style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '2rem', marginBottom: '8px' }}>✨</div>
+                      <div style={{ fontSize: '2rem', marginBottom: '8px' }}><i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></div>
                       <p style={{ color: '#475569', margin: 0, fontSize: '1rem' }}>{impact}</p>
                     </div>
                   ))}
@@ -221,7 +221,8 @@ export const About: React.FC = () => {
                   at bizsuite, we believe every business—no matter its size—deserves software that feels powerful, simple, and beautifully connected. we started small, we've grown with our customers, and we're just getting started.
                 </p>
                 <p style={{ margin: 0, fontSize: '1.1rem' }}>
-                  👉 <a href="/apps" style={{ color: '#FDBA26', textDecoration: 'none', fontWeight: 700 }}>explore bizsuite today</a> — and build the system your business deserves.
+                  <i className="fa-solid fa-arrow-right" aria-hidden="true" style={{ marginRight: 8 }}></i>
+                  <a href="/apps" style={{ color: '#FDBA26', textDecoration: 'none', fontWeight: 700 }}>explore bizsuite today</a> — and build the system your business deserves.
                 </p>
               </CreativeCard>
             </FloatingElement>

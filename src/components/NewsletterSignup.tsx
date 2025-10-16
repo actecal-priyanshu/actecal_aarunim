@@ -151,7 +151,8 @@ export const NewsletterSignup: React.FC<Props> = ({
           margin: '16px 0 0',
           lineHeight: 1.5
         }}>
-          🔒 We respect your privacy. Unsubscribe at any time.
+          <i className="fa-solid fa-lock" aria-hidden="true" style={{ marginRight: 8 }}></i>
+          We respect your privacy. Unsubscribe at any time.
         </p>
 
         {/* Benefits Cards */}
@@ -163,9 +164,9 @@ export const NewsletterSignup: React.FC<Props> = ({
           flexWrap: 'wrap'
         }}>
           {[
-            { icon: '📧', title: 'Weekly Updates', desc: 'Get the latest product news and feature releases' },
-            { icon: '🎯', title: 'Exclusive Offers', desc: 'Access to special discounts and early access' },
-            { icon: '💡', title: 'Pro Tips', desc: 'Learn how to get the most out of our platform' }
+            { icon: <i className="fa-solid fa-envelope" aria-hidden="true"></i>, title: 'Weekly Updates', desc: 'Get the latest product news and feature releases' },
+            { icon: <i className="fa-solid fa-bullseye" aria-hidden="true"></i>, title: 'Exclusive Offers', desc: 'Access to special discounts and early access' },
+            { icon: <i className="fa-solid fa-lightbulb" aria-hidden="true"></i>, title: 'Pro Tips', desc: 'Learn how to get the most out of our platform' }
           ].map((benefit, idx) => (
             <div key={idx} style={{
               background: 'rgba(255,255,255,0.08)',

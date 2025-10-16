@@ -42,24 +42,26 @@ export const AIAssistant: React.FC = () => {
   return (
     <>
       <button className="ai-fab" aria-label="Open AI Assistant" onClick={() => { setOpen(true); setTimeout(() => inputRef.current?.focus(), 0); }}>
-        ✨
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
       </button>
       {open && (
         <div className="ai-overlay" onClick={() => setOpen(false)}>
           <div className="ai-panel" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="AI Assistant">
             <div className="ai-header">
-              <div className="ai-title">AI Assistant</div>
+              <div className="ai-search">
+                <input
+                  ref={inputRef}
+                  type="search"
+                  placeholder="Search the site... (Ctrl+K)"
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  aria-label="Search the site"
+                />
+              </div>
               <button className="ai-close" onClick={() => setOpen(false)} aria-label="Close">×</button>
-            </div>
-            <div className="ai-search">
-              <input
-                ref={inputRef}
-                type="search"
-                placeholder="Ask anything: try ‘upgrade guide’, ‘API’, ‘accountant’... (Ctrl+K)"
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                aria-label="Ask the assistant"
-              />
             </div>
             <div className="ai-results">
               {loading ? (

@@ -2,7 +2,7 @@ import React from 'react';
 
 type AppItem = {
   name: string;
-  emoji: string;
+  icon: React.ReactNode;
 };
 
 interface AppDirectoryProps {
@@ -12,30 +12,30 @@ interface AppDirectoryProps {
 }
 
 const DEFAULT_APPS: AppItem[] = [
-  { name: 'Accounting', emoji: '📒' },
-  { name: 'Knowledge', emoji: '📘' },
-  { name: 'Sign', emoji: '✍️' },
-  { name: 'CRM', emoji: '🤝' },
-  { name: 'Studio', emoji: '🧩' },
-  { name: 'Subscriptions', emoji: '🔁' },
-  { name: 'Rental', emoji: '🧷' },
-  { name: 'Point of Sale', emoji: '🧾' },
-  { name: 'Discuss', emoji: '💬' },
-  { name: 'Documents', emoji: '🗂️' },
-  { name: 'Project', emoji: '📌' },
-  { name: 'Timesheets', emoji: '⏱️' },
-  { name: 'Field Service', emoji: '🛠️' },
-  { name: 'Planning', emoji: '🗓️' },
-  { name: 'Helpdesk', emoji: '🆘' },
-  { name: 'Website', emoji: '🌐' },
-  { name: 'Social Marketing', emoji: '📣' },
-  { name: 'Email Marketing', emoji: '✉️' },
-  { name: 'Purchase', emoji: '🛒' },
-  { name: 'Inventory', emoji: '📦' },
-  { name: 'Manufacturing', emoji: '🏭' },
-  { name: 'Sales', emoji: '📈' },
-  { name: 'HR', emoji: '👥' },
-  { name: 'Dashboard', emoji: '📊' }
+  { name: 'Accounting', icon: <i className="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i> },
+  { name: 'Knowledge', icon: <i className="fa-solid fa-book-open" aria-hidden="true"></i> },
+  { name: 'Sign', icon: <i className="fa-solid fa-file-signature" aria-hidden="true"></i> },
+  { name: 'CRM', icon: <i className="fa-solid fa-handshake" aria-hidden="true"></i> },
+  { name: 'Studio', icon: <i className="fa-solid fa-puzzle-piece" aria-hidden="true"></i> },
+  { name: 'Subscriptions', icon: <i className="fa-solid fa-arrows-rotate" aria-hidden="true"></i> },
+  { name: 'Rental', icon: <i className="fa-solid fa-key" aria-hidden="true"></i> },
+  { name: 'Point of Sale', icon: <i className="fa-solid fa-receipt" aria-hidden="true"></i> },
+  { name: 'Discuss', icon: <i className="fa-solid fa-comments" aria-hidden="true"></i> },
+  { name: 'Documents', icon: <i className="fa-regular fa-folder-open" aria-hidden="true"></i> },
+  { name: 'Project', icon: <i className="fa-solid fa-diagram-project" aria-hidden="true"></i> },
+  { name: 'Timesheets', icon: <i className="fa-solid fa-stopwatch" aria-hidden="true"></i> },
+  { name: 'Field Service', icon: <i className="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> },
+  { name: 'Planning', icon: <i className="fa-solid fa-calendar-days" aria-hidden="true"></i> },
+  { name: 'Helpdesk', icon: <i className="fa-solid fa-headset" aria-hidden="true"></i> },
+  { name: 'Website', icon: <i className="fa-solid fa-globe" aria-hidden="true"></i> },
+  { name: 'Social Marketing', icon: <i className="fa-solid fa-bullhorn" aria-hidden="true"></i> },
+  { name: 'Email Marketing', icon: <i className="fa-solid fa-envelope" aria-hidden="true"></i> },
+  { name: 'Purchase', icon: <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i> },
+  { name: 'Inventory', icon: <i className="fa-solid fa-box" aria-hidden="true"></i> },
+  { name: 'Manufacturing', icon: <i className="fa-solid fa-industry" aria-hidden="true"></i> },
+  { name: 'Sales', icon: <i className="fa-solid fa-chart-line" aria-hidden="true"></i> },
+  { name: 'HR', icon: <i className="fa-solid fa-users" aria-hidden="true"></i> },
+  { name: 'Dashboard', icon: <i className="fa-solid fa-gauge" aria-hidden="true"></i> }
 ];
 
 export const AppDirectory: React.FC<AppDirectoryProps> = ({ items = DEFAULT_APPS, title = 'Choose your apps', subtitle = 'Start with one. Add more anytime.' }) => {
@@ -68,7 +68,7 @@ export const AppDirectory: React.FC<AppDirectoryProps> = ({ items = DEFAULT_APPS
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <span style={{ fontSize: 28 }}>{app.emoji}</span>
+              <span style={{ fontSize: 28, lineHeight: 0 }}>{app.icon}</span>
             </div>
             <div style={{ fontSize: 12, color: '#111827' }}>{app.name}</div>
           </div>

@@ -94,7 +94,7 @@ export const HelpCenter: React.FC = () => {
                 color: '#f97316'
               }}
             >
-              🔍
+              <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
             </span>
           </div>
           <p style={{ margin: 0, color: '#6b7280', fontSize: '0.95rem' }}>

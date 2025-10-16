@@ -14,12 +14,12 @@ export const APIReference: React.FC = () => {
   }, []);
 
   const sections = [
-    { id: 'authentication', title: 'Authentication', icon: '🔐' },
-    { id: 'endpoints', title: 'API Endpoints', icon: '🔗' },
-    { id: 'webhooks', title: 'Webhooks', icon: '🪝' },
-    { id: 'rate-limits', title: 'Rate Limits', icon: '⚡' },
-    { id: 'errors', title: 'Error Handling', icon: '❌' },
-    { id: 'examples', title: 'Code Examples', icon: '💻' }
+    { id: 'authentication', title: 'Authentication', icon: <i className="fa-solid fa-user-lock" aria-hidden="true"></i> },
+    { id: 'endpoints', title: 'API Endpoints', icon: <i className="fa-solid fa-link" aria-hidden="true"></i> },
+    { id: 'webhooks', title: 'Webhooks', icon: <i className="fa-solid fa-diagram-project" aria-hidden="true"></i> },
+    { id: 'rate-limits', title: 'Rate Limits', icon: <i className="fa-solid fa-bolt" aria-hidden="true"></i> },
+    { id: 'errors', title: 'Error Handling', icon: <i className="fa-solid fa-circle-xmark" aria-hidden="true"></i> },
+    { id: 'examples', title: 'Code Examples', icon: <i className="fa-solid fa-laptop-code" aria-hidden="true"></i> }
   ];
 
   const content = {

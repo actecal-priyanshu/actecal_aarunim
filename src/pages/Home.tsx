@@ -4,50 +4,50 @@ import Footer from '../components/Footer';
 import '../styles/Home.css';
 
 const apps = [
-  { name: 'Accounting', icon: '💰', color: '#FF6B6B' },
-  { name: 'Knowledge', icon: '📚', color: '#4ECDC4' },
-  { name: 'Sign', icon: '✍️', color: '#45B7D1' },
-  { name: 'CRM', icon: '👥', color: '#96CEB4' },
-  { name: 'Studio', icon: '🎨', color: '#FFEAA7' },
-  { name: 'Subscriptions', icon: '🔄', color: '#DFE6E9' },
-  { name: 'Rental', icon: '🔑', color: '#74B9FF' },
-  { name: 'Point of Sale', icon: '🏪', color: '#A29BFE' },
-  { name: 'Discuss', icon: '💬', color: '#FD79A8' },
-  { name: 'Documents', icon: '📄', color: '#FDCB6E' },
-  { name: 'Project', icon: '📊', color: '#6C5CE7' },
-  { name: 'Timesheets', icon: '⏱️', color: '#0984E3' },
-  { name: 'Field Service', icon: '⚡', color: '#E17055' },
-  { name: 'Planning', icon: '📅', color: '#00B894' },
-  { name: 'Helpdesk', icon: '🎧', color: '#00CEC9' },
-  { name: 'Website', icon: '🌐', color: '#0984E3' },
-  { name: 'Social Marketing', icon: '❤️', color: '#FD79A8' },
-  { name: 'Email Marketing', icon: '📧', color: '#6C5CE7' },
-  { name: 'Purchase', icon: '🛒', color: '#00B894' },
-  { name: 'Inventory', icon: '📦', color: '#E17055' },
-  { name: 'Manufacturing', icon: '🏭', color: '#00CEC9' },
-  { name: 'Sales', icon: '📈', color: '#FDCB6E' },
-  { name: 'HR', icon: '👤', color: '#A29BFE' },
-  { name: 'Dashboard', icon: '📊', color: '#74B9FF' }
+  { name: 'Accounting', icon: <i className="fa-solid fa-coins" aria-hidden="true"></i>, color: '#FF6B6B' },
+  { name: 'Knowledge', icon: <i className="fa-solid fa-book" aria-hidden="true"></i>, color: '#4ECDC4' },
+  { name: 'Sign', icon: <i className="fa-solid fa-pen" aria-hidden="true"></i>, color: '#45B7D1' },
+  { name: 'CRM', icon: <i className="fa-solid fa-users" aria-hidden="true"></i>, color: '#96CEB4' },
+  { name: 'Studio', icon: <i className="fa-solid fa-palette" aria-hidden="true"></i>, color: '#FFEAA7' },
+  { name: 'Subscriptions', icon: <i className="fa-solid fa-arrows-rotate" aria-hidden="true"></i>, color: '#DFE6E9' },
+  { name: 'Rental', icon: <i className="fa-solid fa-key" aria-hidden="true"></i>, color: '#74B9FF' },
+  { name: 'Point of Sale', icon: <i className="fa-solid fa-store" aria-hidden="true"></i>, color: '#A29BFE' },
+  { name: 'Discuss', icon: <i className="fa-solid fa-comments" aria-hidden="true"></i>, color: '#FD79A8' },
+  { name: 'Documents', icon: <i className="fa-regular fa-file-lines" aria-hidden="true"></i>, color: '#FDCB6E' },
+  { name: 'Project', icon: <i className="fa-solid fa-chart-column" aria-hidden="true"></i>, color: '#6C5CE7' },
+  { name: 'Timesheets', icon: <i className="fa-solid fa-stopwatch" aria-hidden="true"></i>, color: '#0984E3' },
+  { name: 'Field Service', icon: <i className="fa-solid fa-bolt" aria-hidden="true"></i>, color: '#E17055' },
+  { name: 'Planning', icon: <i className="fa-solid fa-calendar-days" aria-hidden="true"></i>, color: '#00B894' },
+  { name: 'Helpdesk', icon: <i className="fa-solid fa-headphones" aria-hidden="true"></i>, color: '#00CEC9' },
+  { name: 'Website', icon: <i className="fa-solid fa-globe" aria-hidden="true"></i>, color: '#0984E3' },
+  { name: 'Social Marketing', icon: <i className="fa-solid fa-heart" aria-hidden="true"></i>, color: '#FD79A8' },
+  { name: 'Email Marketing', icon: <i className="fa-solid fa-envelope" aria-hidden="true"></i>, color: '#6C5CE7' },
+  { name: 'Purchase', icon: <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>, color: '#00B894' },
+  { name: 'Inventory', icon: <i className="fa-solid fa-box" aria-hidden="true"></i>, color: '#E17055' },
+  { name: 'Manufacturing', icon: <i className="fa-solid fa-industry" aria-hidden="true"></i>, color: '#00CEC9' },
+  { name: 'Sales', icon: <i className="fa-solid fa-chart-line" aria-hidden="true"></i>, color: '#FDCB6E' },
+  { name: 'HR', icon: <i className="fa-solid fa-user" aria-hidden="true"></i>, color: '#A29BFE' },
+  { name: 'Dashboard', icon: <i className="fa-solid fa-gauge" aria-hidden="true"></i>, color: '#74B9FF' }
 ];
 
 const features = [
   {
-    icon: '📊',
+    icon: <i className="fa-solid fa-chart-column" aria-hidden="true"></i>,
     title: 'Analytics',
     description: 'Get detailed insights and analytics for your business.'
   },
   {
-    icon: '⚡',
+    icon: <i className="fa-solid fa-bolt" aria-hidden="true"></i>,
     title: 'Performance',
     description: 'Lightning fast performance for all your business needs.'
   },
   {
-    icon: '🔒',
+    icon: <i className="fa-solid fa-lock" aria-hidden="true"></i>,
     title: 'Security',
     description: 'Enterprise-grade security to protect your data.'
   },
   {
-    icon: '🔄',
+    icon: <i className="fa-solid fa-arrows-rotate" aria-hidden="true"></i>,
     title: 'Integration',
     description: 'Seamlessly integrate with your favorite tools.'
   }
@@ -56,32 +56,32 @@ const features = [
 const techPlatforms = [
   {
     name: 'Shop Floor',
-    image: '🏭',
+    image: <i className="fa-solid fa-industry" aria-hidden="true"></i>,
     description: 'Manage your shop floor operations'
   },
   {
     name: 'Expenses',
-    image: '💳',
+    image: <i className="fa-solid fa-credit-card" aria-hidden="true"></i>,
     description: 'Track and manage expenses'
   },
   {
     name: 'Point of Sale',
-    image: '🛒',
+    image: <i className="fa-solid fa-cart-shopping" aria-hidden="true"></i>,
     description: 'Complete POS solution'
   },
   {
     name: 'IoT',
-    image: '📡',
+    image: <i className="fa-solid fa-satellite" aria-hidden="true"></i>,
     description: 'IoT device integration'
   },
   {
     name: 'Kiosk',
-    image: '🖥️',
+    image: <i className="fa-solid fa-desktop" aria-hidden="true"></i>,
     description: 'Self-service kiosk'
   },
   {
     name: 'Barcode Scanner',
-    image: '📱',
+    image: <i className="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>,
     description: 'Mobile scanning solution'
   }
 ];
