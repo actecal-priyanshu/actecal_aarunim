@@ -164,7 +164,8 @@ const Footer: React.FC = () => {
               padding: '16px',
               color: '#68D391'
             }}>
-              ✓ Thank you for subscribing! Check your email for confirmation.
+              <i className="fa-solid fa-circle-check" aria-hidden="true" style={{ marginRight: 8 }}></i>
+              Thank you for subscribing! Check your email for confirmation.
             </div>
           ) : (
             <form onSubmit={handleNewsletterSubmit} style={{
@@ -225,7 +226,8 @@ const Footer: React.FC = () => {
             margin: '16px 0 0',
             lineHeight: 1.5
           }}>
-            🔒 We respect your privacy. Unsubscribe at any time.
+            <i className="fa-solid fa-lock" aria-hidden="true" style={{ marginRight: 8 }}></i>
+            We respect your privacy. Unsubscribe at any time.
           </p>
         </div>
       </div>
