@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import '../styles/Home.css';
+
+const Typewriter: React.FC<{ text: string; speed?: number; className?: string }> = ({ text, speed = 60, className }) => {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (index < text.length) {
+      const t = setTimeout(() => setIndex((v) => v + 1), speed);
+      return () => clearTimeout(t);
+    }
+  }, [index, text, speed]);
+  return (
+    <span className={className ? className + ' typewriter' : 'typewriter'}>
+      {text.slice(0, index)}
+      <span className="caret" aria-hidden="true"></span>
+    </span>
+  );
+};
 
 const apps = [
   { name: 'Accounting', icon: <i className="fa-solid fa-coins" aria-hidden="true"></i>, color: '#FF6B6B' },
@@ -87,48 +103,115 @@ const techPlatforms = [
 ];
 
 const Home: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'Dashboard' | 'Analytics' | 'Reports'>('Dashboard');
+
+  const chartSeries: Record<string, number[]> = {
+    Dashboard: [10, 22, 18, 34, 28, 36, 31, 42, 38, 46, 52, 60],
+    Analytics: [8, 12, 9, 18, 16, 22, 19, 24, 21, 27, 26, 32]
+  };
+
+  const data = chartSeries[activeTab] || chartSeries['Dashboard'];
+  const max = Math.max(...data) || 1;
+  const xStep = 100 / (data.length - 1);
+  const pointsAttr = data
+    .map((y, i) => {
+      const x = i * xStep;
+      const yScaled = 100 - ((y / max) * 80 + 10);
+      return `${x},${yScaled}`;
+    })
+    .join(' ');
+
   return (
     <div className="home-container">
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
           <h1 className="hero-title-animated">
-            <span>Business</span> <span>Solutions</span> <span>Made</span> <span>Simple</span>
+            <Typewriter text="Business Solutions Made Simple" speed={35} />
           </h1>
-          <p className="hero-subtitle hero-subtitle-animated">Streamline your operations with our powerful suite of business tools designed for modern enterprises.</p>
+          <p className="hero-subtitle">
+            <Typewriter text="Streamline your operations with our powerful suite of business tools designed for modern enterprises." speed={16} />
+          </p>
           <div className="hero-cta">
-            <button className="btn btn-primary btn-large">Get Started</button>
-            <button className="btn btn-outline btn-large">Learn More</button>
+            <Link to="/get-started" className="btn btn-primary btn-large" style={{
+              background: 'linear-gradient(180deg, #f97316 0%, #ea580c 100%)',
+              color: '#fff',
+              border: 'none',
+              boxShadow: '0 12px 24px rgba(234, 88, 12, 0.25)'
+            }}>Get Started</Link>
+            <Link to="/learn-more" className="btn btn-outline btn-large" style={{
+              background: '#ffffff',
+              borderColor: '#e5e7eb',
+              color: '#1f2937'
+            }}>Learn More</Link>
           </div>
         </div>
         <div className="hero-image">
+          <Link to="/" style={{ display: 'block' }}>
           <div className="dashboard-preview hero-float">
             {/* Placeholder for dashboard image */}
             <div className="dashboard-placeholder">
               <div className="dashboard-header">
                 <div className="dashboard-tabs">
-                  <span className="tab active">Dashboard</span>
-                  <span className="tab">Analytics</span>
-                  <span className="tab">Reports</span>
+                  <span className={`tab ${activeTab === 'Dashboard' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); setActiveTab('Dashboard'); }}>Dashboard</span>
+                  <span className={`tab ${activeTab === 'Analytics' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); setActiveTab('Analytics'); }}>Analytics</span>
+                  <span className={`tab ${activeTab === 'Reports' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); e.stopPropagation(); setActiveTab('Reports'); }}>Reports</span>
                 </div>
               </div>
               <div className="dashboard-content">
-                <div className="metric-cards">
-                  <div className="metric-card">
-                    <div className="metric-value">1,240</div>
-                    <div className="metric-label">Active Users</div>
+                {activeTab !== 'Reports' ? (
+                  <>
+                    <div className="metric-cards">
+                      {activeTab === 'Dashboard' ? (
+                        <>
+                          <div className="metric-card">
+                            <div className="metric-value">1,240</div>
+                            <div className="metric-label">Active Users</div>
+                          </div>
+                          <div className="metric-card">
+                            <div className="metric-value">89%</div>
+                            <div className="metric-label">Uptime</div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="metric-card">
+                            <div className="metric-value">3.7k</div>
+                            <div className="metric-label">Visitors</div>
+                          </div>
+                          <div className="metric-card">
+                            <div className="metric-value">24%</div>
+                            <div className="metric-label">Conversion</div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <div className="chart-placeholder">
+                      <div className="chart-line"></div>
+                      <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+                        <defs>
+                          <linearGradient id="lineFill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#4f46e5" stopOpacity="0.35" />
+                            <stop offset="100%" stopColor="#4f46e5" stopOpacity="0" />
+                          </linearGradient>
+                        </defs>
+                        <polyline points={pointsAttr} fill="none" stroke="#4f46e5" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+                        <polygon points={`0,100 ${pointsAttr} 100,100`} fill="url(#lineFill)" />
+                      </svg>
+                    </div>
+                  </>
+                ) : (
+                  <div className="metric-cards">
+                    <div className="metric-card" style={{ gridColumn: 'span 2' }}>
+                      <div className="metric-value" style={{ color: '#4f46e5' }}>Monthly report</div>
+                      <div className="metric-label">Your performance report is ready to download</div>
+                    </div>
                   </div>
-                  <div className="metric-card">
-                    <div className="metric-value">89%</div>
-                    <div className="metric-label">Uptime</div>
-                  </div>
-                </div>
-                <div className="chart-placeholder">
-                  <div className="chart-line"></div>
-                </div>
+                )}
               </div>
             </div>
           </div>
+          </Link>
         </div>
       </section>
 

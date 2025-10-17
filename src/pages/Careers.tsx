@@ -96,7 +96,7 @@ export const Careers: React.FC = () => {
 
           <GothicH2 text="Build the Future with Us" style={{ marginTop: 24, fontSize: '1.8rem', marginBottom: '1rem' }} />
           <p style={{ color: '#475569' }}>BizSuite is growing—and so is our impact. If you want to reshape how businesses work and have fun while doing it, we’d love to meet you.</p>
-          <p>👉 <a href="/contact" style={{ color: '#667eea', textDecoration: 'none' }}>Explore open roles or drop us your resume</a>. Let’s build the future of work, together.</p>
+          <p><i className="fa-solid fa-arrow-right" aria-hidden="true" style={{ marginRight: 8 }}></i><a href="/contact" style={{ color: '#667eea', textDecoration: 'none' }}>Explore open roles or drop us your resume</a>. Let’s build the future of work, together.</p>
         </div>
       </section>
     </main>

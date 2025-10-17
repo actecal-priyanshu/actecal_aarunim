@@ -17,16 +17,16 @@ type Props = {
 };
 
 const icons = {
-  analytics: '📊',
-  automation: '⚡',
-  collaboration: '🤝',
-  security: '🔒',
-  integration: '🔗',
-  reporting: '📈',
-  mobile: '📱',
-  cloud: '☁️',
-  ai: '🤖',
-  support: '💬'
+  analytics: <i className="fa-solid fa-chart-column" aria-hidden="true"></i>,
+  automation: <i className="fa-solid fa-bolt" aria-hidden="true"></i>,
+  collaboration: <i className="fa-solid fa-handshake" aria-hidden="true"></i>,
+  security: <i className="fa-solid fa-lock" aria-hidden="true"></i>,
+  integration: <i className="fa-solid fa-link" aria-hidden="true"></i>,
+  reporting: <i className="fa-solid fa-chart-line" aria-hidden="true"></i>,
+  mobile: <i className="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>,
+  cloud: <i className="fa-solid fa-cloud" aria-hidden="true"></i>,
+  ai: <i className="fa-solid fa-robot" aria-hidden="true"></i>,
+  support: <i className="fa-solid fa-comments" aria-hidden="true"></i>
 };
 
 export const FeatureGrid: React.FC<Props> = ({ sections }) => {

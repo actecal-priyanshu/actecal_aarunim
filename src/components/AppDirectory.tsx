@@ -12,14 +12,14 @@ interface AppDirectoryProps {
 }
 
 const DEFAULT_APPS: AppItem[] = [
-  { name: 'Accounting', icon: <i className="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i> },
+  { name: 'Accounting', icon: <i className="fa-solid fa-coins" aria-hidden="true"></i> },
   { name: 'Knowledge', icon: <i className="fa-solid fa-book-open" aria-hidden="true"></i> },
-  { name: 'Sign', icon: <i className="fa-solid fa-file-signature" aria-hidden="true"></i> },
+  { name: 'Sign', icon: <i className="fa-solid fa-pen" aria-hidden="true"></i> },
   { name: 'CRM', icon: <i className="fa-solid fa-handshake" aria-hidden="true"></i> },
   { name: 'Studio', icon: <i className="fa-solid fa-puzzle-piece" aria-hidden="true"></i> },
   { name: 'Subscriptions', icon: <i className="fa-solid fa-arrows-rotate" aria-hidden="true"></i> },
   { name: 'Rental', icon: <i className="fa-solid fa-key" aria-hidden="true"></i> },
-  { name: 'Point of Sale', icon: <i className="fa-solid fa-receipt" aria-hidden="true"></i> },
+  { name: 'Point of Sale', icon: <i className="fa-solid fa-store" aria-hidden="true"></i> },
   { name: 'Discuss', icon: <i className="fa-solid fa-comments" aria-hidden="true"></i> },
   { name: 'Documents', icon: <i className="fa-regular fa-folder-open" aria-hidden="true"></i> },
   { name: 'Project', icon: <i className="fa-solid fa-diagram-project" aria-hidden="true"></i> },
@@ -68,7 +68,7 @@ export const AppDirectory: React.FC<AppDirectoryProps> = ({ items = DEFAULT_APPS
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <span style={{ fontSize: 28, lineHeight: 0 }}>{app.icon}</span>
+              <span style={{ fontSize: 28, lineHeight: 0, color: '#4f46e5' }}>{app.icon}</span>
             </div>
             <div style={{ fontSize: 12, color: '#111827' }}>{app.name}</div>
           </div>

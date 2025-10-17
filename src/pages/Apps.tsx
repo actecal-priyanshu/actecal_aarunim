@@ -81,7 +81,7 @@ export const Apps: React.FC = () => {
       {/* Footer Links */}
       <div className="apps-footer-links">
         <a href="#" className="footer-link">
-          <span className="footer-icon">🔌</span> Third party apps
+          <span className="footer-icon"><i className="fa-solid fa-plug" aria-hidden="true"></i></span> Third party apps
         </a>
       </div>
 

@@ -152,10 +152,12 @@ export const Features: React.FC = () => {
           </p>
 
           <p style={{ color: '#0f172a', marginTop: 24 }}>
-            ✨ In short: BizSuite isn’t just a set of apps. It’s the operating system for your business—modular, open, secure, and delightfully easy to use.
+            <i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" style={{ marginRight: 8 }}></i>
+            In short: BizSuite isn’t just a set of apps. It’s the operating system for your business—modular, open, secure, and delightfully easy to use.
           </p>
           <p style={{ marginTop: 12 }}>
-            👉 <a href="/apps" style={{ color: '#667eea', textDecoration: 'none' }}>Ready to simplify your workflows?</a>
+            <i className="fa-solid fa-arrow-right" aria-hidden="true" style={{ marginRight: 8 }}></i>
+            <a href="/apps" style={{ color: '#667eea', textDecoration: 'none' }}>Ready to simplify your workflows?</a>
           </p>
         </div>
       </section>

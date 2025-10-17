@@ -12,30 +12,30 @@ interface ServiceStatus {
 
 type StatusKey = ServiceStatus['status'];
 
-const statusMeta: Record<StatusKey, { label: string; color: string; tint: string; icon: string }> = {
+const statusMeta: Record<StatusKey, { label: string; color: string; tint: string; icon: React.ReactNode }> = {
   operational: {
     label: 'Operational',
     color: '#22c55e',
     tint: 'rgba(34, 197, 94, 0.16)',
-    icon: '🟢'
+    icon: <i className="fa-solid fa-circle" aria-hidden="true" style={{ color: '#22c55e' }}></i>
   },
   degraded: {
     label: 'Degraded',
     color: '#f97316',
     tint: 'rgba(249, 115, 22, 0.18)',
-    icon: '🟡'
+    icon: <i className="fa-solid fa-circle" aria-hidden="true" style={{ color: '#f59e0b' }}></i>
   },
   outage: {
     label: 'Service Outage',
     color: '#f87171',
     tint: 'rgba(248, 113, 113, 0.22)',
-    icon: '🔴'
+    icon: <i className="fa-solid fa-circle" aria-hidden="true" style={{ color: '#ef4444' }}></i>
   },
   maintenance: {
     label: 'Maintenance',
     color: '#38bdf8',
     tint: 'rgba(56, 189, 248, 0.2)',
-    icon: '🔵'
+    icon: <i className="fa-solid fa-circle" aria-hidden="true" style={{ color: '#3b82f6' }}></i>
   }
 };
 

@@ -105,7 +105,7 @@ interface FloatingElementsProps {
   children: React.ReactNode;
   count?: number;
   elements?: Array<{
-    emoji: string;
+    emoji: React.ReactNode;
     size: number;
     position: { x: number; y: number };
     delay: number;
@@ -120,7 +120,16 @@ export const FloatingElements: React.FC<FloatingElementsProps> = ({
   elements
 }) => {
   const defaultElements = elements || Array.from({ length: count }, (_, i) => ({
-    emoji: ['✨', '⭐', '💫', '🌟', '🎯', '🚀', '💎', '🎨'][i % 8],
+    emoji: [
+      <i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>,
+      <i className="fa-solid fa-star" aria-hidden="true"></i>,
+      <i className="fa-solid fa-bolt" aria-hidden="true"></i>,
+      <i className="fa-solid fa-rocket" aria-hidden="true"></i>,
+      <i className="fa-solid fa-gem" aria-hidden="true"></i>,
+      <i className="fa-solid fa-palette" aria-hidden="true"></i>,
+      <i className="fa-solid fa-comments" aria-hidden="true"></i>,
+      <i className="fa-solid fa-gears" aria-hidden="true"></i>
+    ][i % 8],
     size: Math.random() * 20 + 15,
     position: {
       x: Math.random() * 100,

@@ -12,7 +12,7 @@ const AppsIntro: React.FC = () => {
 
 			<div className="intro-quote">
 				<span className="tape" aria-hidden="true" />
-				<span className="badge">😊</span>
+				<span className="badge"><i className="fa-regular fa-face-smile" aria-hidden="true"></i></span>
 				<span className="quote-text">If you simplify everything, you can do anything!</span>
 				<span className="quote-meta">— Bill McDermott, former CEO of SAP</span>
 			</div>

@@ -54,6 +54,8 @@ import { MeetAnAdvisor } from './pages/MeetAnAdvisor';
 import { ImplementationServices } from './pages/ImplementationServices';
 import { CustomerReferences } from './pages/CustomerReferences';
 import { Upgrades } from './pages/Upgrades';
+import { GetStarted } from './pages/GetStarted';
+import { LearnMore } from './pages/LearnMore';
 function App() {
   return (
     <SiteLayout>
@@ -62,6 +64,8 @@ function App() {
         <Route path="/apps" element={<Apps />} />
         <Route path="/apps/:slug" element={<AppDetail />} />
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/get-started" element={<GetStarted />} />
+        <Route path="/learn-more" element={<LearnMore />} />
         <Route path="/plans/:planId" element={<Plan />} />
         <Route path="/billing" element={<RequireAuth><Billing /></RequireAuth>} />
         <Route path="/signup" element={<Signup />} />

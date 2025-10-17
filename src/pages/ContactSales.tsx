@@ -20,7 +20,9 @@ export const ContactSales: React.FC = () => {
   if (submitted) {
     return (
       <section style={{ padding: '60px 24px', textAlign: 'center' }}>
-        <div style={{ fontSize: '3rem', marginBottom: 12 }}>✅</div>
+        <div style={{ fontSize: '3rem', marginBottom: 12 }}>
+          <i className="fa-solid fa-circle-check" aria-hidden="true"></i>
+        </div>
         <h1 style={{ margin: '0 0 12px' }}>Thanks! We'll be in touch</h1>
         <p style={{ color: '#4a5568' }}>Our sales team will contact you shortly about the {plan} plan.</p>
         <div style={{ marginTop: 24 }}>

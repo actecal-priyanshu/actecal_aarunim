@@ -164,9 +164,9 @@ export const NewsletterSignup: React.FC<Props> = ({
           flexWrap: 'wrap'
         }}>
           {[
-            { icon: <i className="fa-solid fa-envelope" aria-hidden="true"></i>, title: 'Weekly Updates', desc: 'Get the latest product news and feature releases' },
-            { icon: <i className="fa-solid fa-bullseye" aria-hidden="true"></i>, title: 'Exclusive Offers', desc: 'Access to special discounts and early access' },
-            { icon: <i className="fa-solid fa-lightbulb" aria-hidden="true"></i>, title: 'Pro Tips', desc: 'Learn how to get the most out of our platform' }
+            { icon: <i className="fa-solid fa-envelope" aria-hidden="true" style={{ color: '#3B82F6' }}></i>, title: 'Weekly Updates', desc: 'Get the latest product news and feature releases' },
+            { icon: <i className="fa-solid fa-bullseye" aria-hidden="true" style={{ color: '#8B5CF6' }}></i>, title: 'Exclusive Offers', desc: 'Access to special discounts and early access' },
+            { icon: <i className="fa-solid fa-lightbulb" aria-hidden="true" style={{ color: '#EAB308' }}></i>, title: 'Pro Tips', desc: 'Learn how to get the most out of our platform' }
           ].map((benefit, idx) => (
             <div key={idx} style={{
               background: 'rgba(255,255,255,0.08)',

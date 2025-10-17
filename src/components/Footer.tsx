@@ -11,7 +11,20 @@ const Footer: React.FC = () => {
             <div className="footer-avatar-grid">
               {[...Array(40)].map((_, index) => {
                 const hasImage = [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35].includes(index);
-                const avatarEmojis = ['👨‍💼', '👩‍💼', '👨‍💻', '👩‍💻', '👨‍🔬', '👩‍🔬', '👨‍🎨', '👩‍🎨', '👨‍🏫', '👩‍🏫', '👨‍⚕️', '👩‍⚕️'];
+                const avatarEmojis = [
+                  <i className="fa-solid fa-user" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-user" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-laptop-code" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-flask" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-paintbrush" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-chalkboard" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-user" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-user" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-laptop-code" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-flask" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-paintbrush" aria-hidden="true"></i>,
+                  <i className="fa-solid fa-stethoscope" aria-hidden="true"></i>
+                ];
                 return (
                   <div key={index} className={`footer-avatar-item ${hasImage ? 'has-image' : ''}`}>
                     {hasImage && (
@@ -32,7 +45,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="footer-testimonial-card">
-            <div className="footer-quote-icon">💬</div>
+            <div className="footer-quote-icon"><i className="fa-solid fa-quote-left" aria-hidden="true"></i></div>
             <div className="footer-testimonial-content">
               <p className="footer-testimonial-text">
                 The processing time for accounting documents has been noticeably reduced, in certain cases even from 2 days to only 5 hours. As a result we can now focus on what matters: reporting and advising the client.

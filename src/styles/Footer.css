@@ -66,6 +66,7 @@
 .footer-avatar-emoji {
   font-size: 2rem;
   filter: grayscale(0);
+  color: #ffffff;
 }
 
 .footer-community-text {
