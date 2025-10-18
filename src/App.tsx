@@ -322,7 +322,7 @@ const Footer: React.FC = () => {
                 marginBottom: 16,
                 color: 'var(--color-primary)'
               }}>
-                BizSuite              </div>
+                Nexora              </div>
               <div style={{ 
                 color: 'rgba(255,255,255,0.9)',
                 lineHeight: 1.6,
@@ -472,7 +472,7 @@ const Footer: React.FC = () => {
               color: 'rgba(255,255,255,0.8)',
               fontSize: '0.9rem'
             }}>
-              © 2024 BizSuite. All rights reserved.
+              © 2024 Nexora. All rights reserved.
             </div>
             <div style={{
               display: 'flex',

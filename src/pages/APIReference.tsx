@@ -68,7 +68,7 @@ export const APIReference: React.FC = () => {
             margin: '16px 0',
             border: '1px solid rgba(255, 255, 255, 0.2)'
           }}>
-            https://api.bizsuite.com/v1
+            https://api.nexora.com/v1
           </div>
 
           <h3>Available Endpoints</h3>
@@ -262,7 +262,7 @@ export const APIReference: React.FC = () => {
             {`const axios = require('axios');
 
 const client = axios.create({
-  baseURL: 'https://api.bizsuite.com/v1',
+  baseURL: 'https://api.nexora.com/v1',
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY'
   }
@@ -296,7 +296,7 @@ headers = {
 }
 
 response = requests.get(
-    'https://api.bizsuite.com/v1/users',
+    'https://api.nexora.com/v1/users',
     headers=headers
 )
 
@@ -327,7 +327,7 @@ else:
   return (
     <SupportLayout
       title="API Reference"
-      intro="Complete coverage of endpoints, authentication flows, and integration recipes for BizSuite."
+      intro="Complete coverage of endpoints, authentication flows, and integration recipes for Nexora."
     >
       <div style={wrapperStyle}>
         <aside
@@ -430,7 +430,7 @@ else:
                 View Documentation
               </Link>
               <a
-                href="mailto:developers@bizsuite.com"
+                href="mailto:developers@nexora.com"
                 style={{
                   padding: '12px 22px',
                   borderRadius: 999,

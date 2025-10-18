@@ -1,7 +1,7 @@
 /* Global Styles */
 :root {
-  --primary-color: #4f46e5;
-  --primary-hover: #4338ca;
+  --primary-color: #6c5ce7;
+  --primary-hover: #5b51d6;
   --text-color: #1f2937;
   --text-secondary: #6b7280;
   --bg-color: #ffffff;
@@ -11,6 +11,77 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --transition: all 0.2s ease-in-out;
+}
+
+/* Trusted logos row */
+.trust-logos {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(100px, 1fr));
+  gap: 24px;
+  align-items: center;
+  justify-items: center;
+  opacity: 0.8;
+}
+.trust-logo {
+  width: 120px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f5f7fb 0%, #eef2f7 100%);
+  border: 1px solid #eaeef3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9aa3af;
+  font-weight: 700;
+}
+
+/* Testimonials mini grid */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.testimonial-mini { text-align: left; }
+.testimonial-quote-mini { margin: 0 0 8px; color: #111827; font-weight: 600; }
+.testimonial-author-mini { margin: 0; color: #6b7280; font-size: .95rem; }
+
+/* FAQ grid */
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+}
+.faq-item-card { display: grid; gap: 6px; }
+.faq-q { font-weight: 700; color: #0f172a; }
+.faq-a { color: #64748b; }
+
+/* CTA banner */
+.cta-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8fb 100%);
+  border: 1px solid #eaeef3;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+.cta-text h3 { margin: 0 0 6px; }
+.cta-text p { margin: 0; color: #6b7280; }
+.cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 1024px) {
+  .trust-logos { grid-template-columns: repeat(3, 1fr); }
+  .testimonials-grid { grid-template-columns: 1fr 1fr; }
+  .faq-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .trust-logos { grid-template-columns: 1fr 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .cta-banner { flex-direction: column; align-items: flex-start; }
 }
 
 * {
@@ -147,6 +218,7 @@ button {
   line-height: 1.2;
   margin-bottom: 1.5rem;
   color: var(--text-color);
+  letter-spacing: -0.02em;
 }
 
 /* Hero animated title (staggered fade-up per word) */
@@ -193,9 +265,9 @@ button {
 
 .dashboard-preview {
   width: 100%;
-  max-width: 380px;
+  max-width: 420px;
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 16px;
   box-shadow: 0 18px 40px rgba(0,0,0,0.1);
   border: 1px solid #eaeef3;
   overflow: hidden;
@@ -289,8 +361,8 @@ button {
   left: 0;
   right: 0;
   height: 80%;
-  background: linear-gradient(90deg, transparent 49.5%, #e5e7eb 49.5%, #e5e7eb 50.5%, transparent 50.5%),
-              linear-gradient(0deg, transparent 49.5%, #e5e7eb 49.5%, #e5e7eb 50.5%, transparent 50.5%);
+  background: linear-gradient(90deg, transparent 49.5%, #eef2f7 49.5%, #eef2f7 50.5%, transparent 50.5%),
+              linear-gradient(0deg, transparent 49.5%, #eef2f7 49.5%, #eef2f7 50.5%, transparent 50.5%);
   background-size: 20px 20px;
 }
 

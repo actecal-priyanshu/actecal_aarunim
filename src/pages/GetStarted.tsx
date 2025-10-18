@@ -6,7 +6,7 @@ export const GetStarted: React.FC = () => {
   return (
     <main>
       <PageHero
-        title="Get Started with BizSuite"
+        title="Get Started with Nexora"
         subtitle="Set up your workspace in minutes. Start small and expand as you grow."
         imageUrl="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop"
       />

@@ -1,7 +1,7 @@
 /* Apps Page Styles */
 .apps-page {
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--surface);
 }
 
 /* Navigation Bar */
@@ -81,8 +81,8 @@
 
 /* Category Tabs */
 .category-tabs {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
   padding: 1.5rem 2rem 0;
 }
 
@@ -99,7 +99,7 @@
   background: none;
   border: none;
   border-bottom: 3px solid transparent;
-  color: #6b7280;
+  color: var(--color-muted);
   font-weight: 600;
   font-size: 0.875rem;
   cursor: pointer;
@@ -107,13 +107,11 @@
   transition: all 0.2s;
 }
 
-.category-tab:hover {
-  color: #1f2937;
-}
+.category-tab:hover { color: var(--color-text); }
 
 .category-tab.active {
-  color: #7c3aed;
-  border-bottom-color: #7c3aed;
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
 }
 
 /* Apps Content */
@@ -130,16 +128,20 @@
 }
 
 .app-link {
-  color: #4b5563;
+  display: block;
   text-decoration: none;
-  font-size: 0.938rem;
-  font-weight: 500;
-  transition: color 0.2s;
+  padding: 1rem 1.125rem;
+  background: var(--surface-alt);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: transform .15s ease, box-shadow .2s ease, color .2s ease;
 }
 
-.app-link:hover {
-  color: #7c3aed;
-}
+.app-link:hover { color: var(--color-primary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
 /* Footer Links */
 .apps-footer-links {
@@ -168,7 +170,7 @@
 
 .footer-icon {
   font-size: 1.125rem;
-  color: #7c3aed;
+  color: var(--color-primary);
 }
 
 /* Bottom App Links */

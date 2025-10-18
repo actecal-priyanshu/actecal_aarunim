@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768);
@@ -11,6 +12,22 @@ const Navbar: React.FC = () => {
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+
+  useEffect(() => {
+    const saved = (localStorage.getItem('theme') as 'light' | 'dark' | null);
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = saved ?? (prefersDark ? 'dark' : 'light');
+    setTheme(initial);
+    if (initial === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    if (next === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme', next);
+  };
 
   const navLinkBase: React.CSSProperties = {
     color: '#6b7280',
@@ -22,15 +39,18 @@ const Navbar: React.FC = () => {
   };
 
   const renderNavLink = (to: string, label: string) => (
-    <Link
+    <NavLink
       to={to}
-      style={{ ...navLinkBase }}
-      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-primary)')}
-      onMouseLeave={(e) => (e.currentTarget.style.color = '#6b7280')}
+      style={({ isActive }) => ({
+        ...navLinkBase,
+        borderBottom: '2px solid',
+        borderBottomColor: isActive ? 'var(--color-primary)' : 'transparent',
+        color: isActive ? 'var(--color-primary)' : '#6b7280'
+      })}
       onClick={() => setOpen(false)}
     >
       {label}
-    </Link>
+    </NavLink>
   );
 
   return (
@@ -38,8 +58,11 @@ const Navbar: React.FC = () => {
       position: 'sticky',
       top: 0,
       zIndex: 1000,
-      background: '#ffffff',
-      borderBottom: '1px solid rgba(0,0,0,0.06)'
+      background: 'rgba(255,255,255,0.8)',
+      backdropFilter: 'saturate(180%) blur(12px)',
+      WebkitBackdropFilter: 'saturate(180%) blur(12px)',
+      borderBottom: '1px solid rgba(0,0,0,0.04)',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.06)'
     }}>
       <div style={{
         maxWidth: 1200,
@@ -57,7 +80,7 @@ const Navbar: React.FC = () => {
             fontWeight: 800,
             fontSize: '1.25rem',
             color: 'var(--color-text)'
-          }}>BizSuite</span>
+          }}>Nexora</span>
           <span style={{
             display: 'inline-block',
             width: 8,
@@ -82,6 +105,19 @@ const Navbar: React.FC = () => {
 
         {/* Right actions */}
         <div style={{ display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: 12, justifySelf: 'end' }}>
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle dark mode"
+            style={{
+              background: 'transparent',
+              border: '1px solid rgba(0,0,0,0.1)',
+              padding: '6px 10px',
+              borderRadius: 8,
+              cursor: 'pointer'
+            }}
+          >
+            {theme === 'dark' ? <i className="fa-solid fa-sun" aria-hidden="true"></i> : <i className="fa-solid fa-moon" aria-hidden="true"></i>}
+          </button>
           <Link to="/login" className="btn">Log in</Link>
           <Link to="/signup" className="btn btn-primary">Sign up</Link>
         </div>
@@ -115,6 +151,12 @@ const Navbar: React.FC = () => {
             {renderNavLink('/solutions', 'Industries')}
             {renderNavLink('/community', 'Community')}
             {renderNavLink('/pricing', 'Pricing')}
+            <button onClick={() => { toggleTheme(); }} className="btn" style={{
+              border: '1px solid rgba(0,0,0,0.1)',
+              background: 'transparent'
+            }}>
+              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            </button>
             <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
               <Link to="/login" className="btn">Log in</Link>
               <Link to="/signup" className="btn btn-primary">Sign up</Link>

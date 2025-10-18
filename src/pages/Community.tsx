@@ -63,7 +63,7 @@ const pathOverrides: Record<string, string> = {
 
 const featuredEvents = [
   {
-    title: 'BizSuite Annual Conference 2025',
+    title: 'Nexora Annual Conference 2025',
     date: 'March 15-17, 2025',
     location: 'San Francisco, CA',
     description: 'Join us for three days of workshops, networking, and keynote speeches from industry leaders.',
@@ -73,14 +73,14 @@ const featuredEvents = [
     title: 'Community Meetup - New York',
     date: 'November 20, 2024',
     location: 'New York, NY',
-    description: 'A casual meetup to connect with local BizSuite users and share best practices.',
+    description: 'A casual meetup to connect with local Nexora users and share best practices.',
     link: '/events/ny-meetup',
   },
   {
     title: 'Webinar: Inventory Optimization',
     date: 'December 2, 2024',
     location: 'Online',
-    description: 'Practical strategies to reduce stockouts and excess inventory using BizSuite.',
+    description: 'Practical strategies to reduce stockouts and excess inventory using Nexora.',
     link: '/events/inventory-webinar',
   },
   {
@@ -94,7 +94,7 @@ const featuredEvents = [
 
 const testimonials = [
   {
-    quote: 'Joining the BizSuite community has transformed the way I run my business. The support and resources are invaluable.',
+    quote: 'Joining the Nexora community has transformed the way I run my business. The support and resources are invaluable.',
     author: 'Jane Doe',
     company: 'SmallBiz Solutions',
   },

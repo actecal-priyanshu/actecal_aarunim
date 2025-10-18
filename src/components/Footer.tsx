@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
               <h2 className="footer-community-title">
                 Join <span className="footer-highlight-happy">15 million</span> users
               </h2>
-              <p className="footer-community-subtitle">who grow their business with BizSuite</p>
+              <p className="footer-community-subtitle">who grow their business with Nexora</p>
             </div>
           </div>
 

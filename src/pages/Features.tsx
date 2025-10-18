@@ -6,8 +6,8 @@ export const Features: React.FC = () => {
   return (
     <main>
       <PageHero
-        title="BizSuite Features"
-        subtitle="At BizSuite, we don’t just give you tools—we give you a connected system that grows with your business. Every feature helps your team move faster and work as one."
+        title="Nexora Features"
+        subtitle="At Nexora, we don’t just give you tools—we give you a connected system that grows with your business. Every feature helps your team move faster and work as one."
         imageUrl="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"
       />
       <section style={{ padding: '0 24px 40px' }}>
@@ -28,7 +28,7 @@ export const Features: React.FC = () => {
             ))}
           </div>
           <p style={{ color: '#475569', lineHeight: 1.9 }}>
-            Here’s what makes BizSuite powerful:
+            Here’s what makes Nexora powerful:
           </p>
 
           <h3>1. Modular Apps – Start Small, Scale Confidently</h3>
@@ -153,7 +153,7 @@ export const Features: React.FC = () => {
 
           <p style={{ color: '#0f172a', marginTop: 24 }}>
             <i className="fa-solid fa-wand-magic-sparkles" aria-hidden="true" style={{ marginRight: 8 }}></i>
-            In short: BizSuite isn’t just a set of apps. It’s the operating system for your business—modular, open, secure, and delightfully easy to use.
+            In short: Nexora isn’t just a set of apps. It’s the operating system for your business—modular, open, secure, and delightfully easy to use.
           </p>
           <p style={{ marginTop: 12 }}>
             <i className="fa-solid fa-arrow-right" aria-hidden="true" style={{ marginRight: 8 }}></i>

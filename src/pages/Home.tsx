@@ -137,12 +137,15 @@ const Home: React.FC = () => {
               background: 'linear-gradient(180deg, #f97316 0%, #ea580c 100%)',
               color: '#fff',
               border: 'none',
-              boxShadow: '0 12px 24px rgba(234, 88, 12, 0.25)'
+              boxShadow: '0 12px 24px rgba(234, 88, 12, 0.25)',
+              borderRadius: 10
             }}>Get Started</Link>
             <Link to="/learn-more" className="btn btn-outline btn-large" style={{
               background: '#ffffff',
               borderColor: '#e5e7eb',
-              color: '#1f2937'
+              color: '#1f2937',
+              borderRadius: 10,
+              boxShadow: '0 8px 20px rgba(0,0,0,0.04)'
             }}>Learn More</Link>
           </div>
         </div>
@@ -191,11 +194,11 @@ const Home: React.FC = () => {
                       <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
                         <defs>
                           <linearGradient id="lineFill" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#4f46e5" stopOpacity="0.35" />
-                            <stop offset="100%" stopColor="#4f46e5" stopOpacity="0" />
+                            <stop offset="0%" stopColor="var(--primary-color)" stopOpacity="0.35" />
+                            <stop offset="100%" stopColor="var(--primary-color)" stopOpacity="0" />
                           </linearGradient>
                         </defs>
-                        <polyline points={pointsAttr} fill="none" stroke="#4f46e5" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+                        <polyline points={pointsAttr} fill="none" stroke="var(--primary-color)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
                         <polygon points={`0,100 ${pointsAttr} 100,100`} fill="url(#lineFill)" />
                       </svg>
                     </div>
@@ -203,7 +206,7 @@ const Home: React.FC = () => {
                 ) : (
                   <div className="metric-cards">
                     <div className="metric-card" style={{ gridColumn: 'span 2' }}>
-                      <div className="metric-value" style={{ color: '#4f46e5' }}>Monthly report</div>
+                      <div className="metric-value" style={{ color: 'var(--primary-color)' }}>Monthly report</div>
                       <div className="metric-label">Your performance report is ready to download</div>
                     </div>
                   </div>
@@ -212,6 +215,15 @@ const Home: React.FC = () => {
             </div>
           </div>
           </Link>
+        </div>
+      </section>
+
+      {/* Trust Logos Section */}
+      <section className="section" aria-label="Trusted by">
+        <div className="container trust-logos">
+          {['Acme', 'Globex', 'Umbrella', 'Stark', 'Wayne', 'Hooli'].map((brand) => (
+            <div key={brand} className="trust-logo">{brand}</div>
+          ))}
         </div>
       </section>
 
@@ -259,6 +271,63 @@ const Home: React.FC = () => {
               <p>{feature.description}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="section">
+        <div className="container">
+          <h2 style={{ textAlign: 'center', margin: '0 0 20px' }}>What our customers say</h2>
+          <div className="testimonials-grid">
+            {[
+              { q: 'Switched from 7 tools to 1 — onboarding dropped from weeks to days.', a: 'Ops Director, Acme Retail' },
+              { q: 'Revenue ops finally runs on one source of truth. Team loves the UX.', a: 'Head of RevOps, Northwind Labs' },
+              { q: 'Dashboards gave us visibility we were missing. Decisions are faster.', a: 'COO, Globex Services' }
+            ].map((t) => (
+              <div className="card testimonial-mini" key={t.a}>
+                <p className="testimonial-quote-mini">“{t.q}”</p>
+                <p className="testimonial-author-mini">{t.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="section">
+        <div className="container">
+          <h2 style={{ textAlign: 'center', margin: '0 0 20px' }}>Frequently asked questions</h2>
+          <div className="faq-grid">
+            {[
+              { q: 'How fast can we get started?', a: 'Most teams set up in under a day using a starter template.' },
+              { q: 'Do we need to migrate data?', a: 'Import CSVs or use the API. Start small and expand with no re‑platforming.' },
+              { q: 'Is there a free trial?', a: 'Yes — invite teammates and explore core features during the trial.' },
+              { q: 'Can we add more apps later?', a: 'Absolutely. Add modules anytime — all apps share one data model.' },
+              { q: 'How secure is it?', a: 'Encryption in transit/at rest, RBAC/SSO, audit logs, and backups by default.' },
+              { q: 'Do you integrate with our tools?', a: 'Yes — email, payments, storage, messaging, and custom APIs/webhooks.' }
+            ].map((f) => (
+              <div className="card faq-item-card" key={f.q}>
+                <div className="faq-q">{f.q}</div>
+                <div className="faq-a">{f.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Banner */}
+      <section className="section">
+        <div className="container">
+          <div className="cta-banner">
+            <div className="cta-text">
+              <h3>Run your business on one platform</h3>
+              <p>Start free today — add apps as you grow. No migrations, no chaos.</p>
+            </div>
+            <div className="cta-actions">
+              <Link to="/get-started" className="btn btn-primary">Get started</Link>
+              <Link to="/learn-more" className="btn btn-secondary">Learn more</Link>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -6,7 +6,7 @@ export const LearnMore: React.FC = () => {
   return (
     <main>
       <PageHero
-        title="Learn More About BizSuite"
+        title="Learn More About Nexora"
         subtitle="Understand our platform's capabilities, architecture, and how it fits your business."
         imageUrl="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1200&auto=format&fit=crop"
       />
@@ -23,7 +23,7 @@ export const LearnMore: React.FC = () => {
             ]}
           />
 
-          <h2 style={{ margin: '28px 0 12px' }}>Why teams choose BizSuite</h2>
+          <h2 style={{ margin: '28px 0 12px' }}>Why teams choose Nexora</h2>
           <HandBullets
             items={[
               'Start small, grow fast: add apps as needs evolve',
