@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth <= 768);
@@ -14,20 +15,19 @@ const Navbar: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const saved = (localStorage.getItem('theme') as 'light' | 'dark' | null);
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initial = saved ?? (prefersDark ? 'dark' : 'light');
-    setTheme(initial);
-    if (initial === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-  }, []);
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    if (next === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-    else document.documentElement.removeAttribute('data-theme');
-    localStorage.setItem('theme', next);
-  };
+    lastY.current = window.scrollY;
+    const onScroll = () => {
+      if (open) { setHidden(false); lastY.current = window.scrollY; return; }
+      const y = window.scrollY;
+      const delta = y - lastY.current;
+      if (y <= 0) setHidden(false);
+      else if (delta > 4 && y > 80) setHidden(true); // scrolling down
+      else if (delta < -4) setHidden(false);        // scrolling up
+      lastY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [open]);
 
   const navLinkBase: React.CSSProperties = {
     color: '#6b7280',
@@ -62,7 +62,9 @@ const Navbar: React.FC = () => {
       backdropFilter: 'saturate(180%) blur(12px)',
       WebkitBackdropFilter: 'saturate(180%) blur(12px)',
       borderBottom: '1px solid rgba(0,0,0,0.04)',
-      boxShadow: '0 10px 30px rgba(0,0,0,0.06)'
+      boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
+      transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
+      transition: 'transform .25s ease'
     }}>
       <div style={{
         maxWidth: 1200,
@@ -105,19 +107,6 @@ const Navbar: React.FC = () => {
 
         {/* Right actions */}
         <div style={{ display: isMobile ? 'none' : 'flex', alignItems: 'center', gap: 12, justifySelf: 'end' }}>
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle dark mode"
-            style={{
-              background: 'transparent',
-              border: '1px solid rgba(0,0,0,0.1)',
-              padding: '6px 10px',
-              borderRadius: 8,
-              cursor: 'pointer'
-            }}
-          >
-            {theme === 'dark' ? <i className="fa-solid fa-sun" aria-hidden="true"></i> : <i className="fa-solid fa-moon" aria-hidden="true"></i>}
-          </button>
           <Link to="/login" className="btn">Log in</Link>
           <Link to="/signup" className="btn btn-primary">Sign up</Link>
         </div>
@@ -151,18 +140,12 @@ const Navbar: React.FC = () => {
             {renderNavLink('/solutions', 'Industries')}
             {renderNavLink('/community', 'Community')}
             {renderNavLink('/pricing', 'Pricing')}
-            <button onClick={() => { toggleTheme(); }} className="btn" style={{
-              border: '1px solid rgba(0,0,0,0.1)',
-              background: 'transparent'
-            }}>
-              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
-            </button>
             <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
               <Link to="/login" className="btn">Log in</Link>
               <Link to="/signup" className="btn btn-primary">Sign up</Link>
             </div>
             <div style={{ marginTop: 8 }}>
-              <Link to="/contact-sales" className="btn" style={{
+              <Link to="/choose-apps" className="btn" style={{
                 width: '100%',
                 textAlign: 'center',
                 boxShadow: '0 8px 20px rgba(255,107,0,0.25)'

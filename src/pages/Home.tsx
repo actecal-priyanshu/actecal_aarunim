@@ -133,7 +133,7 @@ const Home: React.FC = () => {
             <Typewriter text="Streamline your operations with our powerful suite of business tools designed for modern enterprises." speed={16} />
           </p>
           <div className="hero-cta">
-            <Link to="/get-started" className="btn btn-primary btn-large" style={{
+            <Link to="/choose-apps" className="btn btn-primary btn-large" style={{
               background: 'linear-gradient(180deg, #f97316 0%, #ea580c 100%)',
               color: '#fff',
               border: 'none',
@@ -218,15 +218,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Trust Logos Section */}
-      <section className="section" aria-label="Trusted by">
-        <div className="container trust-logos">
-          {['Acme', 'Globex', 'Umbrella', 'Stark', 'Wayne', 'Hooli'].map((brand) => (
-            <div key={brand} className="trust-logo">{brand}</div>
-          ))}
-        </div>
-      </section>
-
+      
       {/* Apps Grid Section */}
       <section className="apps-section">
         <div className="apps-container">
@@ -306,7 +298,7 @@ const Home: React.FC = () => {
               { q: 'How secure is it?', a: 'Encryption in transit/at rest, RBAC/SSO, audit logs, and backups by default.' },
               { q: 'Do you integrate with our tools?', a: 'Yes — email, payments, storage, messaging, and custom APIs/webhooks.' }
             ].map((f) => (
-              <div className="card faq-item-card" key={f.q}>
+              <div className="faq-item-card" key={f.q}>
                 <div className="faq-q">{f.q}</div>
                 <div className="faq-a">{f.a}</div>
               </div>
@@ -324,8 +316,19 @@ const Home: React.FC = () => {
               <p>Start free today — add apps as you grow. No migrations, no chaos.</p>
             </div>
             <div className="cta-actions">
-              <Link to="/get-started" className="btn btn-primary">Get started</Link>
-              <Link to="/learn-more" className="btn btn-secondary">Learn more</Link>
+              <Link to="/choose-apps" className="btn btn-primary" style={{
+                background: 'linear-gradient(180deg, #f97316 0%, #ea580c 100%)',
+                color: '#fff',
+                border: 'none',
+                boxShadow: '0 10px 24px rgba(234, 88, 12, 0.25)',
+                borderRadius: 10
+              }}>Get started</Link>
+              <Link to="/learn-more" className="btn btn-secondary" style={{
+                background: '#ffffff',
+                border: '1px solid #e5e7eb',
+                color: '#1f2937',
+                borderRadius: 10
+              }}>Learn more</Link>
             </div>
           </div>
         </div>

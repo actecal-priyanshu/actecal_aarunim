@@ -18,7 +18,7 @@ export const PromoCard: React.FC = () => {
 				</h2>
 				<p className="promo-sub">Creative, intuitive, and powerful!</p>
 				<div className="promo-actions">
-					<a className="promo-btn primary anim-delay-1" href="#get-started">Get Started</a>
+					<a className="promo-btn primary anim-delay-1" href="/choose-apps">Get Started</a>
 					<div className="learn-wrap anim-delay-2">
 						<a className="promo-btn ghost" href="#learn-more">Learn More</a>
 					</div>

@@ -185,7 +185,7 @@ export const Community: React.FC = () => {
     <main>
       <PageHero 
         title="Join Our Community"
-        subtitle="Connect with other BizSuite users, get help, and share your ideas. Explore our resources to learn, collaborate, and get the most out of our software."
+        subtitle="Connect with other Nexora users, get help, and share your ideas. Explore our resources to learn, collaborate, and get the most out of our software."
         emphasize='none'
       />
       <section className="community-page-section">

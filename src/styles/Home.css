@@ -13,27 +13,6 @@
   --transition: all 0.2s ease-in-out;
 }
 
-/* Trusted logos row */
-.trust-logos {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(100px, 1fr));
-  gap: 24px;
-  align-items: center;
-  justify-items: center;
-  opacity: 0.8;
-}
-.trust-logo {
-  width: 120px;
-  height: 36px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #f5f7fb 0%, #eef2f7 100%);
-  border: 1px solid #eaeef3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #9aa3af;
-  font-weight: 700;
-}
 
 /* Testimonials mini grid */
 .testimonials-grid {
@@ -46,13 +25,23 @@
 .testimonial-author-mini { margin: 0; color: #6b7280; font-size: .95rem; }
 
 /* FAQ grid */
-.avatar-grid {
+.faq-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
 }
-.faq-item-card { display: grid; gap: 6px; }
-.faq-q { font-weight: 700; color: #0f172a; }
+.faq-item-card {
+  display: grid;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.faq-item-card:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+.faq-q { font-weight: 800; color: #0f172a; }
 .faq-a { color: #64748b; }
 
 /* CTA banner */
@@ -72,16 +61,18 @@
 .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
 @media (max-width: 1024px) {
-  .trust-logos { grid-template-columns: repeat(3, 1fr); }
   .testimonials-grid { grid-template-columns: 1fr 1fr; }
-  .faq-grid { grid-template-columns: 1fr 1fr; }
+  .faq-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 640px) {
-  .trust-logos { grid-template-columns: 1fr 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .faq-grid { grid-template-columns: 1fr; }
   .cta-banner { flex-direction: column; align-items: flex-start; }
+}
+
+@media (min-width: 1280px) {
+  .faq-grid { grid-template-columns: repeat(6, 1fr); }
 }
 
 * {

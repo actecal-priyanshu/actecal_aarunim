@@ -76,8 +76,8 @@ export const Industry: React.FC = () => {
 
           <div className="cta-section">
             <h3 className="cta-title">Ready to Streamline Your {industry.name} Business?</h3>
-            <p className="cta-subtitle">Discover how BizSuite can be tailored to fit your unique needs.</p>
-            <a href="/contact-sales" className="btn btn-primary cta-button">Get Started</a>
+            <p className="cta-subtitle">Discover how Nexora can be tailored to fit your unique needs.</p>
+            <a href="/choose-apps" className="btn btn-primary cta-button">Get Started</a>
           </div>
         </div>
       </section>
