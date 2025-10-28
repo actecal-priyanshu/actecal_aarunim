@@ -882,6 +882,25 @@ button {
     gap: 1.5rem;
     padding: 0 1rem;
   }
+
+  /* Full-page app sections responsive */
+  .app-fullpage-content {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+  }
+
+  .app-fullpage-title {
+    font-size: 2.5rem;
+  }
+
+  .app-icon-large-wrapper {
+    width: 140px;
+    height: 140px;
+  }
+
+  .app-icon-large {
+    font-size: 3.5rem;
+  }
 }
 
 @media (max-width: 640px) {

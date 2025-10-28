@@ -218,7 +218,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      
       {/* Apps Grid Section */}
       <section className="apps-section">
         <div className="apps-container">

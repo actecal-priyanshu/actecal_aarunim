@@ -145,7 +145,7 @@ const Navbar: React.FC = () => {
               <Link to="/signup" className="btn btn-primary">Sign up</Link>
             </div>
             <div style={{ marginTop: 8 }}>
-              <Link to="/choose-apps" className="btn" style={{
+              <Link to="/get-started" className="btn" style={{
                 width: '100%',
                 textAlign: 'center',
                 boxShadow: '0 8px 20px rgba(255,107,0,0.25)'

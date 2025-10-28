@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 const fieldStyle: React.CSSProperties = {
   padding: '12px 14px',
@@ -31,6 +31,7 @@ export const StartNow: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement> = (e) => {
     const { name, value } = e.target;
@@ -53,7 +54,8 @@ export const StartNow: React.FC = () => {
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setSaved(true);
+      const qs = selected.length ? `?selected=${encodeURIComponent(selected.join(','))}` : '';
+      navigate(`/get-started${qs}`);
     } catch (err) {
       // Fallback: persist locally so data is not lost
       try {
@@ -61,7 +63,8 @@ export const StartNow: React.FC = () => {
         const prev = JSON.parse(localStorage.getItem(key) || '[]');
         prev.push(payload);
         localStorage.setItem(key, JSON.stringify(prev));
-        setSaved(true);
+        const qs = selected.length ? `?selected=${encodeURIComponent(selected.join(','))}` : '';
+        navigate(`/get-started${qs}`);
       } catch (e2) {
         setError('Could not save your submission. Please try again.');
       }

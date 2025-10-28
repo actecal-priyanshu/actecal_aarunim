@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import SiteLayout from './components/SiteLayout';
 import Home from './pages/Home';
 import { Apps } from './pages/Apps';
@@ -55,9 +55,11 @@ import { ImplementationServices } from './pages/ImplementationServices';
 import { CustomerReferences } from './pages/CustomerReferences';
 import { Upgrades } from './pages/Upgrades';
 import { LearnMore } from './pages/LearnMore';
-import { ChooseApps } from './pages/ChooseApps';
 import { StartNow } from './pages/StartNow';
+import { GetStarted } from './pages/GetStarted';
 function App() {
+  const location = useLocation();
+  const hideChrome = location.pathname.startsWith('/get-started') || location.pathname.startsWith('/choose-apps');
   return (
     <SiteLayout>
       <Routes>
@@ -65,8 +67,8 @@ function App() {
         <Route path="/apps" element={<Apps />} />
         <Route path="/apps/:slug" element={<AppDetail />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/get-started" element={<ChooseApps />} />
-        <Route path="/choose-apps" element={<ChooseApps />} />
+        <Route path="/get-started" element={<GetStarted />} />
+        <Route path="/choose-apps" element={<GetStarted />} />
         <Route path="/start-now" element={<StartNow />} />
         <Route path="/learn-more" element={<LearnMore />} />
         <Route path="/plans/:planId" element={<Plan />} />
@@ -116,7 +118,7 @@ function App() {
         <Route path="/upgrades" element={<Upgrades />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      {!hideChrome && <Footer />}
     </SiteLayout>
   );
 }

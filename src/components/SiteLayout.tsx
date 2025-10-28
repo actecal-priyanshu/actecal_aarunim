@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import { AIAssistant } from './AIAssistant';
+import { useLocation } from 'react-router-dom';
 
 interface SiteLayoutProps {
   children: React.ReactNode;
@@ -8,13 +9,15 @@ interface SiteLayoutProps {
 
 // Shared site layout with clean sticky navbar and cream background
 export const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
+  const location = useLocation();
+  const hideChrome = location.pathname.startsWith('/get-started');
   return (
     <div style={{ background: 'var(--surface)', minHeight: '100vh' }}>
-      <Navbar />
+      {!hideChrome && <Navbar />}
       <div>
         {children}
       </div>
-      <AIAssistant />
+      {!hideChrome && <AIAssistant />}
     </div>
   );
 };

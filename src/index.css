@@ -140,26 +140,6 @@ section { background: transparent; }
 }
 .btn-outline-primary:hover { background: rgba(108, 92, 231, 0.08); }
 
-/* Dark theme tokens */
-[data-theme="dark"] {
-  --color-text: #e5e7eb;
-  --color-muted: #94a3b8;
-  --color-bg: #0b1120;
-  --surface: #0b1120;
-  --surface-alt: #0f172a;
-  --surface-accent: #0b1120;
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.5);
-  --shadow-md: 0 8px 24px rgba(0,0,0,0.6);
-  /* Map Home.css variables for dark mode */
-  --text-color: #e5e7eb;
-  --text-secondary: #94a3b8;
-  --bg-color: var(--surface);
-  --bg-secondary: #0f172a;
-  --border-color: rgba(255,255,255,0.1);
-}
-[data-theme="dark"] body { background: var(--surface); color: var(--color-text); }
-[data-theme="dark"] .card { border-color: rgba(255,255,255,0.08); }
-
 /* Fallback overrides for common inline hex colors used in components */
   /* Map old slate text to new muted */
   [style*="#4a5568"] { color: var(--color-muted) !important; border-color: var(--color-muted) !important; }
