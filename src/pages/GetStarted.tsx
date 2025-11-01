@@ -99,13 +99,13 @@ const APP_CATEGORIES: AppCategory[] = [
   },
 ];
 
+const MAX_APP_SELECTION = 10;
+
 export const GetStarted: React.FC = () => {
   const [formData, setFormData] = useState({
     domain: '',
     companyName: '',
     industry: '',
-    budgetRange: '',
-    timeline: '',
     contactEmail: '',
     contactPhone: '',
     projectDescription: '',
@@ -220,25 +220,31 @@ export const GetStarted: React.FC = () => {
 
   // App selection functionality
   const toggleAppSelection = (appKey: string) => {
-    setFormData(prev => ({
-      ...prev,
-      selectedApps: prev.selectedApps.includes(appKey)
-        ? prev.selectedApps.filter(key => key !== appKey)
-        : [...prev.selectedApps, appKey]
-    }));
+    setFormData(prev => {
+      const isAlreadySelected = prev.selectedApps.includes(appKey);
+      if (!isAlreadySelected && prev.selectedApps.length >= MAX_APP_SELECTION) {
+        return prev;
+      }
+
+      return {
+        ...prev,
+        selectedApps: isAlreadySelected
+          ? prev.selectedApps.filter(key => key !== appKey)
+          : [...prev.selectedApps, appKey],
+      };
+    });
   };
 
   const getSelectedAppsCount = () => formData.selectedApps.length;
+  const isSelectionLimitReached = getSelectedAppsCount() >= MAX_APP_SELECTION;
+
+  const scrollToForm = () => {
+    formSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const onContinue = () => {
     if (!canContinue) return;
-    const brief = encodeURIComponent(JSON.stringify(formData));
-    const selectedParam = search.get('selected');
-    const parts = [] as string[];
-    if (selectedParam) parts.push(`selected=${encodeURIComponent(selectedParam)}`);
-    parts.push(`brief=${brief}`);
-    const qs = parts.length ? `?${parts.join('&')}` : '';
-    navigate(`/start-now${qs}`);
+    navigate(`/apps`);
     handleSuccessfulSubmit();
   };
 
@@ -260,27 +266,20 @@ export const GetStarted: React.FC = () => {
     },
     {
       id: 2,
-      title: 'Project Planning',
-      description: 'Budget and timeline for your project',
-      fields: ['budgetRange', 'timeline'],
-      icon: 'fas fa-calendar-alt',
-    },
-    {
-      id: 3,
       title: 'App Selection',
       description: 'Choose the apps you need',
       fields: ['selectedApps'],
       icon: 'fas fa-puzzle-piece',
     },
     {
-      id: 4,
+      id: 3,
       title: 'Contact Information',
       description: 'How we can reach you',
       fields: ['contactEmail', 'contactPhone'],
       icon: 'fas fa-user',
     },
     {
-      id: 5,
+      id: 4,
       title: 'Project Description',
       description: 'Tell us about your vision',
       fields: ['projectDescription'],
@@ -348,7 +347,7 @@ export const GetStarted: React.FC = () => {
       const value = formData[field as keyof typeof formData];
       return field === 'projectDescription' ? (typeof value === 'string' && value.trim().length >= 50) : (typeof value === 'string' && Boolean(value));
     }).length;
-    const optionalFields = ['industry', 'budgetRange', 'timeline'];
+    const optionalFields = ['industry'];
     const filledOptional = optionalFields.filter(field => {
       const value = formData[field as keyof typeof formData];
       return typeof value === 'string' && Boolean(value);
@@ -356,7 +355,7 @@ export const GetStarted: React.FC = () => {
     const filledApps = formData.selectedApps.length > 0 ? 1 : 0;
 
     const requiredProgress = (filledRequired / requiredFields.length) * 60;
-    const optionalProgress = (filledOptional / optionalFields.length) * 30;
+    const optionalProgress = optionalFields.length ? (filledOptional / optionalFields.length) * 30 : 0;
     const appsProgress = filledApps * 10;
     return Math.round(requiredProgress + optionalProgress + appsProgress);
   };
@@ -365,6 +364,7 @@ export const GetStarted: React.FC = () => {
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const formSectionRef = useRef<HTMLDivElement | null>(null);
 
   // Load draft on component mount
   useEffect(() => {
@@ -381,8 +381,6 @@ export const GetStarted: React.FC = () => {
             domain: parsedData.domain || '',
             companyName: parsedData.companyName || '',
             industry: parsedData.industry || '',
-            budgetRange: parsedData.budgetRange || '',
-            timeline: parsedData.timeline || '',
             contactEmail: parsedData.contactEmail || '',
             contactPhone: parsedData.contactPhone || '',
             projectDescription: parsedData.projectDescription || '',
@@ -411,8 +409,6 @@ export const GetStarted: React.FC = () => {
       domain: '',
       companyName: '',
       industry: '',
-      budgetRange: '',
-      timeline: '',
       contactEmail: '',
       contactPhone: '',
       projectDescription: '',
@@ -469,16 +465,29 @@ export const GetStarted: React.FC = () => {
 
   return (
     <main className="getstarted-fullpage">
-      {/* Enhanced Background Pattern */}
-      <div className="background-particles">
-        {[...Array(25)].map((_, i) => (
-          <div key={i} className={`particle particle-${i + 1}`} />
-        ))}
+      {/* Ambient Gradient and Floating Accents */}
+      <div className="background-particles" />
+      <div className="floating-elements">
+        <div className="floating-element floating-1">
+          <i className="fas fa-chart-line"></i>
+        </div>
+        <div className="floating-element floating-2">
+          <i className="fas fa-users"></i>
+        </div>
+        <div className="floating-element floating-3">
+          <i className="fas fa-cog"></i>
+        </div>
+        <div className="floating-element floating-4">
+          <i className="fas fa-lightbulb"></i>
+        </div>
+        <div className="floating-element floating-5">
+          <i className="fas fa-rocket"></i>
+        </div>
       </div>
 
-      {/* Left-Aligned Hero Section */}
+      {/* Hero Section */}
       <section className={`hero-section-full ${mounted ? 'in' : ''}`}>
-        <div className={"hero-content-full"}>
+        <div className="hero-content-full">
           <h1 className="hero-title-full">
             <span className={`text-animate ${showTitle ? 'animate-in' : ''}`}>Start Your</span>
             <span className={`text-animate delay-1 ${showTitle ? 'animate-in' : ''}`}>Digital Journey</span>
@@ -487,65 +496,75 @@ export const GetStarted: React.FC = () => {
             Transform your business with a professional website that drives results.
             Tell us about your project and we'll create something exceptional together.
           </p>
+
+          <div className="hero-meta">
+            <div className="hero-cta">
+              <button
+                type="button"
+                className="btn btn-primary hero-cta-btn"
+                onClick={scrollToForm}
+              >
+                Start your project
+                <i className="fas fa-arrow-right"></i>
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary hero-cta-btn"
+                onClick={() => navigate('/apps')}
+              >
+                Explore apps catalogue
+                <i className="fas fa-th-large"></i>
+              </button>
+            </div>
+
+            <div className="hero-metrics">
+              <div className="hero-metric-card">
+                <span className="metric-value">250+</span>
+                <span className="metric-label">Projects delivered</span>
+              </div>
+              <div className="hero-metric-card">
+                <span className="metric-value">40%</span>
+                <span className="metric-label">Faster launch</span>
+              </div>
+              <div className="hero-metric-card">
+                <span className="metric-value">24/7</span>
+                <span className="metric-label">Expert support</span>
+              </div>
+            </div>
+          </div>
+
           <div className="hero-features">
             <div className="feature-item">
-              <i className="fas fa-check-circle"></i>
-              <span>Professional Design</span>
+              <i className="fas fa-lightbulb"></i>
+              <span>Strategy workshop</span>
+            </div>
+            <div className="feature-item">
+              <i className="fas fa-layer-group"></i>
+              <span>Modular architecture</span>
             </div>
             <div className="feature-item">
               <i className="fas fa-mobile-alt"></i>
-              <span>Mobile Responsive</span>
+              <span>Responsive by default</span>
             </div>
             <div className="feature-item">
-              <i className="fas fa-search"></i>
-              <span>SEO Optimized</span>
+              <i className="fas fa-headset"></i>
+              <span>Dedicated success team</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Left-Aligned Form Section */}
+      {/* Form Section */}
       <section className={`form-section-full ${showForm ? 'in' : ''}`}>
-        <div className="form-container-full">
+        <div className="form-container-full" ref={formSectionRef}>
           <div className="form-header-full">
             <h2 className={`form-title-full ${showFormTitle ? 'title-animate' : ''}`}>
               <span className="title-word">Get</span>{' '}
               <span className="title-word">Started</span>
             </h2>
-            <p className={`form-description-full ${showFormDesc ? 'desc-animate' : ''}`}>
-              <span className="desc-word">Share</span>{' '}
-              <span className="desc-word">your</span>{' '}
-              <span className="desc-word">project</span>{' '}
-              <span className="desc-word">details</span>{' '}
-              <span className="desc-word">to</span>{' '}
-              <span className="desc-word">begin</span>
-            </p>
           </div>
 
-          <form className="form-full-data-only" onSubmit={(e) => { e.preventDefault(); allStepsCompleted() ? onContinue() : nextStep(); }}>
-            {/* Step Navigation */}
-            <div className="step-navigation">
-              {steps.map((step) => (
-                <button
-                  key={step.id}
-                  type="button"
-                  className={`step-nav-item ${currentStep === step.id ? 'active' : ''} ${completedSteps.has(step.id) ? 'completed' : ''} ${canGoToStep(step.id) ? 'accessible' : ''}`}
-                  onClick={() => goToStep(step.id)}
-                  disabled={!canGoToStep(step.id)}
-                  aria-current={currentStep === step.id ? 'step' : undefined}
-                >
-                  <div className="step-icon">
-                    <i className={step.icon}></i>
-                    {completedSteps.has(step.id) && <i className="fas fa-check step-check"></i>}
-                  </div>
-                  <div className="step-info">
-                    <span className="step-title">{step.title}</span>
-                    <span className="step-description">{step.description}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-
+          <form className="multi-step-form" onSubmit={(e) => e.preventDefault()}>
             {/* Progress Indicator */}
             <div className="form-progress-container">
               <div className="progress-bar">
@@ -574,364 +593,312 @@ export const GetStarted: React.FC = () => {
 
             {/* Step Content */}
             <div className={`step-content ${showFields ? 'fields-animate' : ''}`}>
-              {currentStep === 1 && (
-                <div className="step-fields">
-                  <h3 className="step-heading">
-                    <i className="fas fa-building"></i>
-                    Company Details
-                  </h3>
-                  <div className="form-row">
-                    <div className="field-group-full">
-                      <label className="field-label-full">
-                        <i className="fas fa-globe"></i>
-                        <span className="label-word">Company Domain</span>
-                        <span className="required">*</span>
-                      </label>
-                      <input
-                        className={`field-input-full ${getFieldError('domain') ? 'error' : ''}`}
-                        placeholder="yourcompany.com"
-                        value={formData.domain}
-                        onChange={(e) => handleInputChange('domain', e.target.value)}
-                        onBlur={() => handleBlur('domain')}
-                        autoFocus
-                        aria-required="true"
-                        aria-invalid={Boolean(getFieldError('domain'))}
-                        aria-describedby={getFieldError('domain') ? 'domain-error' : undefined}
-                      />
-                      {getFieldError('domain') && (
-                        <div className="field-error" id="domain-error" role="alert">
-                          <i className="fas fa-exclamation-circle"></i>
-                          {getFieldError('domain')}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="field-group-full">
-                      <label className="field-label-full">
-                        <i className="fas fa-building"></i>
-                        <span className="label-word">Company Name</span>
-                        <span className="required">*</span>
-                      </label>
-                      <input
-                        className={`field-input-full ${getFieldError('companyName') ? 'error' : ''}`}
-                        placeholder="Your Company Name"
-                        value={formData.companyName}
-                        onChange={(e) => handleInputChange('companyName', e.target.value)}
-                        onBlur={() => handleBlur('companyName')}
-                        aria-required="true"
-                        aria-invalid={Boolean(getFieldError('companyName'))}
-                        aria-describedby={getFieldError('companyName') ? 'company-error' : undefined}
-                      />
-                      {getFieldError('companyName') && (
-                        <div className="field-error" id="company-error" role="alert">
-                          <i className="fas fa-exclamation-circle"></i>
-                          {getFieldError('companyName')}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
+            {currentStep === 1 && (
+              <div className="step-fields">
+                <h3 className="step-heading">
+                  <i className="fas fa-building"></i>
+                  Company Details
+                </h3>
+                <div className="form-row">
                   <div className="field-group-full">
                     <label className="field-label-full">
-                      <i className="fas fa-industry"></i>
-                      <span className="label-word">Industry</span>
-                    </label>
-                    <select
-                      className="field-input-full field-select"
-                      value={formData.industry}
-                      onChange={(e) => handleInputChange('industry', e.target.value)}
-                    >
-                      <option value="">Select your industry</option>
-                      <option value="technology">Technology</option>
-                      <option value="healthcare">Healthcare</option>
-                      <option value="finance">Finance</option>
-                      <option value="retail">Retail</option>
-                      <option value="education">Education</option>
-                      <option value="manufacturing">Manufacturing</option>
-                      <option value="real-estate">Real Estate</option>
-                      <option value="hospitality">Hospitality</option>
-                      <option value="consulting">Consulting</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-              )}
-
-              {currentStep === 2 && (
-                <div className="step-fields">
-                  <h3 className="step-heading">
-                    <i className="fas fa-calendar-alt"></i>
-                    Project Planning
-                  </h3>
-                  <div className="form-row">
-                    <div className="field-group-full">
-                      <label className="field-label-full">
-                        <i className="fas fa-dollar-sign"></i>
-                        <span className="label-word">Budget Range</span>
-                      </label>
-                      <select
-                        className="field-input-full field-select"
-                        value={formData.budgetRange}
-                        onChange={(e) => handleInputChange('budgetRange', e.target.value)}
-                      >
-                        <option value="">Select budget range</option>
-                        <option value="under-5k">$0 - $5,000</option>
-                        <option value="5k-10k">$5,000 - $10,000</option>
-                        <option value="10k-25k">$10,000 - $25,000</option>
-                        <option value="25k-50k">$25,000 - $50,000</option>
-                        <option value="50k-100k">$50,000 - $100,000</option>
-                        <option value="over-100k">$100,000+</option>
-                      </select>
-                    </div>
-
-                    <div className="field-group-full">
-                      <label className="field-label-full">
-                        <i className="fas fa-calendar-alt"></i>
-                        <span className="label-word">Project Timeline</span>
-                      </label>
-                      <select
-                        className="field-input-full field-select"
-                        value={formData.timeline}
-                        onChange={(e) => handleInputChange('timeline', e.target.value)}
-                      >
-                        <option value="">Select timeline</option>
-                        <option value="asap">ASAP</option>
-                        <option value="1-month">Within 1 month</option>
-                        <option value="2-3-months">2-3 months</option>
-                        <option value="3-6-months">3-6 months</option>
-                        <option value="6-months-plus">6+ months</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {currentStep === 3 && (
-                <div className="step-fields">
-                  <h3 className="step-heading">
-                    <i className="fas fa-puzzle-piece"></i>
-                    App Selection
-                  </h3>
-                  <div className="app-selection-container">
-                    <div className="selected-apps-summary">
-                      <div className="apps-count">
-                        <i className="fas fa-check-circle"></i>
-                        <span>{getSelectedAppsCount()} apps selected</span>
-                      </div>
-                      {getSelectedAppsCount() === 0 && (
-                        <div className="selection-hint">
-                          <i className="fas fa-info-circle"></i>
-                          Please select at least one app to continue
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="apps-categories">
-                      {APP_CATEGORIES.map((category) => (
-                        <div key={category.name} className="apps-category">
-                          <h4 className="category-title">{category.name}</h4>
-                          <div className="apps-grid">
-                            {category.tiles.map((app) => {
-                              const isSelected = formData.selectedApps.includes(app.key);
-                              return (
-                                <div
-                                  key={app.key}
-                                  className={`app-tile ${isSelected ? 'selected' : ''}`}
-                                  onClick={() => toggleAppSelection(app.key)}
-                                  role="button"
-                                  tabIndex={0}
-                                  onKeyDown={(e) => {
-                                    if (e.key === 'Enter' || e.key === ' ') {
-                                      e.preventDefault();
-                                      toggleAppSelection(app.key);
-                                    }
-                                  }}
-                                  aria-pressed={isSelected}
-                                >
-                                  <div className="app-icon" style={{ backgroundColor: app.color }}>
-                                    <i className={app.icon}></i>
-                                  </div>
-                                  <div className="app-label">{app.label}</div>
-                                  {isSelected && (
-                                    <div className="selection-indicator">
-                                      <i className="fas fa-check"></i>
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {currentStep === 4 && (
-                <div className="step-fields">
-                  <h3 className="step-heading">
-                    <i className="fas fa-user"></i>
-                    Contact Information
-                  </h3>
-                  <div className="form-row">
-                    <div className="field-group-full">
-                      <label className="field-label-full">
-                        <i className="fas fa-envelope"></i>
-                        <span className="label-word">Contact Email</span>
-                        <span className="required">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        className={`field-input-full ${getFieldError('contactEmail') ? 'error' : ''}`}
-                        placeholder="your@email.com"
-                        value={formData.contactEmail}
-                        onChange={(e) => handleInputChange('contactEmail', e.target.value)}
-                        onBlur={() => handleBlur('contactEmail')}
-                        aria-required="true"
-                        aria-invalid={Boolean(getFieldError('contactEmail'))}
-                        aria-describedby={getFieldError('contactEmail') ? 'email-error' : undefined}
-                      />
-                      {getFieldError('contactEmail') && (
-                        <div className="field-error" id="email-error" role="alert">
-                          <i className="fas fa-exclamation-circle"></i>
-                          {getFieldError('contactEmail')}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="field-group-full">
-                      <label className="field-label-full">
-                        <i className="fas fa-phone"></i>
-                        <span className="label-word">Contact Phone</span>
-                        <span className="required">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        className={`field-input-full ${getFieldError('contactPhone') ? 'error' : ''}`}
-                        placeholder="+1 (555) 123-4567"
-                        value={formData.contactPhone}
-                        onChange={(e) => handleInputChange('contactPhone', e.target.value)}
-                        onBlur={() => handleBlur('contactPhone')}
-                        aria-required="true"
-                        aria-invalid={Boolean(getFieldError('contactPhone'))}
-                        aria-describedby={getFieldError('contactPhone') ? 'phone-error' : undefined}
-                      />
-                      {getFieldError('contactPhone') && (
-                        <div className="field-error" id="phone-error" role="alert">
-                          <i className="fas fa-exclamation-circle"></i>
-                          {getFieldError('contactPhone')}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {currentStep === 5 && (
-                <div className="step-fields">
-                  <h3 className="step-heading">
-                    <i className="fas fa-lightbulb"></i>
-                    Project Description
-                  </h3>
-                  <div className="field-group-full">
-                    <label className="field-label-full">
-                      <i className="fas fa-edit"></i>
-                      <span className="label-word">Project Description</span>
+                      <i className="fas fa-globe"></i>
+                      <span className="label-word">Company Domain</span>
                       <span className="required">*</span>
-                      <span className="character-count">
-                        {formData.projectDescription.length}/500
-                      </span>
                     </label>
-                    <textarea
-                      className={`field-textarea-full ${getFieldError('projectDescription') ? 'error' : ''}`}
-                      placeholder="Describe your business goals, target audience, key features needed, design preferences, and any specific requirements. Please be as detailed as possible to help us create the perfect solution for you..."
-                      rows={6}
-                      maxLength={500}
-                      value={formData.projectDescription}
-                      onChange={(e) => handleInputChange('projectDescription', e.target.value)}
-                      onBlur={() => handleBlur('projectDescription')}
-                      required
+                    <input
+                      className={`field-input-full ${getFieldError('domain') ? 'error' : ''}`}
+                      placeholder="yourcompany.com"
+                      value={formData.domain}
+                      onChange={(e) => handleInputChange('domain', e.target.value)}
+                      onBlur={() => handleBlur('domain')}
+                      autoFocus
                       aria-required="true"
-                      aria-invalid={Boolean(getFieldError('projectDescription'))}
-                      aria-describedby={getFieldError('projectDescription') ? 'description-error' : 'description-help'}
+                      aria-invalid={Boolean(getFieldError('domain'))}
+                      aria-describedby={getFieldError('domain') ? 'domain-error' : undefined}
                     />
-                    <div className="field-help" id="description-help">
-                      <i className="fas fa-info-circle"></i>
-                      Minimum 50 characters required
-                    </div>
-                    {getFieldError('projectDescription') && (
-                      <div className="field-error" id="description-error" role="alert">
+                    {getFieldError('domain') && (
+                      <div className="field-error" id="domain-error" role="alert">
                         <i className="fas fa-exclamation-circle"></i>
-                        {getFieldError('projectDescription')}
+                        {getFieldError('domain')}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="field-group-full">
+                    <label className="field-label-full">
+                      <i className="fas fa-building"></i>
+                      <span className="label-word">Company Name</span>
+                      <span className="required">*</span>
+                    </label>
+                    <input
+                      className={`field-input-full ${getFieldError('companyName') ? 'error' : ''}`}
+                      placeholder="Your Company Name"
+                      value={formData.companyName}
+                      onChange={(e) => handleInputChange('companyName', e.target.value)}
+                      onBlur={() => handleBlur('companyName')}
+                      aria-required="true"
+                      aria-invalid={Boolean(getFieldError('companyName'))}
+                      aria-describedby={getFieldError('companyName') ? 'company-error' : undefined}
+                    />
+                    {getFieldError('companyName') && (
+                      <div className="field-error" id="company-error" role="alert">
+                        <i className="fas fa-exclamation-circle"></i>
+                        {getFieldError('companyName')}
                       </div>
                     )}
                   </div>
                 </div>
+
+                <div className="field-group-full">
+                  <label className="field-label-full">
+                    <i className="fas fa-industry"></i>
+                    <span className="label-word">Industry</span>
+                  </label>
+                  <select
+                    className="field-input-full field-select"
+                    value={formData.industry}
+                    onChange={(e) => handleInputChange('industry', e.target.value)}
+                  >
+                    <option value="">Select your industry</option>
+                    <option value="technology">Technology</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="finance">Finance</option>
+                    <option value="retail">Retail</option>
+                    <option value="education">Education</option>
+                    <option value="manufacturing">Manufacturing</option>
+                    <option value="real-estate">Real Estate</option>
+                    <option value="hospitality">Hospitality</option>
+                    <option value="consulting">Consulting</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+            )}
+
+            {currentStep === 2 && (
+              <div className="step-fields">
+                <h3 className="step-heading">
+                  <i className="fas fa-puzzle-piece"></i>
+                  App Selection
+                </h3>
+                <div className="app-selection-container">
+                  <div className="selected-apps-summary">
+                    <div className="apps-count">
+                      <i className="fas fa-check-circle"></i>
+                      <span>
+                        {getSelectedAppsCount() === 0
+                          ? 'No apps selected'
+                          : `${getSelectedAppsCount()} ${getSelectedAppsCount() === 1 ? 'app' : 'apps'} selected`}
+                      </span>
+                    </div>
+                    {isSelectionLimitReached && (
+                      <div className="selection-limit" role="status">
+                        Maximum of {MAX_APP_SELECTION} apps can be selected.
+                      </div>
+                    )}
+                    {getSelectedAppsCount() >= 3 && (
+                      <div className="selection-reward" role="status">
+                        You qualify for a 15-day free trial with 3+ apps selected.
+                      </div>
+                    )}
+                    {getSelectedAppsCount() === 0 && (
+                      <div className="selection-hint">
+                        <i className="fas fa-info-circle"></i>
+                        Please select at least one app to continue
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="apps-categories">
+                    {APP_CATEGORIES.map((category) => (
+                      <div key={category.name} className="apps-category">
+                        <h4 className="category-title">{category.name}</h4>
+                        <div className="apps-grid">
+                          {category.tiles.map((app) => {
+                            const isSelected = formData.selectedApps.includes(app.key);
+                            return (
+                              <div
+                                key={app.key}
+                                className={`app-tile ${isSelected ? 'selected' : ''}`}
+                                onClick={() => toggleAppSelection(app.key)}
+                                role="button"
+                                tabIndex={0}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    toggleAppSelection(app.key);
+                                  }
+                                }}
+                                aria-pressed={isSelected}
+                                aria-disabled={isSelectionLimitReached && !isSelected}
+                              >
+                                <div className="app-icon" style={{ backgroundColor: app.color }}>
+                                  <i className={app.icon}></i>
+                                </div>
+                                <div className="app-label">{app.label}</div>
+                                {isSelected && (
+                                  <div className="selection-indicator">
+                                    <i className="fas fa-check"></i>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {currentStep === 3 && (
+              <div className="step-fields">
+                <h3 className="step-heading">
+                  <i className="fas fa-user"></i>
+                  Contact Information
+                </h3>
+                <div className="form-row">
+                  <div className="field-group-full">
+                    <label className="field-label-full">
+                      <i className="fas fa-envelope"></i>
+                      <span className="label-word">Contact Email</span>
+                      <span className="required">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      className={`field-input-full ${getFieldError('contactEmail') ? 'error' : ''}`}
+                      placeholder="your@email.com"
+                      value={formData.contactEmail}
+                      onChange={(e) => handleInputChange('contactEmail', e.target.value)}
+                      onBlur={() => handleBlur('contactEmail')}
+                      aria-required="true"
+                      aria-invalid={Boolean(getFieldError('contactEmail'))}
+                      aria-describedby={getFieldError('contactEmail') ? 'email-error' : undefined}
+                    />
+                    {getFieldError('contactEmail') && (
+                      <div className="field-error" id="email-error" role="alert">
+                        <i className="fas fa-exclamation-circle"></i>
+                        {getFieldError('contactEmail')}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="field-group-full">
+                    <label className="field-label-full">
+                      <i className="fas fa-phone"></i>
+                      <span className="label-word">Contact Phone</span>
+                      <span className="required">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      className={`field-input-full ${getFieldError('contactPhone') ? 'error' : ''}`}
+                      placeholder="+1 (555) 123-4567"
+                      value={formData.contactPhone}
+                      onChange={(e) => handleInputChange('contactPhone', e.target.value)}
+                      onBlur={() => handleBlur('contactPhone')}
+                      aria-required="true"
+                      aria-invalid={Boolean(getFieldError('contactPhone'))}
+                      aria-describedby={getFieldError('contactPhone') ? 'phone-error' : undefined}
+                    />
+                    {getFieldError('contactPhone') && (
+                      <div className="field-error" id="phone-error" role="alert">
+                        <i className="fas fa-exclamation-circle"></i>
+                        {getFieldError('contactPhone')}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {currentStep === 4 && (
+              <div className="step-fields">
+                <h3 className="step-heading">
+                  <i className="fas fa-lightbulb"></i>
+                  Project Description
+                </h3>
+                <div className="field-group-full">
+                  <label className="field-label-full">
+                    <i className="fas fa-edit"></i>
+                    <span className="label-word">Project Description</span>
+                    <span className="required">*</span>
+                    <span className="character-count">
+                      {formData.projectDescription.length}/500
+                    </span>
+                  </label>
+                  <textarea
+                    className={`field-textarea-full ${getFieldError('projectDescription') ? 'error' : ''}`}
+                    placeholder="Describe your business goals, target audience, key features needed, design preferences, and any specific requirements. Please be as detailed as possible to help us create the perfect solution for you..."
+                    rows={6}
+                    maxLength={500}
+                    value={formData.projectDescription}
+                    onChange={(e) => handleInputChange('projectDescription', e.target.value)}
+                    onBlur={() => handleBlur('projectDescription')}
+                    required
+                    aria-required="true"
+                    aria-invalid={Boolean(getFieldError('projectDescription'))}
+                    aria-describedby={getFieldError('projectDescription') ? 'description-error' : 'description-help'}
+                  />
+                  <div className="field-help" id="description-help">
+                    <i className="fas fa-info-circle"></i>
+                    Minimum 50 characters required
+                  </div>
+                  {getFieldError('projectDescription') && (
+                    <div className="field-error" id="description-error" role="alert">
+                      <i className="fas fa-exclamation-circle"></i>
+                      {getFieldError('projectDescription')}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Step Navigation Buttons */}
+          <div className={`form-actions-full ${showButtons ? 'buttons-animate' : ''}`}>
+            <div className="step-buttons">
+              {currentStep > 1 && (
+                <button type="button" className="btn btn-secondary-full" onClick={prevStep}>
+                  <i className="fas fa-arrow-left"></i>
+                  <span className="button-text">Previous</span>
+                </button>
+              )}
+
+              {currentStep < steps.length ? (
+                <button
+                  type="button"
+                  className="btn btn-primary-full"
+                  onClick={nextStep}
+                  disabled={!isStepValid(currentStep)}
+                >
+                  <span className="button-text">Next Step</span>
+                  <i className="fas fa-arrow-right"></i>
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="btn btn-primary-full brief-continue"
+                  disabled={!allStepsCompleted()}
+                  onClick={onContinue}
+                >
+                  <i className="fas fa-paper-plane"></i>
+                  <span className="button-text">Start Project</span>
+                </button>
               )}
             </div>
 
-            {/* Step Navigation Buttons */}
-            <div className={`form-actions-full ${showButtons ? 'buttons-animate' : ''}`}>
-              <div className="step-buttons">
-                {currentStep > 1 && (
-                  <button type="button" className="btn btn-secondary-full" onClick={prevStep}>
-                    <i className="fas fa-arrow-left"></i>
-                    <span className="button-text">Previous</span>
-                  </button>
-                )}
-
-                {currentStep < steps.length ? (
-                  <button
-                    type="button"
-                    className="btn btn-primary-full"
-                    onClick={nextStep}
-                    disabled={!isStepValid(currentStep)}
-                  >
-                    <span className="button-text">Next Step</span>
-                    <i className="fas fa-arrow-right"></i>
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    className="btn btn-primary-full brief-continue"
-                    disabled={!allStepsCompleted()}
-                  >
-                    <i className="fas fa-paper-plane"></i>
-                    <span className="button-text">Start Project</span>
-                  </button>
-                )}
-              </div>
-
-              <button type="button" className="btn btn-secondary-full clear-btn" onClick={clearForm}>
-                <i className="fas fa-trash"></i>
-                <span className="button-text">Clear Form</span>
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-
-      {/* Professional Floating Icons */}
-      <div className="floating-elements">
-        <div className="floating-element floating-1">
-          <i className="fas fa-chart-line"></i>
-        </div>
-        <div className="floating-element floating-2">
-          <i className="fas fa-users"></i>
-        </div>
-        <div className="floating-element floating-3">
-          <i className="fas fa-cog"></i>
-        </div>
-        <div className="floating-element floating-4">
-          <i className="fas fa-lightbulb"></i>
-        </div>
-        <div className="floating-element floating-5">
-          <i className="fas fa-trophy"></i>
-        </div>
+            <button type="button" className="btn btn-secondary-full clear-btn" onClick={clearForm}>
+              <i className="fas fa-trash"></i>
+              <span className="button-text">Clear Form</span>
+            </button>
+          </div>
+        </form>
       </div>
-    </main>
-  );
+    </section>
+  </main>
+);
 };
 
 export default GetStarted;

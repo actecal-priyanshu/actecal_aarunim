@@ -129,7 +129,7 @@ export const ChooseApps: React.FC = () => {
 
   const onContinue = () => {
     const qs = selected.length ? `?selected=${encodeURIComponent(selected.join(','))}` : '';
-    navigate(`/start-now${qs}`);
+    navigate(`/get-started${qs}`);
   };
 
   const count = selected.length;

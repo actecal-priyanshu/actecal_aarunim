@@ -55,7 +55,6 @@ import { ImplementationServices } from './pages/ImplementationServices';
 import { CustomerReferences } from './pages/CustomerReferences';
 import { Upgrades } from './pages/Upgrades';
 import { LearnMore } from './pages/LearnMore';
-import { StartNow } from './pages/StartNow';
 import { GetStarted } from './pages/GetStarted';
 function App() {
   const location = useLocation();
@@ -69,7 +68,6 @@ function App() {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/get-started" element={<GetStarted />} />
         <Route path="/choose-apps" element={<GetStarted />} />
-        <Route path="/start-now" element={<StartNow />} />
         <Route path="/learn-more" element={<LearnMore />} />
         <Route path="/plans/:planId" element={<Plan />} />
         <Route path="/billing" element={<RequireAuth><Billing /></RequireAuth>} />
