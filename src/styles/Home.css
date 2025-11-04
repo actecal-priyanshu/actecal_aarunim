@@ -55,6 +55,8 @@
   background: linear-gradient(180deg, #ffffff 0%, #f7f8fb 100%);
   border: 1px solid #eaeef3;
   box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+  margin-top: -5rem;
+  margin-bottom: 5rem;
 }
 .cta-text h3 { margin: 0 0 6px; }
 .cta-text p { margin: 0; color: #6b7280; }
