@@ -209,7 +209,7 @@ const Home: React.FC = () => {
                     <h3>Monthly report</h3>
                     <p>Your performance report is ready to download</p>
                     <a
-                      href="/reports/monthly-report.pdf"
+                      href="reports/monthly-report.pdf" target="_blank" 
                       className="btn btn-primary report-download"
                       download
                       onClick={(e) => e.stopPropagation()}
