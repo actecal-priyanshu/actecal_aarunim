@@ -204,11 +204,19 @@ const Home: React.FC = () => {
                     </div>
                   </>
                 ) : (
-                  <div className="metric-cards">
-                    <div className="metric-card" style={{ gridColumn: 'span 2' }}>
-                      <div className="metric-value" style={{ color: 'var(--primary-color)' }}>Monthly report</div>
-                      <div className="metric-label">Your performance report is ready to download</div>
-                    </div>
+                  <div className="report-card">
+                    <span className="report-status">Reports</span>
+                    <h3>Monthly report</h3>
+                    <p>Your performance report is ready to download</p>
+                    <a
+                      href="/reports/monthly-report.pdf"
+                      className="btn btn-primary report-download"
+                      download
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <i className="fa fa-download" aria-hidden="true" />
+                      <span>Download PDF</span>
+                    </a>
                   </div>
                 )}
               </div>

@@ -13,6 +13,9 @@
   --transition: all 0.2s ease-in-out;
 }
 
+.dashboard-placeholder{
+      width: 26rem;
+}
 
 /* Testimonials mini grid */
 .testimonials-grid {
