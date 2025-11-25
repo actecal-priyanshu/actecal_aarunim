@@ -535,14 +535,28 @@ export default function AIWebsiteBuilder() {
           <h1 
             contentEditable={selected} 
             suppressContentEditableWarning 
-            onBlur={(e) => updateBlock(b.id, { headline: e.currentTarget.textContent })} 
-            className="ai-hero-heading"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedId(b.id);
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.outline = '2px solid #3b82f6';
+              e.currentTarget.style.outlineOffset = '2px';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.outline = 'none';
+              e.currentTarget.style.outlineOffset = '0';
+              updateBlock(b.id, { headline: e.currentTarget.textContent });
+            }} 
+            className="ai-hero-heading ai-editable-text"
             style={{ 
               fontSize: (s.headingSize ?? 48) + "px", 
               lineHeight: 1.2, 
               fontFamily: s.fontFamily, 
               fontWeight: s.fontWeight || 800,
-              marginBottom: 24 
+              marginBottom: 24,
+              cursor: selected ? 'text' : 'pointer',
+              transition: 'outline 0.2s ease'
             }}
           >
             {b.data.headline}
@@ -551,14 +565,29 @@ export default function AIWebsiteBuilder() {
             <h3 
               contentEditable={selected} 
               suppressContentEditableWarning 
-              onBlur={(e) => updateBlock(b.id, { subheading: e.currentTarget.textContent })} 
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedId(b.id);
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.outline = '2px solid #3b82f6';
+                e.currentTarget.style.outlineOffset = '2px';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.outline = 'none';
+                e.currentTarget.style.outlineOffset = '0';
+                updateBlock(b.id, { subheading: e.currentTarget.textContent });
+              }} 
+              className="ai-editable-text"
               style={{ 
                 fontSize: "24px", 
                 lineHeight: 1.4, 
                 fontFamily: s.fontFamily,
                 fontWeight: 600,
                 marginBottom: 16,
-                opacity: 0.9 
+                opacity: 0.9,
+                cursor: selected ? 'text' : 'pointer',
+                transition: 'outline 0.2s ease'
               }}
             >
               {b.data.subheading}
@@ -567,14 +596,29 @@ export default function AIWebsiteBuilder() {
           <p 
             contentEditable={selected} 
             suppressContentEditableWarning 
-            onBlur={(e) => updateBlock(b.id, { copy: e.currentTarget.textContent })} 
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedId(b.id);
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.outline = '2px solid #3b82f6';
+              e.currentTarget.style.outlineOffset = '2px';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.outline = 'none';
+              e.currentTarget.style.outlineOffset = '0';
+              updateBlock(b.id, { copy: e.currentTarget.textContent });
+            }} 
+            className="ai-editable-text"
             style={{ 
               fontSize: (s.bodySize ?? 18) + "px", 
               lineHeight: s.lineHeight ?? 1.6, 
               fontFamily: s.fontFamily,
               marginBottom: 32,
               maxWidth: "600px",
-              margin: "0 auto 32px"
+              margin: "0 auto 32px",
+              cursor: selected ? 'text' : 'pointer',
+              transition: 'outline 0.2s ease'
             }}
           >
             {b.data.copy}
@@ -625,14 +669,29 @@ export default function AIWebsiteBuilder() {
           <h2 
             contentEditable={selected} 
             suppressContentEditableWarning 
-            onBlur={(e) => updateBlock(b.id, { title: e.currentTarget.textContent })} 
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedId(b.id);
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.outline = '2px solid #3b82f6';
+              e.currentTarget.style.outlineOffset = '2px';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.outline = 'none';
+              e.currentTarget.style.outlineOffset = '0';
+              updateBlock(b.id, { title: e.currentTarget.textContent });
+            }} 
+            className="ai-editable-text"
             style={{ 
               fontSize: (s.headingSize ?? 36) + "px", 
               lineHeight: 1.2, 
               fontFamily: s.fontFamily, 
               fontWeight: s.fontWeight || 700,
               marginBottom: 16,
-              color: s.color || theme.text
+              color: s.color || theme.text,
+              cursor: selected ? 'text' : 'pointer',
+              transition: 'outline 0.2s ease'
             }}
           >
             {b.data.title}
@@ -641,7 +700,20 @@ export default function AIWebsiteBuilder() {
             <p 
               contentEditable={selected} 
               suppressContentEditableWarning 
-              onBlur={(e) => updateBlock(b.id, { subtitle: e.currentTarget.textContent })} 
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedId(b.id);
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.outline = '2px solid #3b82f6';
+                e.currentTarget.style.outlineOffset = '2px';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.outline = 'none';
+                e.currentTarget.style.outlineOffset = '0';
+                updateBlock(b.id, { subtitle: e.currentTarget.textContent });
+              }} 
+              className="ai-editable-text"
               style={{ 
                 fontSize: (s.bodySize ?? 18) + "px", 
                 lineHeight: 1.6, 
@@ -649,7 +721,9 @@ export default function AIWebsiteBuilder() {
                 marginBottom: 48,
                 color: theme.muted,
                 maxWidth: "600px",
-                margin: "0 auto 48px"
+                margin: "0 auto 48px",
+                cursor: selected ? 'text' : 'pointer',
+                transition: 'outline 0.2s ease'
               }}
             >
               {b.data.subtitle}
@@ -686,17 +760,30 @@ export default function AIWebsiteBuilder() {
                 <h4 
                   contentEditable={selected} 
                   suppressContentEditableWarning 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedId(b.id);
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.outline = '2px solid #3b82f6';
+                    e.currentTarget.style.outlineOffset = '2px';
+                  }}
                   onBlur={(e) => {
+                    e.currentTarget.style.outline = 'none';
+                    e.currentTarget.style.outlineOffset = '0';
                     const v = e.currentTarget.textContent || "";
                     const copy = [...b.data.items]; 
                     copy[i] = { ...copy[i], title: v }; 
                     updateBlock(b.id, { items: copy });
                   }}
+                  className="ai-editable-text"
                   style={{ 
                     fontSize: 20, 
                     fontWeight: 700, 
                     marginBottom: 12,
-                    color: theme.text
+                    color: theme.text,
+                    cursor: selected ? 'text' : 'pointer',
+                    transition: 'outline 0.2s ease'
                   }}
                 >
                   {it.title}
@@ -704,16 +791,29 @@ export default function AIWebsiteBuilder() {
                 <p 
                   contentEditable={selected} 
                   suppressContentEditableWarning 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedId(b.id);
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.outline = '2px solid #3b82f6';
+                    e.currentTarget.style.outlineOffset = '2px';
+                  }}
                   onBlur={(e) => {
+                    e.currentTarget.style.outline = 'none';
+                    e.currentTarget.style.outlineOffset = '0';
                     const v = e.currentTarget.textContent || "";
                     const copy = [...b.data.items]; 
                     copy[i] = { ...copy[i], desc: v }; 
                     updateBlock(b.id, { items: copy });
                   }}
+                  className="ai-editable-text"
                   style={{ 
                     fontSize: 16, 
                     lineHeight: 1.6,
-                    color: theme.muted
+                    color: theme.muted,
+                    cursor: selected ? 'text' : 'pointer',
+                    transition: 'outline 0.2s ease'
                   }}
                 >
                   {it.desc}
@@ -747,13 +847,28 @@ export default function AIWebsiteBuilder() {
           <h2 
             contentEditable={selected} 
             suppressContentEditableWarning 
-            onBlur={(e) => updateBlock(b.id, { title: e.currentTarget.textContent })} 
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedId(b.id);
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.outline = '2px solid #3b82f6';
+              e.currentTarget.style.outlineOffset = '2px';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.outline = 'none';
+              e.currentTarget.style.outlineOffset = '0';
+              updateBlock(b.id, { title: e.currentTarget.textContent });
+            }} 
+            className="ai-editable-text"
             style={{ 
               fontSize: (s.headingSize ?? 32) + "px", 
               fontFamily: s.fontFamily, 
               fontWeight: s.fontWeight || 700,
               marginBottom: 48,
-              color: s.color || theme.text
+              color: s.color || theme.text,
+              cursor: selected ? 'text' : 'pointer',
+              transition: 'outline 0.2s ease'
             }}
           >
             {b.data.title}
@@ -1070,13 +1185,28 @@ export default function AIWebsiteBuilder() {
           <h2 
             contentEditable={selected} 
             suppressContentEditableWarning 
-            onBlur={(e) => updateBlock(b.id, { title: e.currentTarget.textContent })} 
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedId(b.id);
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.outline = '2px solid #ffffff';
+              e.currentTarget.style.outlineOffset = '2px';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.outline = 'none';
+              e.currentTarget.style.outlineOffset = '0';
+              updateBlock(b.id, { title: e.currentTarget.textContent });
+            }} 
+            className="ai-editable-text"
             style={{ 
               fontSize: (s.headingSize ?? 40) + "px", 
               lineHeight: 1.2, 
               fontFamily: s.fontFamily, 
               fontWeight: s.fontWeight || 800,
-              marginBottom: 16 
+              marginBottom: 16,
+              cursor: selected ? 'text' : 'pointer',
+              transition: 'outline 0.2s ease'
             }}
           >
             {b.data.title}
@@ -1084,14 +1214,29 @@ export default function AIWebsiteBuilder() {
           <p 
             contentEditable={selected} 
             suppressContentEditableWarning 
-            onBlur={(e) => updateBlock(b.id, { desc: e.currentTarget.textContent })} 
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedId(b.id);
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.outline = '2px solid #ffffff';
+              e.currentTarget.style.outlineOffset = '2px';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.outline = 'none';
+              e.currentTarget.style.outlineOffset = '0';
+              updateBlock(b.id, { desc: e.currentTarget.textContent });
+            }} 
+            className="ai-editable-text"
             style={{ 
               fontSize: (s.bodySize ?? 18) + "px", 
               lineHeight: 1.6, 
               fontFamily: s.fontFamily,
               marginBottom: 32,
               maxWidth: "600px",
-              margin: "0 auto 32px"
+              margin: "0 auto 32px",
+              cursor: selected ? 'text' : 'pointer',
+              transition: 'outline 0.2s ease'
             }}
           >
             {b.data.desc}
@@ -1591,6 +1736,22 @@ export default function AIWebsiteBuilder() {
           color: #111827;
         }
 
+        /* Editable Text Elements */
+        .ai-editable-text {
+          position: relative;
+          border-radius: 4px;
+          padding: 2px 4px;
+          margin: -2px -4px;
+        }
+        .ai-editable-text:hover {
+          background: rgba(59, 130, 246, 0.05);
+        }
+        .ai-editable-text:focus {
+          background: rgba(59, 130, 246, 0.1);
+          outline: 2px solid #3b82f6;
+          outline-offset: 2px;
+        }
+        
         /* Responsive Design */
         @media (max-width: 1400px) {
           .ai-container { grid-template-columns: 300px 1fr 340px; gap: 20px; }
