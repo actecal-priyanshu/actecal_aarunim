@@ -244,7 +244,7 @@ export const GetStarted: React.FC = () => {
 
   const onContinue = () => {
     if (!canContinue) return;
-    navigate(`/apps`);
+    navigate('/launch-plan');
     handleSuccessfulSubmit();
   };
 

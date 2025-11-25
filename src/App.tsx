@@ -55,6 +55,7 @@ import { ImplementationServices } from './pages/ImplementationServices';
 import { CustomerReferences } from './pages/CustomerReferences';
 import { Upgrades } from './pages/Upgrades';
 import { LearnMore } from './pages/LearnMore';
+import LaunchPlan from './pages/LaunchPlan';
 import { GetStarted } from './pages/GetStarted';
 function App() {
   const location = useLocation();
@@ -63,6 +64,7 @@ function App() {
     <SiteLayout>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/launch-plan" element={<LaunchPlan />} />
         <Route path="/apps" element={<Apps />} />
         <Route path="/apps/:slug" element={<AppDetail />} />
         <Route path="/pricing" element={<Pricing />} />
